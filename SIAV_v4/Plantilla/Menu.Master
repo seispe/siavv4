@@ -1,0 +1,101 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Menu.master.cs" Inherits="SIAV_v4.Plantilla.Menu" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- ACtivar modo smartphone-->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <% nombreEmpresa(); %>
+    <!-- Estilo Bootstrap -->
+    <link href="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>css/font-awesome.min.css" rel="stylesheet" />
+    <link href="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>css/css_SIAV_plantilla.css" rel="stylesheet" />
+    <link href="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>css/css_SEG_componentes.css" rel="stylesheet" />
+    <script src="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>js/jquery.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <!-- Menu -->
+    <header>
+        <!-- Boton Menu -->
+        <div class="menu_bar">
+			<%--<a href="#" class="action action--open bt-menu" bt-menu" data-toggle="tooltip" data-placement="rigth" title="Menu"><span class="fa fa-list"></span>Menú</a>--%>
+            <!-- Barra Superior -->
+            <div class="BarraSuperior">
+                <asp:Label ID="lblMedio" runat="server" Text="" CssClass="BarraSuperiorMedio"></asp:Label>
+            </div>
+            <!-- Menu Horizontal -->
+            <div class="dropdown">
+                <a href="javascript:;" class="menu_hor dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <asp:Label ID="lblNombreHorizontal" runat="server" Text="" CssClass="menu_hor"></asp:Label>
+                    <span class="fa fa-angle-down icon_mh"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+                    <li><a href="<% Response.Write(ConfigurationManager.AppSettings["PATH"]); %>Perfil.aspx">Perfil</a>
+                    </li>
+                    <li><a href="<% Response.Write(ConfigurationManager.AppSettings["PATH"]); %>OutLogin.aspx"><i class="fa fa-sign-out pull-right"></i> Salir</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /Menu Horizontal -->
+		</div>
+        <!-- /Boton Menu -->
+        <!-- Menu Vertical -->
+        <div class="container2">		
+		    <button class="action action--open" ><span class="fa fa-list" style="margin-right:10px;"></span>Menú</button>
+		    <nav id="ml-menu" class="menu">
+			    <button class="action action--close" ><span class="fa fa-times"></span></button>
+			    <div class="menu__wrap">
+				    <ul data-menu="main" class="menu__level">
+                        <% CargarMenu(); %>
+					</ul>				   
+			    </div>
+		    </nav>		
+	    </div>
+    </header>
+    <!-- /Menu -->
+    <div class="container">
+        <!-- Contenido Holder -->
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    
+    <!-- Jqeury -->
+    
+    <script src="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>js/js_SEG_modernizr-custom.js"></script>
+    <!-- Bootstrap -->
+    <script src="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>js/bootstrap.min.js"></script>
+    <script src="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>js/js_SEG_login.js"></script>
+    <script src="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>js/js_classie.js"></script>
+    <script src="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>js/js_main.js"></script>
+    <script>
+	    (function() {
+		    var menuEl = document.getElementById('ml-menu'),
+			    mlmenu = new MLMenu(menuEl, {
+				    backCtrl : true, // mostrar boton atras
+			        itemsDelayInterval : 20, // intervalo de animacion
+			    });
+		    //
+		    var openMenuCtrl = document.querySelector('.action--open'),
+			    closeMenuCtrl = document.querySelector('.action--close');
+
+		    openMenuCtrl.addEventListener('click', openMenu);
+		    closeMenuCtrl.addEventListener('click', closeMenu);
+
+		    function openMenu() {
+			    classie.add(menuEl, 'menu--open');
+		    }
+
+		    function closeMenu() {
+			    classie.remove(menuEl, 'menu--open');
+		    }
+	    })();
+	</script>
+    <!-- Contenido Script -->
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>

@@ -1,0 +1,120 @@
+﻿
+.grid {  
+    width: 100%;  
+    background-color: #fff;  
+    margin: 5px 0 10px 0;  
+    border: solid 1px #525252;  
+    border-collapse: collapse;  
+}  
+  
+    .grid td {  
+        padding: 2px;  
+        border: solid 1px #c1c1c1;  
+        color: #717171;  
+    }  
+  
+    .grid th {  
+        padding: 4px 2px;  
+        color: #fff;  
+        background: #424242 url(grd_head.png) repeat-x top;  
+        border-left: solid 1px #525252;  
+        font-size: 0.9em;  
+    }  
+  
+    .grid .alt {  
+        background: #fcfcfc url(grd_alt.png) repeat-x top;  
+    }  
+  
+    .grid .pgr {  
+        background: #424242 url(grd_pgr.png) repeat-x top;  
+    }  
+  
+        .grid .pgr table {  
+            margin: 5px 0;  
+        }  
+  
+        .grid .pgr td {  
+            border-width: 0;  
+            padding: 0 6px;  
+            border-left: solid 1px #666;  
+            font-weight: bold;  
+            color: #fff;  
+            line-height: 12px;  
+        }  
+  
+        .grid .pgr a {  
+            color: #666;  
+            text-decoration: none;  
+        }  
+  
+            .grid .pgr a:hover {  
+                color: #000;  
+                text-decoration: none;  
+            }  
+
+.table_informativo {
+    width: 10%;
+    max-width: 50%;
+    margin-bottom: 20px;
+}
+.embarque{
+    background-color: #94eb5f;
+}
+.embarque > a{
+    color: black;
+}
+.embarque > a:hover{
+    background-color: #94eb5f!important;
+    color: black;
+}
+.facturacion{
+    background-color: #bced98;
+}
+.facturacion > a{
+    color: black;
+}
+.facturacion > a:hover{
+    background-color: #bced98!important;
+    color: black;
+}
+.desaduanizacion{
+    background-color: #b3d0a1;
+}
+.desaduanizacion > a{
+    color: black;
+}
+.desaduanizacion > a:hover{
+    background-color: #b3d0a1!important;
+    color: black;
+}
+.recepcion{
+    background-color: #9ec686;
+}
+.recepcion > a{
+    color: black;
+}
+.recepcion > a:hover{
+    background-color: #9ec686!important;
+    color: black;
+}
+.contenido{
+    background-color: #85be84;
+}
+.contenido > a{
+    color: black;
+}
+.contenido > a:hover{
+    background-color: #85be84!important;
+    color: black;
+}
+.fentrega {
+    z-index: -10000;
+}
+.size{
+    font-size:95%;
+}
+.left {
+    position:relative;
+    left:550px;
+}
+

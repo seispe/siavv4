@@ -1,0 +1,54 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Login.master.cs" Inherits="SIAV_v4.Plantilla.Login" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Grupo Alvarado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="shortcut icon" href="/Recursos/Favicon/LogoIAVGROUP.ico" type="image/x-icon" />
+    <link rel="icon" href="/Recursos/Favicon/LogoIAVGROUP.ico" type="image/x-icon" />
+    <link href="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>css/css_SEG_login.css" rel="stylesheet" />
+    <link href="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>css/css_SEG_login_elem.css" rel="stylesheet" />
+    <link href="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>css/font-awesome.min.css" rel="stylesheet" />
+    <script src="<% Response.Write(ConfigurationManager.AppSettings["PATH_RECURSOS"]); %>js/js_SEG_login.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+     <!--[if lt IE 9]>
+        <script src="/SIAV/Scripts/html5shiv.js"></script>
+        <script src="/SIAV/Scripts/respond.min.js"></script>
+    <![endif]-->
+    <!--[if IE]>
+    <script type="text/javascript">
+        var e =     ("abbr,article,aside,audio,canvas,datalist,details,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video").split    (',');
+        for (var i=0; i<e.length; i++) {
+            document.createElement(e[i]);
+        }
+    </script>
+    <![endif]-->
+</head>
+<body>
+    <script src="/Recursos/js/js_SEG_login.js"></script>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="masthead clearfix">
+                    <div class="inner">
+                       <%-- <div class="panel panel-primary">
+                          <div class="panel-body">
+                              <h3 class="masthead-brand"><img src="/Recursos/logos/LogoIAVGROUP.png" width="50px" /></h3>
+                          </div>
+                        </div>--%>
+                    </div>
+                </div>
+                <div class="inner cover">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

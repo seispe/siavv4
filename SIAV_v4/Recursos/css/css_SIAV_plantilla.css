@@ -1,0 +1,821 @@
+﻿/* ---------------------------------------------- */
+/*                  CSS PLANTILLA                 */
+/* ---------------------------------------------- */
+/* Autor: Gabriel Reyes                           */
+/* Fecha: 21/07/2015                              */
+/* Version: 1.0.1                                 */
+/* ---------------------------------------------- */
+/* Autor: Gabriel Reyes                           */
+/* Fecha: 31/12/2015                              */
+/* Version: 2.0.2                                 */
+/* ---------------------------------------------- */
+/*            CSS Limipar el BODY                 */
+/* ---------------------------------------------- */
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/* ---------------------------------------------- */
+/*                  CSS BODY                      */
+/* ---------------------------------------------- */
+body {
+    background-image: url("../Img/fondo.png");
+    height: 850px;
+}
+
+/* ---------------------------------------------- */
+/*             CSS MENU CELULAR                   */
+/* ---------------------------------------------- */
+.menu_bar {
+    width: 100%;
+    height: 40px;
+    background: #023859;
+    z-index: 1000;
+}
+
+.bt-menu {
+    padding: 4px;
+    display: inline-block;
+    overflow: hidden;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    width: 120px;
+}
+
+.menu_bar .BarraSuperior {
+    display: inline-block;
+    padding: 4px;
+    overflow: hidden;
+}
+
+.menu_bar span {
+    float: right;
+    font-size: 30px;
+}
+/* ---------------------------------------------- */
+/*                  CSS HEADER                    */
+/* ---------------------------------------------- */
+header {
+    width: 100%;
+}
+    /* ---------------------------------------------- */
+    /*               CSS HEADER NAV                   */
+    /* ---------------------------------------------- */
+    header .container2 .action {
+        position: absolute;
+        cursor: pointer;
+        border: none;
+        background: none;
+        top: 5px;
+        font-size:20px;
+        color:#f2ebeb;
+        left:20px;
+        
+        
+    }
+
+    header .container2 nav .menu__wrap ul li .caret {
+        float: right;
+    }
+
+    header .container2 nav .menu__wrap ul li a i {
+        margin-right: 10px;
+    }
+
+    header .container2 nav .menu__wrap ul li {
+        border-bottom: 1px solid rgba(255,255,255,.5);
+    }
+
+/*header nav {
+    background:#023859;
+    z-index:1000;
+    max-width:200px;
+    width: 50%;
+	position: absolute;
+	right:100%;
+    display:block;
+} 
+
+header nav ul {
+    margin: 0;
+    padding: 0;
+    list-style:none;
+}
+
+header nav ul li {
+    display: block;
+	border-bottom:1px solid rgba(255,255,255,.5);
+}
+
+header nav ul li:hover {
+    background: #5e90ae;
+}
+
+header nav ul li .children ul li:hover {
+    background: #023859;
+}
+
+header nav ul li a {
+    color:#fff;
+    display:block;
+    text-decoration:none;
+    padding:10px;
+}
+
+header nav ul li a i {
+    margin-right:10px;
+}
+
+header nav ul li .children {
+    display:none;
+    width: 100%;
+	position: relative;
+    background:#011826;
+}
+
+header nav ul li .children li {
+    display:block;
+    overflow:hidden;
+    border-bottom:1px solid rgba(255,255,255,.5);
+}
+
+header nav ul li .children li a {
+    display:block;
+}
+
+header nav ul .children li a i {
+    margin-right:10px;
+    /*float: right;
+    position:relative;
+    top:3px;
+    margin-right:0;
+    margin-left:10px;*/
+/*}
+
+header nav ul li .caret {
+    float: right;
+}*/
+/* ---------------------------------------------- */
+/*               CSS MENU CELULAR                 */
+/* ---------------------------------------------- */
+@media screen and (max-width: 800px) { /*800*/
+    body {
+        padding-top: 40px;
+    }
+
+    .menu_bar {
+        display: inline-block;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        background: #023859;
+    }
+
+        .menu_bar .bt-menu {
+            display: inline-block;
+            padding: 5px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .menu_bar i {
+            float: right;
+            /*font-size: 40px;*/
+        }
+
+    header nav {
+        display: inline-block;
+        width: 50%;
+        position: fixed;
+        right: 100%;
+        margin: 0;
+        font-size: 12px !important;
+        /*overflow: scroll;*/
+    }
+
+        header nav ul li {
+            display: block;
+            border-bottom: 1px solid rgba(255,255,255,.5);
+        }
+
+            header nav ul li a {
+                display: block;
+            }
+
+            header nav ul li:hover .children {
+                display: none;
+            }
+
+            header nav ul li .children {
+                width: 100%;
+                position: relative;
+            }
+
+                header nav ul li .children li a {
+                    margin-left: 20px;
+                }
+
+            header nav ul li .caret {
+                float: right;
+            }
+
+    .dropdown {
+        display: none !important;
+    }
+
+    .BarraSuperior {
+        display: none !important;
+    }
+
+    .profile_img,
+    .profile_info {
+        display: none;
+    }
+}
+/* ---------------------------------------------- */
+/*               CSS CONTAINER                    */
+/* ---------------------------------------------- */
+.container {
+    width: 98%;
+}
+/* ---------------------------------------------- */
+/*            CSS MENU HORIZONTAL                 */
+/* ---------------------------------------------- */
+header nav ul li .children ul {
+    display: none;
+}
+
+.dropdown {
+    display: inline-block;
+    padding: 10px;
+    width: 40%;
+    float: right;
+}
+
+.menu_hor {
+    color: #fff;
+    font-size: 15px !important;
+    text-align: center;
+}
+/* ---------------------------------------------- */
+/*               CSS IMAGEN PERFIL                */
+/* ---------------------------------------------- */
+.profile_img {
+    margin-top: 10px;
+    margin-left: 60px;
+    width: 80px;
+    padding: 1px;
+    border: 2px solid #CECECE;
+}
+
+.profile_info {
+    padding: 10px 10px;
+    width: 65%;
+}
+
+    .profile_info span {
+        font-size: 13px;
+        line-height: 30px;
+        color: #BAB8B8;
+    }
+
+    .profile_info h2 {
+        font-size: 14px;
+        color: #ECF0F1;
+        margin: 0;
+        font-weight: 300;
+    }
+
+.nombrePerfil {
+    color: #fff !important;
+    font-size: 14px !important;
+}
+/* ---------------------------------------------- */
+/*            CSS BARRA SUPERIOR                  */
+/* ---------------------------------------------- */
+.BarraSuperior {
+    display: inline-block;
+    margin: 0px auto;
+    color: #fff;
+    padding: 5px;
+    width: 45%;
+    text-align: center;
+}
+
+.BarraSuperiorMedio {
+    font-size: 15px !important;
+}
+/* ---------------------------------------------- */
+/*                  CSS CAJAS                     */
+/* ---------------------------------------------- */
+/* ---------------------------------------------- */
+/* ---------------------------------------------- */
+
+/* Paneles Simples */
+.box {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.blue-background {
+    background-color: #00ACEC !important;
+}
+
+.green-background {
+    background-color: #49BF67 !important;
+}
+
+.orange-background {
+    background-color: #F8A326 !important;
+}
+
+.purple-background {
+    background-color: #9564E2 !important;
+}
+
+.yellow-background {
+    background-color: #D7DF01 !important;
+}
+
+.muted-background {
+    background-color: #999 !important;
+}
+
+.red-background {
+    background-color: #F34541 !important;
+}
+
+.box-quick-link {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+    .box-quick-link a {
+        text-decoration: none;
+    }
+
+        .box-quick-link a .header {
+            height: 60px;
+            line-height: 60px;
+            padding-bottom: 2px;
+        }
+
+        .box-quick-link a .content {
+            text-transform: uppercase;
+            font-size: 85%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #5B5B5B;
+            background-color: #DBDBDB;
+            border-bottom: 1px solid #CECECE;
+            padding: 5px;
+        }
+
+        .box-quick-link a .header [class*=" fa-a"],
+        .box-quick-link a .header [class*=" fa-b"],
+        .box-quick-link a .header [class*=" fa-c"],
+        .box-quick-link a .header [class*=" fa-d"],
+        .box-quick-link a .header [class*=" fa-e"],
+        .box-quick-link a .header [class*=" fa-f"],
+        .box-quick-link a .header [class*=" fa-g"],
+        .box-quick-link a .header [class*=" fa-h"],
+        .box-quick-link a .header [class*=" fa-i"],
+        .box-quick-link a .header [class*=" fa-j"],
+        .box-quick-link a .header [class*=" fa-k"],
+        .box-quick-link a .header [class*=" fa-l"],
+        .box-quick-link a .header [class*=" fa-m"],
+        .box-quick-link a .header [class*=" fa-n"],
+        .box-quick-link a .header [class*=" fa-o"],
+        .box-quick-link a .header [class*=" fa-p"],
+        .box-quick-link a .header [class*=" fa-q"],
+        .box-quick-link a .header [class*=" fa-r"],
+        .box-quick-link a .header [class*=" fa-s"],
+        .box-quick-link a .header [class*=" fa-t"],
+        .box-quick-link a .header [class*=" fa-u"],
+        .box-quick-link a .header [class*=" fa-v"],
+        .box-quick-link a .header [class*=" fa-w"],
+        .box-quick-link a .header [class*=" fa-x"],
+        .box-quick-link a .header [class*=" fa-y"],
+        .box-quick-link a .header [class*=" fa-z"] {
+            vertical-align: middle;
+            color: #FFF;
+            font-size: 30px;
+        }
+
+        .box-quick-link a:hover [class*=" fa-a"],
+        .box-quick-link a:hover [class*=" fa-b"],
+        .box-quick-link a:hover [class*=" fa-c"],
+        .box-quick-link a:hover [class*=" fa-d"],
+        .box-quick-link a:hover [class*=" fa-e"],
+        .box-quick-link a:hover [class*=" fa-f"],
+        .box-quick-link a:hover [class*=" fa-g"],
+        .box-quick-link a:hover [class*=" fa-h"],
+        .box-quick-link a:hover [class*=" fa-i"],
+        .box-quick-link a:hover [class*=" fa-j"],
+        .box-quick-link a:hover [class*=" fa-k"],
+        .box-quick-link a:hover [class*=" fa-l"],
+        .box-quick-link a:hover [class*=" fa-m"],
+        .box-quick-link a:hover [class*=" fa-n"],
+        .box-quick-link a:hover [class*=" fa-o"],
+        .box-quick-link a:hover [class*=" fa-p"],
+        .box-quick-link a:hover [class*=" fa-q"],
+        .box-quick-link a:hover [class*=" fa-r"],
+        .box-quick-link a:hover [class*=" fa-s"],
+        .box-quick-link a:hover [class*=" fa-t"],
+        .box-quick-link a:hover [class*=" fa-u"],
+        .box-quick-link a:hover [class*=" fa-v"],
+        .box-quick-link a:hover [class*=" fa-w"],
+        .box-quick-link a:hover [class*=" fa-x"],
+        .box-quick-link a:hover [class*=" fa-y"],
+        .box-quick-link a:hover [class*=" fa-z"] {
+            text-shadow: none;
+            box-shadow: none;
+            font-size: 45px;
+            text-align: left;
+        }
+
+/*[class*=" fa-bug"], [class*=" fa-archive"], [class*=" fa-money"] {
+    vertical-align: middle;
+    color: #FFF;
+    font-size: 30px;
+}
+
+a:hover [class*=" fa-bug"],a:hover [class*=" fa-archive"],a:hover [class*=" fa-money"]  {
+    text-shadow: none;
+    box-shadow: none;
+    font-size: 45px;
+    text-align:left;
+}*/
+
+a:hover .content {
+    text-decoration: underline;
+}
+
+/* Paneles Con Opcion de Exit*/
+
+.box .box-header {
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 30px;
+    padding: 10px 15px;
+}
+
+    .box .box-header .title {
+        float: left;
+        color: #3C3C3C;
+    }
+
+    .box .box-header .actions {
+        margin-top: -3px;
+        float: right;
+    }
+
+        .box .box-header .actions .btn-link {
+            color: #754c4c;
+            text-decoration: none;
+            text-shadow: none;
+        }
+
+.btn-link:focus, .btn-link, .btn-link:hover, .btn-link:active {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* ---------------------------------------------- */
+/*            CSS Textbox Fechas                  */
+/* ---------------------------------------------- */
+.form-text {
+    display: inline-block !important;
+    width: 100% !important;
+    height: 34px !important;
+    padding: 6px 12px !important;
+    font-size: 14px !important;
+    line-height: 1.42857 !important;
+    color: #555 !important;
+    background-color: #FFF !important;
+    background-image: none !important;
+    border: 1px solid #CCC !important;
+    border-radius: 4px !important;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset !important;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s !important;
+}
+/* ---------------------------------------------- */
+/*              CSS SWITCHER                      */
+/* ---------------------------------------------- */
+.style-switcher.open {
+    right: 0px;
+}
+
+.style-switcher {
+    background-color: #222;
+    position: fixed;
+    right: -212px;
+    top: 54px;
+    width: 212px;
+    z-index: 1;
+    transition: all 1s ease 0s;
+}
+
+    .style-switcher h5 {
+        background-color: #333;
+        color: #FFF;
+        margin: 0px;
+        padding: 8px;
+        line-height: 23px;
+        text-shadow: 0px 1px 0px #000;
+        border-top: 1px solid #666;
+    }
+
+        .style-switcher h5 a {
+            background: #333 none repeat scroll 0% 0%;
+            border-bottom-left-radius: 4px;
+            border-top-left-radius: 4px;
+            color: #E1E1E8;
+            left: -39px;
+            padding: 4px 4px 5px;
+            position: absolute;
+            text-decoration: none;
+            top: 0px;
+            border: 1px solid #666;
+        }
+
+.fa-spin {
+    animation: 2s linear 0s normal none infinite running fa-spin;
+}
+
+.fa-2x {
+    font-size: 2em;
+}
+
+.style-switcher .style-switcher-wrap {
+    padding: 5px 10px;
+    border-width: 1px 0px 1px 1px;
+    border-style: solid;
+    border-color: #fff; /*#666;*/
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+}
+
+.style-switcher .options {
+    margin: 0px;
+    padding: 0px;
+    list-style: outside none none;
+}
+
+    .style-switcher .options li {
+        float: right;
+        margin: 4px 0px 0px 4px;
+    }
+
+        .style-switcher .options li a {
+            cursor: pointer;
+            display: block;
+            width: 1pc;
+            height: 1pc;
+        }
+
+.style-switcher h6 {
+    color: #FFF;
+    text-shadow: 0px 1px 0px #000;
+}
+/* ---------------------------------------------- */
+/*              CSS COMBOBOX                      */
+/* ---------------------------------------------- */
+.combobox {
+    color: #fff;
+}
+/* ---------------------------------------------- */
+/*              CSS TEXTBOX                       */
+/* ---------------------------------------------- */
+.textbox-success {
+    border-radius: 2px 2px 2px 2px !important;
+    -moz-border-radius: 2px 2px 2px 2px !important;
+    -webkit-border-radius: 2px 2px 2px 2px !important;
+    border: 2px solid #3a9911 !important;
+}
+/* ---------------------------------------------- */
+/*              CSS LIMPIADOR                     */
+/* ---------------------------------------------- */
+/* ---------------------------------------------- */
+/*              CSS MODAL                         */
+/* ---------------------------------------------- */
+.modal-header {
+    background-color: #215d81 !important;
+    color: #fff;
+    text-align: center;
+}
+
+.modal-footer {
+    background-color: #8f9fa9 !important;
+    color: #fff;
+}
+/* ---------------------------------------------- */
+/*              CSS Mensaje                       */
+/* ---------------------------------------------- */
+.mensaje {
+    border: 2px solid #21172e;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 350px;
+    height: 80px;
+    font-size: 16px;
+    z-index: 9999999;
+    -webkit-box-shadow: 10px 10px 88px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 88px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 88px 0px rgba(0,0,0,0.75);
+}
+/* ---------------------------------------------- */
+/*             CSS Update Progress                */
+/* ---------------------------------------------- */
+.updateProgress {
+    position: fixed;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999998;
+    background-color: #000000;
+    opacity: 0.7;
+}
+
+.updateProgressHijo {
+    border-width: 0px;
+    position: fixed;
+    padding: 50px;
+    background-color: #FFFFFF;
+    font-size: 36px;
+    left: 40%;
+    top: 40%;
+}
+
+@media screen and (max-width: 800px) {
+    .updateProgressHijo {
+        border-width: 0px;
+        position: fixed;
+        padding: 30px;
+        background-color: #FFFFFF;
+        font-size: 30px;
+        left: 40%;
+        top: 40%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .updateProgressHijo {
+        border-width: 0px;
+        position: fixed;
+        padding: 20px;
+        background-color: #FFFFFF;
+        font-size: 20px;
+        left: 40%;
+        top: 40%;
+    }
+}
+
+.page-header {
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+    padding: 5px !important;
+    font-size: 25px;
+    text-align: center;
+    text-shadow: 5px 3px 2px #818dd5;
+    font-weight: bold;
+}
+
+.textbox-presupuestos {
+    background: #99CCFF !important;
+}
+
+    .textbox-presupuestos input {
+        background: #99CCFF !important;
+    }
+
+/* ---------------------------------------------- */
+/*             CSS Radio Button y Check Button    */
+/* ---------------------------------------------- */
+
+@import('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css');
+
+.funkyradio div {
+    clear: both;
+    overflow: hidden;
+    margin-top: -30px;
+}
+
+.funkyradio label {
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #D1D3D4;
+    font-weight: normal;
+}
+
+.funkyradio input[type="radio"]:empty,
+.funkyradio input[type="checkbox"]:empty {
+    display: none;
+}
+
+    .funkyradio input[type="radio"]:empty ~ label,
+    .funkyradio input[type="checkbox"]:empty ~ label {
+        position: relative;
+        line-height: 2.5em;
+        text-indent: 3.25em;
+        margin-top: 2em;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        .funkyradio input[type="radio"]:empty ~ label:before,
+        .funkyradio input[type="checkbox"]:empty ~ label:before {
+            position: absolute;
+            display: block;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            content: '';
+            width: 2.5em;
+            background: #D1D3D4;
+            border-radius: 3px 0 0 3px;
+        }
+
+.funkyradio input[type="radio"]:hover:not(:checked) ~ label,
+.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
+    color: #888;
+}
+
+    .funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
+    .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
+        content: '\2714';
+        text-indent: .9em;
+        color: #C2C2C2;
+    }
+
+.funkyradio input[type="radio"]:checked ~ label,
+.funkyradio input[type="checkbox"]:checked ~ label {
+    color: #777;
+}
+
+    .funkyradio input[type="radio"]:checked ~ label:before,
+    .funkyradio input[type="checkbox"]:checked ~ label:before {
+        content: '\2714';
+        text-indent: .9em;
+        color: #333;
+        background-color: #ccc;
+    }
+
+.funkyradio input[type="radio"]:focus ~ label:before,
+.funkyradio input[type="checkbox"]:focus ~ label:before {
+    box-shadow: 0 0 0 3px #999;
+}
+
+.funkyradio-default input[type="radio"]:checked ~ label:before,
+.funkyradio-default input[type="checkbox"]:checked ~ label:before {
+    color: #333;
+    background-color: #ccc;
+}
+
+.funkyradio-primary input[type="radio"]:checked ~ label:before,
+.funkyradio-primary input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #337ab7;
+}
+
+.funkyradio-success input[type="radio"]:checked ~ label:before,
+.funkyradio-success input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.funkyradio-danger input[type="radio"]:checked ~ label:before,
+.funkyradio-danger input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.funkyradio-warning input[type="radio"]:checked ~ label:before,
+.funkyradio-warning input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.funkyradio-info input[type="radio"]:checked ~ label:before,
+.funkyradio-info input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #5bc0de;
+}

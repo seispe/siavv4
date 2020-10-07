@@ -1,0 +1,1883 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DB4D0373-E3AE-4A16-9ABE-AD4D65815D8F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SIAV_v4</RootNamespace>
+    <AssemblyName>SIAV_v4</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BarcodeLib, Version=1.3.0.0, Culture=neutral, PublicKeyToken=5f09bda868cc39e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\BarcodeLib.1.3.0.0\lib\net20\BarcodeLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DataMatrix.net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DataMatrix.net.0.4.2\lib\20\DataMatrix.net.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.11\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\sebastian.pozo\Desktop\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization">
+      <HintPath>C:\Users\mariajose.morillo\Desktop\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel">
+      <HintPath>C:\Users\mariajose.morillo\Desktop\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\sebastian.pozo\Desktop\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WindowsBase">
+      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Default.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="OutLogin.aspx" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plantilla\Login.Master" />
+    <Content Include="Plantilla\Menu.Master" />
+    <Content Include="Proyectos\Adata\frm_HRVehiculos.aspx" />
+    <Content Include="Proyectos\Autorizaciones\frm_ajustesaprobados.aspx" />
+    <Content Include="Proyectos\Autorizaciones\frm_ajustesrectima.aspx" />
+    <Content Include="Proyectos\Autorizaciones\frm_AprobarFact.aspx" />
+    <Content Include="Proyectos\Autorizaciones\frm_DesaprobarFact.aspx" />
+    <Content Include="Proyectos\Cobranzas\frm_ingDocClientes.aspx" />
+    <Content Include="Proyectos\Cobranzas\frm_NewCliente.aspx" />
+    <Content Include="Proyectos\Comisiones\frm_ComiConfig.aspx" />
+    <Content Include="Proyectos\Comisiones\frm_GenerarComi.aspx" />
+    <Content Include="Proyectos\Comisiones\frm_MenuConfig.aspx" />
+    <Content Include="Proyectos\Comisiones\frm_VendedoresComi.aspx" />
+    <Content Include="Proyectos\Compras\frm_Proveedores.aspx" />
+    <Content Include="Proyectos\Compras\frm_SubirRecepcion.aspx" />
+    <Content Include="Proyectos\Devoluciones\frm_Bodega.aspx" />
+    <Content Include="Proyectos\Devoluciones\frm_CartaServ.aspx" />
+    <Content Include="Proyectos\Devoluciones\frm_Cierre.aspx" />
+    <Content Include="Proyectos\Devoluciones\frm_Eliminar.aspx" />
+    <Content Include="Proyectos\Devoluciones\frm_Logistica.aspx" />
+    <Content Include="Proyectos\Devoluciones\frm_Rechazadas.aspx" />
+    <Content Include="Proyectos\Devoluciones\frm_Ventas.aspx" />
+    <Content Include="Proyectos\Devoluciones\frm_VentasBodega.aspx" />
+    <Content Include="Proyectos\Devoluciones\frm_WMS.aspx" />
+    <Content Include="Proyectos\Facturacion\frm_PorDespachar.aspx" />
+    <Content Include="Proyectos\Importaciones\frmOrdenCompra.aspx" />
+    <Content Include="Proyectos\OrdenCompra\frm_OrdenCompra.aspx" />
+    <Content Include="Proyectos\Pruebas\frm_LeerDatosJson.aspx" />
+    <Content Include="Proyectos\Despacho\frm_procesodespacho.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_abrircoordenadasg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_actvoidsg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_arreglarneg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_asigconteog.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_asigpickingg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_asigrackccg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_asigreccg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_cantconteog.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_cierreg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_cierrerecepciong.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_codigosalternosg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_excedenteocg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_exportarccwmsg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_forzarpedidosg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_recibimientologisticag.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_reversasg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_sincronizacionGPg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_subirpvcg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_subirtrfg.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_supervisorlogisticag.aspx" />
+    <Content Include="Proyectos\WMScalG\frm_vaciarccg.aspx" />
+    <Content Include="Proyectos\WMScal\frm_asigconteo.aspx" />
+    <Content Include="Proyectos\WMScal\frm_asigfamilias.aspx" />
+    <Content Include="Proyectos\WMScal\frm_asigpickingcal.aspx" />
+    <Content Include="Proyectos\WMScal\frm_sincronizacionGP.aspx" />
+    <Content Include="Proyectos\WMScal\frm_subirtrf.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_abrircoordenadas.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_actvoids.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_arreglarempaque.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_arreglarne.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_asigconteo.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_asigconteocuarentena.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_asigfamilias.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_asigpicking.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_asigrackcc.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_asigrecc.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_cantconteo.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_cierre.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_cierrerecepcion.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_codigosalternos.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_consBultos.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_excedenteoc.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_exportarccwms.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_forzarpedidos.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_recibimientologistica.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_reversas.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_subirpvc.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_subirtrf.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_supervisorlogistica.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_vaciarcc.aspx" />
+    <Content Include="Proyectos\WMSiav\frm_vaciarccfamprod.aspx" />
+    <Content Include="Proyectos\WMStra\frm_asigconteor.aspx" />
+    <Content Include="Proyectos\WMStra\frm_asigpickingr.aspx" />
+    <Content Include="Proyectos\WMStra\frm_cierrer.aspx" />
+    <Content Include="Proyectos\WMStra\frm_codigosalternosr.aspx" />
+    <Content Include="Proyectos\WMStra\frm_exportarccwmsr.aspx" />
+    <Content Include="Proyectos\WMStra\frm_forzarpedidosr.aspx" />
+    <Content Include="Proyectos\WMStra\frm_reversasr.aspx" />
+    <Content Include="Proyectos\WMStra\frm_vaciarcoordenada.aspx" />
+    <Content Include="Recursos\css\bootstrap.min.css" />
+    <Content Include="Recursos\css\custom_checkbox.css" />
+    <Content Include="Recursos\css\datepicker.css" />
+    <Content Include="Recursos\css\Despacho\css_alert.css" />
+    <Content Include="Recursos\css\Despacho\css_buscargrilla.css" />
+    <Content Include="Recursos\css\Despacho\css_check.css" />
+    <Content Include="Recursos\css\Despacho\css_label.css" />
+    <Content Include="Recursos\css\Despacho\css_navbarvertical.css" />
+    <Content Include="Recursos\css\Despacho\css_process.css" />
+    <Content Include="Recursos\css\Despacho\css_sidemenu.css" />
+    <Content Include="Recursos\css\Comisiones\css_comisiones.css" />
+    <Content Include="Recursos\css\css_SEG_componentes.css" />
+    <Content Include="Recursos\css\css_SEG_login.css" />
+    <Content Include="Recursos\css\css_SEG_login_elem.css" />
+    <Content Include="Recursos\css\css_SIAV_plantilla.css" />
+    <Content Include="Recursos\css\css_grid.css" />
+    <Content Include="Recursos\css\font-awesome.min.css" />
+    <Content Include="Recursos\css\OrdenCompra\css_tabs.css" />
+    <Content Include="Recursos\fonts\fontawesome-webfont.eot" />
+    <Content Include="Recursos\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Recursos\fonts\fontawesome-webfont.woff" />
+    <Content Include="Recursos\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Recursos\fonts\FontAwesome.otf" />
+    <Content Include="Recursos\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Recursos\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Recursos\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Properties\PublishProfiles\SIAV_v4.pubxml" />
+    <Content Include="Recursos\images\export.png" />
+    <Content Include="Recursos\images\mail.png" />
+    <Content Include="Recursos\js\js_prueba.js" />
+    <Content Include="Recursos\rptHTML\rptPRUEBA.html" />
+    <None Include="Properties\PublishProfiles\WMScal.pubxml" />
+    <None Include="Properties\PublishProfiles\WMScalG.pubxml" />
+    <None Include="Properties\PublishProfiles\WMSiav.pubxml" />
+    <None Include="Properties\PublishProfiles\WMStra.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LEER_REGLAS.txt" />
+    <Content Include="Recursos\favicon\LogoAccpass.ico" />
+    <Content Include="Recursos\favicon\LogoAllparts.ico" />
+    <Content Include="Recursos\favicon\LogoCorpal.ico" />
+    <Content Include="Recursos\favicon\LogoDepo.ico" />
+    <Content Include="Recursos\favicon\LogoIAV.ico" />
+    <Content Include="Recursos\favicon\LogoIAVGROUP.ico" />
+    <Content Include="Recursos\favicon\LogoRectima.ico" />
+    <Content Include="Recursos\fonts\fontawesome-webfont.svg" />
+    <Content Include="Recursos\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Recursos\images\add.png" />
+    <Content Include="Recursos\images\delete.png" />
+    <Content Include="Recursos\images\edit.png" />
+    <Content Include="Recursos\images\find.png" />
+    <Content Include="Recursos\images\grafico.png" />
+    <Content Include="Recursos\images\loading.gif" />
+    <Content Include="Recursos\images\printer.png" />
+    <Content Include="Recursos\images\printer2.png" />
+    <Content Include="Recursos\images\select.png" />
+    <Content Include="Recursos\images\cargando.gif" />
+    <Content Include="Recursos\js\bootstrap-datepicker.js" />
+    <Content Include="Recursos\js\bootstrap.min.js" />
+    <Content Include="Recursos\js\Despacho\js_buscargrilla.js" />
+    <Content Include="Recursos\js\Despacho\js_navbarvertical.js" />
+    <Content Include="Recursos\js\Despacho\js_process.js" />
+    <Content Include="Recursos\js\Despacho\js_sidemenu.js" />
+    <Content Include="Recursos\js\jquery.js" />
+    <Content Include="Recursos\js\js_classie.js" />
+    <Content Include="Recursos\js\js_main.js" />
+    <Content Include="Recursos\js\js_SEG_login.js" />
+    <Content Include="Recursos\js\js_SEG_modernizr-custom.js" />
+    <Content Include="Recursos\logos\LogoAccpass.png" />
+    <Content Include="Recursos\logos\LogoAllparts.png" />
+    <Content Include="Recursos\logos\LogoCAO.png" />
+    <Content Include="Recursos\logos\LogoCorpal.png" />
+    <Content Include="Recursos\logos\LogoDepo.png" />
+    <Content Include="Recursos\logos\LogoIAV.png" />
+    <Content Include="Recursos\logos\LogoIAVGROUP.png" />
+    <Content Include="Recursos\logos\LogoRectima.png" />
+    <Content Include="Recursos\upload\README.html" />
+    <Content Include="Reportes\Cobranzas\rpt_ChequesPosfDepo.aspx" />
+    <Content Include="Reportes\Cobranzas\rpt_ChequesPosfNoDepo.aspx" />
+    <Content Include="Reportes\Cobranzas\rpt_ChequesProt.aspx" />
+    <Content Include="Reportes\Cobranzas\rpt_CuentasxCobrar.aspx" />
+    <Content Include="Reportes\Cobranzas\rpt_CuentasxPagar.aspx" />
+    <Content Include="Reportes\Cobranzas\rpt_EstadoCuenta.aspx" />
+    <Content Include="Reportes\Cobranzas\rpt_EstadoCuentaVendedor.aspx" />
+    <Content Include="Reportes\Cobranzas\rpt_Recaudacion.aspx" />
+    <Content Include="Reportes\Compras\rpt_CostosDescarga.aspx" />
+    <Content Include="Reportes\Compras\rpt_OrdenCompraGPWMS.aspx" />
+    <Content Include="Reportes\Compras\rpt_PedComEgr.aspx" />
+    <Content Include="Reportes\Compras\rpt_RecibimientoWMS.aspx" />
+    <Content Include="Reportes\Compras\rpt_Rendimientos.aspx" />
+    <Content Include="Reportes\Compras\rpt_Rotacion.aspx" />
+    <Content Include="Reportes\Devoluciones\rpt_DevEstado.aspx" />
+    <Content Include="Reportes\Devoluciones\rpt_DevLogistica.aspx" />
+    <Content Include="Reportes\Devoluciones\rpt_DevRechazadas.aspx" />
+    <Content Include="Reportes\Devoluciones\rpt_DevVoids.aspx" />
+    <Content Include="Reportes\Devoluciones\rpt_DevxDia.aspx" />
+    <Content Include="Reportes\Devoluciones\rpt_DevxDia64.aspx" />
+    <Content Include="Reportes\Devoluciones\rpt_DevxMotivos.aspx" />
+    <Content Include="Reportes\Devoluciones\rpt_DevxMotivosNC.aspx" />
+    <Content Include="Reportes\Devoluciones\rpt_DevXRetirar.aspx" />
+    <Content Include="Reportes\Devoluciones\rpt_Stock64.aspx" />
+    <Content Include="Reportes\Inventario\rpt_InventarioFecha.aspx" />
+    <Content Include="Reportes\ListaPrecios\rpt_ListaPreciosNOAsociados.aspx" />
+    <Content Include="Reportes\Logistica\rpt_LogisticaTiempos.aspx" />
+    <Content Include="Reportes\Logistica\rpt_ResumenTiemposWMS.aspx" />
+    <Content Include="Reportes\Logistica\rpt_TiemposWMS.aspx" />
+    <Content Include="Reportes\Produccion\rpt_ProdxMes.aspx" />
+    <Content Include="Reportes\Pruebas\frmReportesMultiples.aspx" />
+    <Content Include="Reportes\Reporte247.aspx" />
+    <Content Include="Reportes\TOC\rpt_DisponibilidadABC.aspx" />
+    <Content Include="Reportes\Ventas\BI_ventas_vendedor.aspx" />
+    <Content Include="Reportes\Ventas\BI_ventas_vendedor_linea.aspx" />
+    <Content Include="Reportes\Ventas\rpt_Clientes_con_Deuda.aspx" />
+    <Content Include="Reportes\Ventas\rpt_Clientes_Cupos.aspx" />
+    <Content Include="Reportes\Ventas\rpt_CostoLogistico.aspx" />
+    <Content Include="Reportes\Ventas\rpt_NotasEntrega.aspx" />
+    <Content Include="Reportes\Ventas\rpt_RecepcionNE.aspx" />
+    <Content Include="Reportes\Ventas\rpt_VtasxCliVen.aspx" />
+    <Content Include="Reportes\Ventas\rpt_VtasxFechas.aspx" />
+    <Content Include="Reportes\Ventas\rpt_VtasxItems.aspx" />
+    <Content Include="Reportes\Ventas\rpt_VtasxLinea.aspx" />
+    <Content Include="Reportes\Ventas\rpt_VtasxVenSuper.aspx" />
+    <Content Include="Reportes\WMScalG\frm_DetPedidosg.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_Anulacionesg.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_BultosxUsuariog.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_CantConteog.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_CierreProcesog.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_Comprometidosg.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_ConspenxUsuariog.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_DetConteog.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_EstadoPedidosFechag.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_EstadoPedidosg.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_Kardexg.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_NoStockg.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_PackingListg.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_PorcentajeConteog.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_Recepciong.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_ResumenDiariog.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_Reversasg.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_UbicaProductog.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_Voidsg.aspx" />
+    <Content Include="Reportes\WMScalG\rpt_WmsVsGPg.aspx" />
+    <Content Include="Reportes\WMScal\rpt_DetConteo.aspx" />
+    <Content Include="Reportes\WMScal\rpt_PedsinStock.aspx" />
+    <Content Include="Reportes\WMSiav\frm_DetPedidos.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_Anulaciones.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_BultosxUsuario.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_CantConteo.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_CierreProceso.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_Comprometidos.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_ConspenxUsuario.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_ConteoDetallado.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_DetConteo.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_EstadoPedidos.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_EstadoPedidosFecha.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_Kardex.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_NoStock.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_PackingList.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_PedPenxFact.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_PorcentajeConteo.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_Recepcion.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_ResumenDiario.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_Reversas.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_TiemposWMS.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_UbicaProducto.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_UbicaProductoCuarentena.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_Voids.aspx" />
+    <Content Include="Reportes\WMSiav\rpt_WmsVsGP.aspx" />
+    <Content Include="Reportes\WMStra\rptKardexr.aspx" />
+    <Content Include="Reportes\WMStra\rptRecepcionr.aspx" />
+    <Content Include="Reportes\WMStra\rpt_Anulacionesr.aspx" />
+    <Content Include="Reportes\WMStra\rpt_BultosxUsuario.aspx" />
+    <Content Include="Reportes\WMStra\rpt_ConteoDetallador.aspx" />
+    <Content Include="Reportes\WMStra\rpt_DetConteor.aspx" />
+    <Content Include="Reportes\WMStra\rpt_EstadoPedidosFechar.aspx" />
+    <Content Include="Reportes\WMStra\rpt_EstadoPedidosr.aspx" />
+    <Content Include="Reportes\WMStra\rpt_ImpresosAlternos.aspx" />
+    <Content Include="Reportes\WMStra\rpt_packinglistr.aspx" />
+    <Content Include="Reportes\WMStra\rpt_ResumenDiarior.aspx" />
+    <Content Include="Reportes\WMStra\rpt_Reversasr.aspx" />
+    <Content Include="Reportes\WMStra\rpt_UbicaProductor.aspx" />
+    <Content Include="Reportes\WMStra\rpt_WmsVsGPr.aspx" />
+    <Content Include="Seguridad\frm_AdministrarMenu.aspx" />
+    <Content Include="Seguridad\frm_UsuarioEmpresa.aspx" />
+    <Content Include="Seguridad\frm_UsuarioMenu.aspx" />
+    <Content Include="Seguridad\frm_UsuarioVentana.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OutLogin.aspx.cs">
+      <DependentUpon>OutLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OutLogin.aspx.designer.cs">
+      <DependentUpon>OutLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Plantilla\Login.Master.cs">
+      <DependentUpon>Login.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plantilla\Login.Master.designer.cs">
+      <DependentUpon>Login.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Plantilla\Menu.Master.cs">
+      <DependentUpon>Menu.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plantilla\Menu.Master.designer.cs">
+      <DependentUpon>Menu.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proyectos\Adata\frm_HRVehiculos.aspx.cs">
+      <DependentUpon>frm_HRVehiculos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Adata\frm_HRVehiculos.aspx.designer.cs">
+      <DependentUpon>frm_HRVehiculos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Autorizaciones\frm_ajustesaprobados.aspx.cs">
+      <DependentUpon>frm_ajustesaprobados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Autorizaciones\frm_ajustesaprobados.aspx.designer.cs">
+      <DependentUpon>frm_ajustesaprobados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Autorizaciones\frm_ajustesrectima.aspx.cs">
+      <DependentUpon>frm_ajustesrectima.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Autorizaciones\frm_ajustesrectima.aspx.designer.cs">
+      <DependentUpon>frm_ajustesrectima.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Autorizaciones\frm_AprobarFact.aspx.cs">
+      <DependentUpon>frm_AprobarFact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Autorizaciones\frm_AprobarFact.aspx.designer.cs">
+      <DependentUpon>frm_AprobarFact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Autorizaciones\frm_DesaprobarFact.aspx.cs">
+      <DependentUpon>frm_DesaprobarFact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Autorizaciones\frm_DesaprobarFact.aspx.designer.cs">
+      <DependentUpon>frm_DesaprobarFact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Cobranzas\frm_ingDocClientes.aspx.cs">
+      <DependentUpon>frm_ingDocClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Cobranzas\frm_ingDocClientes.aspx.designer.cs">
+      <DependentUpon>frm_ingDocClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Cobranzas\frm_NewCliente.aspx.cs">
+      <DependentUpon>frm_NewCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Cobranzas\frm_NewCliente.aspx.designer.cs">
+      <DependentUpon>frm_NewCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Comisiones\frm_ComiConfig.aspx.cs">
+      <DependentUpon>frm_ComiConfig.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Comisiones\frm_ComiConfig.aspx.designer.cs">
+      <DependentUpon>frm_ComiConfig.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Comisiones\frm_GenerarComi.aspx.cs">
+      <DependentUpon>frm_GenerarComi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Comisiones\frm_GenerarComi.aspx.designer.cs">
+      <DependentUpon>frm_GenerarComi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Comisiones\frm_MenuConfig.aspx.cs">
+      <DependentUpon>frm_MenuConfig.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Comisiones\frm_MenuConfig.aspx.designer.cs">
+      <DependentUpon>frm_MenuConfig.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Comisiones\frm_VendedoresComi.aspx.cs">
+      <DependentUpon>frm_VendedoresComi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Comisiones\frm_VendedoresComi.aspx.designer.cs">
+      <DependentUpon>frm_VendedoresComi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Compras\frm_Proveedores.aspx.cs">
+      <DependentUpon>frm_Proveedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Compras\frm_Proveedores.aspx.designer.cs">
+      <DependentUpon>frm_Proveedores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Compras\frm_SubirRecepcion.aspx.cs">
+      <DependentUpon>frm_SubirRecepcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Compras\frm_SubirRecepcion.aspx.designer.cs">
+      <DependentUpon>frm_SubirRecepcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Despacho\frm_procesodespacho.aspx.cs">
+      <DependentUpon>frm_procesodespacho.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Despacho\frm_procesodespacho.aspx.designer.cs">
+      <DependentUpon>frm_procesodespacho.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Bodega.aspx.cs">
+      <DependentUpon>frm_Bodega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Bodega.aspx.designer.cs">
+      <DependentUpon>frm_Bodega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_CartaServ.aspx.cs">
+      <DependentUpon>frm_CartaServ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_CartaServ.aspx.designer.cs">
+      <DependentUpon>frm_CartaServ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Cierre.aspx.cs">
+      <DependentUpon>frm_Cierre.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Cierre.aspx.designer.cs">
+      <DependentUpon>frm_Cierre.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Eliminar.aspx.cs">
+      <DependentUpon>frm_Eliminar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Eliminar.aspx.designer.cs">
+      <DependentUpon>frm_Eliminar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Logistica.aspx.cs">
+      <DependentUpon>frm_Logistica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Logistica.aspx.designer.cs">
+      <DependentUpon>frm_Logistica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Rechazadas.aspx.cs">
+      <DependentUpon>frm_Rechazadas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Rechazadas.aspx.designer.cs">
+      <DependentUpon>frm_Rechazadas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Ventas.aspx.cs">
+      <DependentUpon>frm_Ventas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_Ventas.aspx.designer.cs">
+      <DependentUpon>frm_Ventas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_VentasBodega.aspx.cs">
+      <DependentUpon>frm_VentasBodega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_VentasBodega.aspx.designer.cs">
+      <DependentUpon>frm_VentasBodega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_WMS.aspx.cs">
+      <DependentUpon>frm_WMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Devoluciones\frm_WMS.aspx.designer.cs">
+      <DependentUpon>frm_WMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Facturacion\frm_PorDespachar.aspx.cs">
+      <DependentUpon>frm_PorDespachar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Facturacion\frm_PorDespachar.aspx.designer.cs">
+      <DependentUpon>frm_PorDespachar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Importaciones\frmOrdenCompra.aspx.cs">
+      <DependentUpon>frmOrdenCompra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Importaciones\frmOrdenCompra.aspx.designer.cs">
+      <DependentUpon>frmOrdenCompra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Impresion\ConexionTcp.cs" />
+    <Compile Include="Proyectos\Impresion\Paquete.cs" />
+    <Compile Include="Proyectos\OrdenCompra\frm_OrdenCompra.aspx.cs">
+      <DependentUpon>frm_OrdenCompra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\OrdenCompra\frm_OrdenCompra.aspx.designer.cs">
+      <DependentUpon>frm_OrdenCompra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\Pruebas\frm_LeerDatosJson.aspx.cs">
+      <DependentUpon>frm_LeerDatosJson.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\Pruebas\frm_LeerDatosJson.aspx.designer.cs">
+      <DependentUpon>frm_LeerDatosJson.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_abrircoordenadasg.aspx.cs">
+      <DependentUpon>frm_abrircoordenadasg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_abrircoordenadasg.aspx.designer.cs">
+      <DependentUpon>frm_abrircoordenadasg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_actvoidsg.aspx.cs">
+      <DependentUpon>frm_actvoidsg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_actvoidsg.aspx.designer.cs">
+      <DependentUpon>frm_actvoidsg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_arreglarneg.aspx.cs">
+      <DependentUpon>frm_arreglarneg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_arreglarneg.aspx.designer.cs">
+      <DependentUpon>frm_arreglarneg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_asigconteog.aspx.cs">
+      <DependentUpon>frm_asigconteog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_asigconteog.aspx.designer.cs">
+      <DependentUpon>frm_asigconteog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_asigpickingg.aspx.cs">
+      <DependentUpon>frm_asigpickingg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_asigpickingg.aspx.designer.cs">
+      <DependentUpon>frm_asigpickingg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_asigrackccg.aspx.cs">
+      <DependentUpon>frm_asigrackccg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_asigrackccg.aspx.designer.cs">
+      <DependentUpon>frm_asigrackccg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_asigreccg.aspx.cs">
+      <DependentUpon>frm_asigreccg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_asigreccg.aspx.designer.cs">
+      <DependentUpon>frm_asigreccg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_cantconteog.aspx.cs">
+      <DependentUpon>frm_cantconteog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_cantconteog.aspx.designer.cs">
+      <DependentUpon>frm_cantconteog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_cierreg.aspx.cs">
+      <DependentUpon>frm_cierreg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_cierreg.aspx.designer.cs">
+      <DependentUpon>frm_cierreg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_cierrerecepciong.aspx.cs">
+      <DependentUpon>frm_cierrerecepciong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_cierrerecepciong.aspx.designer.cs">
+      <DependentUpon>frm_cierrerecepciong.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_codigosalternosg.aspx.cs">
+      <DependentUpon>frm_codigosalternosg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_codigosalternosg.aspx.designer.cs">
+      <DependentUpon>frm_codigosalternosg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_excedenteocg.aspx.cs">
+      <DependentUpon>frm_excedenteocg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_excedenteocg.aspx.designer.cs">
+      <DependentUpon>frm_excedenteocg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_exportarccwmsg.aspx.cs">
+      <DependentUpon>frm_exportarccwmsg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_exportarccwmsg.aspx.designer.cs">
+      <DependentUpon>frm_exportarccwmsg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_forzarpedidosg.aspx.cs">
+      <DependentUpon>frm_forzarpedidosg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_forzarpedidosg.aspx.designer.cs">
+      <DependentUpon>frm_forzarpedidosg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_recibimientologisticag.aspx.cs">
+      <DependentUpon>frm_recibimientologisticag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_recibimientologisticag.aspx.designer.cs">
+      <DependentUpon>frm_recibimientologisticag.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_reversasg.aspx.cs">
+      <DependentUpon>frm_reversasg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_reversasg.aspx.designer.cs">
+      <DependentUpon>frm_reversasg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_sincronizacionGPg.aspx.cs">
+      <DependentUpon>frm_sincronizacionGPg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_sincronizacionGPg.aspx.designer.cs">
+      <DependentUpon>frm_sincronizacionGPg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_subirpvcg.aspx.cs">
+      <DependentUpon>frm_subirpvcg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_subirpvcg.aspx.designer.cs">
+      <DependentUpon>frm_subirpvcg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_subirtrfg.aspx.cs">
+      <DependentUpon>frm_subirtrfg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_subirtrfg.aspx.designer.cs">
+      <DependentUpon>frm_subirtrfg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_supervisorlogisticag.aspx.cs">
+      <DependentUpon>frm_supervisorlogisticag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_supervisorlogisticag.aspx.designer.cs">
+      <DependentUpon>frm_supervisorlogisticag.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_vaciarccg.aspx.cs">
+      <DependentUpon>frm_vaciarccg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScalG\frm_vaciarccg.aspx.designer.cs">
+      <DependentUpon>frm_vaciarccg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScal\frm_asigconteo.aspx.cs">
+      <DependentUpon>frm_asigconteo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScal\frm_asigconteo.aspx.designer.cs">
+      <DependentUpon>frm_asigconteo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScal\frm_asigfamilias.aspx.cs">
+      <DependentUpon>frm_asigfamilias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScal\frm_asigfamilias.aspx.designer.cs">
+      <DependentUpon>frm_asigfamilias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScal\frm_asigpickingcal.aspx.cs">
+      <DependentUpon>frm_asigpickingcal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScal\frm_asigpickingcal.aspx.designer.cs">
+      <DependentUpon>frm_asigpickingcal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScal\frm_sincronizacionGP.aspx.cs">
+      <DependentUpon>frm_sincronizacionGP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScal\frm_sincronizacionGP.aspx.designer.cs">
+      <DependentUpon>frm_sincronizacionGP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMScal\frm_subirtrf.aspx.cs">
+      <DependentUpon>frm_subirtrf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMScal\frm_subirtrf.aspx.designer.cs">
+      <DependentUpon>frm_subirtrf.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_abrircoordenadas.aspx.cs">
+      <DependentUpon>frm_abrircoordenadas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_abrircoordenadas.aspx.designer.cs">
+      <DependentUpon>frm_abrircoordenadas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_actvoids.aspx.cs">
+      <DependentUpon>frm_actvoids.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_actvoids.aspx.designer.cs">
+      <DependentUpon>frm_actvoids.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_arreglarempaque.aspx.cs">
+      <DependentUpon>frm_arreglarempaque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_arreglarempaque.aspx.designer.cs">
+      <DependentUpon>frm_arreglarempaque.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_arreglarne.aspx.cs">
+      <DependentUpon>frm_arreglarne.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_arreglarne.aspx.designer.cs">
+      <DependentUpon>frm_arreglarne.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigconteo.aspx.cs">
+      <DependentUpon>frm_asigconteo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigconteo.aspx.designer.cs">
+      <DependentUpon>frm_asigconteo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigconteocuarentena.aspx.cs">
+      <DependentUpon>frm_asigconteocuarentena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigconteocuarentena.aspx.designer.cs">
+      <DependentUpon>frm_asigconteocuarentena.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigfamilias.aspx.cs">
+      <DependentUpon>frm_asigfamilias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigfamilias.aspx.designer.cs">
+      <DependentUpon>frm_asigfamilias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigpicking.aspx.cs">
+      <DependentUpon>frm_asigpicking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigpicking.aspx.designer.cs">
+      <DependentUpon>frm_asigpicking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigrackcc.aspx.cs">
+      <DependentUpon>frm_asigrackcc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigrackcc.aspx.designer.cs">
+      <DependentUpon>frm_asigrackcc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigrecc.aspx.cs">
+      <DependentUpon>frm_asigrecc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_asigrecc.aspx.designer.cs">
+      <DependentUpon>frm_asigrecc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_cantconteo.aspx.cs">
+      <DependentUpon>frm_cantconteo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_cantconteo.aspx.designer.cs">
+      <DependentUpon>frm_cantconteo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_cierre.aspx.cs">
+      <DependentUpon>frm_cierre.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_cierre.aspx.designer.cs">
+      <DependentUpon>frm_cierre.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_cierrerecepcion.aspx.cs">
+      <DependentUpon>frm_cierrerecepcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_cierrerecepcion.aspx.designer.cs">
+      <DependentUpon>frm_cierrerecepcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_codigosalternos.aspx.cs">
+      <DependentUpon>frm_codigosalternos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_codigosalternos.aspx.designer.cs">
+      <DependentUpon>frm_codigosalternos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_consBultos.aspx.cs">
+      <DependentUpon>frm_consBultos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_consBultos.aspx.designer.cs">
+      <DependentUpon>frm_consBultos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_excedenteoc.aspx.cs">
+      <DependentUpon>frm_excedenteoc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_excedenteoc.aspx.designer.cs">
+      <DependentUpon>frm_excedenteoc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_exportarccwms.aspx.cs">
+      <DependentUpon>frm_exportarccwms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_exportarccwms.aspx.designer.cs">
+      <DependentUpon>frm_exportarccwms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_forzarpedidos.aspx.cs">
+      <DependentUpon>frm_forzarpedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_forzarpedidos.aspx.designer.cs">
+      <DependentUpon>frm_forzarpedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_recibimientologistica.aspx.cs">
+      <DependentUpon>frm_recibimientologistica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_recibimientologistica.aspx.designer.cs">
+      <DependentUpon>frm_recibimientologistica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_reversas.aspx.cs">
+      <DependentUpon>frm_reversas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_reversas.aspx.designer.cs">
+      <DependentUpon>frm_reversas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_subirpvc.aspx.cs">
+      <DependentUpon>frm_subirpvc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_subirpvc.aspx.designer.cs">
+      <DependentUpon>frm_subirpvc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_subirtrf.aspx.cs">
+      <DependentUpon>frm_subirtrf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_subirtrf.aspx.designer.cs">
+      <DependentUpon>frm_subirtrf.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_supervisorlogistica.aspx.cs">
+      <DependentUpon>frm_supervisorlogistica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_supervisorlogistica.aspx.designer.cs">
+      <DependentUpon>frm_supervisorlogistica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_vaciarcc.aspx.cs">
+      <DependentUpon>frm_vaciarcc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_vaciarcc.aspx.designer.cs">
+      <DependentUpon>frm_vaciarcc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_vaciarccfamprod.aspx.cs">
+      <DependentUpon>frm_vaciarccfamprod.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMSiav\frm_vaciarccfamprod.aspx.designer.cs">
+      <DependentUpon>frm_vaciarccfamprod.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_asigconteor.aspx.cs">
+      <DependentUpon>frm_asigconteor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_asigconteor.aspx.designer.cs">
+      <DependentUpon>frm_asigconteor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_asigpickingr.aspx.cs">
+      <DependentUpon>frm_asigpickingr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_asigpickingr.aspx.designer.cs">
+      <DependentUpon>frm_asigpickingr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_cierrer.aspx.cs">
+      <DependentUpon>frm_cierrer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_cierrer.aspx.designer.cs">
+      <DependentUpon>frm_cierrer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_codigosalternosr.aspx.cs">
+      <DependentUpon>frm_codigosalternosr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_codigosalternosr.aspx.designer.cs">
+      <DependentUpon>frm_codigosalternosr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_exportarccwmsr.aspx.cs">
+      <DependentUpon>frm_exportarccwmsr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_exportarccwmsr.aspx.designer.cs">
+      <DependentUpon>frm_exportarccwmsr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_forzarpedidosr.aspx.cs">
+      <DependentUpon>frm_forzarpedidosr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_forzarpedidosr.aspx.designer.cs">
+      <DependentUpon>frm_forzarpedidosr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_reversasr.aspx.cs">
+      <DependentUpon>frm_reversasr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_reversasr.aspx.designer.cs">
+      <DependentUpon>frm_reversasr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_vaciarcoordenada.aspx.cs">
+      <DependentUpon>frm_vaciarcoordenada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proyectos\WMStra\frm_vaciarcoordenada.aspx.designer.cs">
+      <DependentUpon>frm_vaciarcoordenada.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_ChequesPosfDepo.aspx.cs">
+      <DependentUpon>rpt_ChequesPosfDepo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_ChequesPosfDepo.aspx.designer.cs">
+      <DependentUpon>rpt_ChequesPosfDepo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_ChequesPosfNoDepo.aspx.cs">
+      <DependentUpon>rpt_ChequesPosfNoDepo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_ChequesPosfNoDepo.aspx.designer.cs">
+      <DependentUpon>rpt_ChequesPosfNoDepo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_ChequesProt.aspx.cs">
+      <DependentUpon>rpt_ChequesProt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_ChequesProt.aspx.designer.cs">
+      <DependentUpon>rpt_ChequesProt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_CuentasxCobrar.aspx.cs">
+      <DependentUpon>rpt_CuentasxCobrar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_CuentasxCobrar.aspx.designer.cs">
+      <DependentUpon>rpt_CuentasxCobrar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_CuentasxPagar.aspx.cs">
+      <DependentUpon>rpt_CuentasxPagar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_CuentasxPagar.aspx.designer.cs">
+      <DependentUpon>rpt_CuentasxPagar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_EstadoCuenta.aspx.cs">
+      <DependentUpon>rpt_EstadoCuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_EstadoCuenta.aspx.designer.cs">
+      <DependentUpon>rpt_EstadoCuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_EstadoCuentaVendedor.aspx.cs">
+      <DependentUpon>rpt_EstadoCuentaVendedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_EstadoCuentaVendedor.aspx.designer.cs">
+      <DependentUpon>rpt_EstadoCuentaVendedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_Recaudacion.aspx.cs">
+      <DependentUpon>rpt_Recaudacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Cobranzas\rpt_Recaudacion.aspx.designer.cs">
+      <DependentUpon>rpt_Recaudacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_CostosDescarga.aspx.cs">
+      <DependentUpon>rpt_CostosDescarga.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_CostosDescarga.aspx.designer.cs">
+      <DependentUpon>rpt_CostosDescarga.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_OrdenCompraGPWMS.aspx.cs">
+      <DependentUpon>rpt_OrdenCompraGPWMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_OrdenCompraGPWMS.aspx.designer.cs">
+      <DependentUpon>rpt_OrdenCompraGPWMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_PedComEgr.aspx.cs">
+      <DependentUpon>rpt_PedComEgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_PedComEgr.aspx.designer.cs">
+      <DependentUpon>rpt_PedComEgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_RecibimientoWMS.aspx.cs">
+      <DependentUpon>rpt_RecibimientoWMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_RecibimientoWMS.aspx.designer.cs">
+      <DependentUpon>rpt_RecibimientoWMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_Rendimientos.aspx.cs">
+      <DependentUpon>rpt_Rendimientos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_Rendimientos.aspx.designer.cs">
+      <DependentUpon>rpt_Rendimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_Rotacion.aspx.cs">
+      <DependentUpon>rpt_Rotacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Compras\rpt_Rotacion.aspx.designer.cs">
+      <DependentUpon>rpt_Rotacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevEstado.aspx.cs">
+      <DependentUpon>rpt_DevEstado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevEstado.aspx.designer.cs">
+      <DependentUpon>rpt_DevEstado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevLogistica.aspx.cs">
+      <DependentUpon>rpt_DevLogistica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevLogistica.aspx.designer.cs">
+      <DependentUpon>rpt_DevLogistica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevRechazadas.aspx.cs">
+      <DependentUpon>rpt_DevRechazadas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevRechazadas.aspx.designer.cs">
+      <DependentUpon>rpt_DevRechazadas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevVoids.aspx.cs">
+      <DependentUpon>rpt_DevVoids.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevVoids.aspx.designer.cs">
+      <DependentUpon>rpt_DevVoids.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevxDia.aspx.cs">
+      <DependentUpon>rpt_DevxDia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevxDia.aspx.designer.cs">
+      <DependentUpon>rpt_DevxDia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevxDia64.aspx.cs">
+      <DependentUpon>rpt_DevxDia64.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevxDia64.aspx.designer.cs">
+      <DependentUpon>rpt_DevxDia64.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevxMotivos.aspx.cs">
+      <DependentUpon>rpt_DevxMotivos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevxMotivos.aspx.designer.cs">
+      <DependentUpon>rpt_DevxMotivos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevxMotivosNC.aspx.cs">
+      <DependentUpon>rpt_DevxMotivosNC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevxMotivosNC.aspx.designer.cs">
+      <DependentUpon>rpt_DevxMotivosNC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevXRetirar.aspx.cs">
+      <DependentUpon>rpt_DevXRetirar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_DevXRetirar.aspx.designer.cs">
+      <DependentUpon>rpt_DevXRetirar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_Stock64.aspx.cs">
+      <DependentUpon>rpt_Stock64.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Devoluciones\rpt_Stock64.aspx.designer.cs">
+      <DependentUpon>rpt_Stock64.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Inventario\rpt_InventarioFecha.aspx.cs">
+      <DependentUpon>rpt_InventarioFecha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\rpt_InventarioFecha.aspx.designer.cs">
+      <DependentUpon>rpt_InventarioFecha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ListaPrecios\rpt_ListaPreciosNOAsociados.aspx.cs">
+      <DependentUpon>rpt_ListaPreciosNOAsociados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\ListaPrecios\rpt_ListaPreciosNOAsociados.aspx.designer.cs">
+      <DependentUpon>rpt_ListaPreciosNOAsociados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Logistica\rpt_LogisticaTiempos.aspx.cs">
+      <DependentUpon>rpt_LogisticaTiempos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Logistica\rpt_LogisticaTiempos.aspx.designer.cs">
+      <DependentUpon>rpt_LogisticaTiempos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Logistica\rpt_ResumenTiemposWMS.aspx.cs">
+      <DependentUpon>rpt_ResumenTiemposWMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Logistica\rpt_ResumenTiemposWMS.aspx.designer.cs">
+      <DependentUpon>rpt_ResumenTiemposWMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Logistica\rpt_TiemposWMS.aspx.cs">
+      <DependentUpon>rpt_TiemposWMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Logistica\rpt_TiemposWMS.aspx.designer.cs">
+      <DependentUpon>rpt_TiemposWMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Produccion\rpt_ProdxMes.aspx.cs">
+      <DependentUpon>rpt_ProdxMes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Produccion\rpt_ProdxMes.aspx.designer.cs">
+      <DependentUpon>rpt_ProdxMes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Pruebas\frmReportesMultiples.aspx.cs">
+      <DependentUpon>frmReportesMultiples.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Pruebas\frmReportesMultiples.aspx.designer.cs">
+      <DependentUpon>frmReportesMultiples.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Reporte247.aspx.cs">
+      <DependentUpon>Reporte247.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte247.aspx.designer.cs">
+      <DependentUpon>Reporte247.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\TOC\rpt_DisponibilidadABC.aspx.cs">
+      <DependentUpon>rpt_DisponibilidadABC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\TOC\rpt_DisponibilidadABC.aspx.designer.cs">
+      <DependentUpon>rpt_DisponibilidadABC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\BI_ventas_vendedor.aspx.cs">
+      <DependentUpon>BI_ventas_vendedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\BI_ventas_vendedor.aspx.designer.cs">
+      <DependentUpon>BI_ventas_vendedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\BI_ventas_vendedor_linea.aspx.cs">
+      <DependentUpon>BI_ventas_vendedor_linea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\BI_ventas_vendedor_linea.aspx.designer.cs">
+      <DependentUpon>BI_ventas_vendedor_linea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_Clientes_con_Deuda.aspx.cs">
+      <DependentUpon>rpt_Clientes_con_Deuda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_Clientes_con_Deuda.aspx.designer.cs">
+      <DependentUpon>rpt_Clientes_con_Deuda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_Clientes_Cupos.aspx.cs">
+      <DependentUpon>rpt_Clientes_Cupos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_Clientes_Cupos.aspx.designer.cs">
+      <DependentUpon>rpt_Clientes_Cupos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_CostoLogistico.aspx.cs">
+      <DependentUpon>rpt_CostoLogistico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_CostoLogistico.aspx.designer.cs">
+      <DependentUpon>rpt_CostoLogistico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_NotasEntrega.aspx.cs">
+      <DependentUpon>rpt_NotasEntrega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_NotasEntrega.aspx.designer.cs">
+      <DependentUpon>rpt_NotasEntrega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_RecepcionNE.aspx.cs">
+      <DependentUpon>rpt_RecepcionNE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_RecepcionNE.aspx.designer.cs">
+      <DependentUpon>rpt_RecepcionNE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_VtasxCliVen.aspx.cs">
+      <DependentUpon>rpt_VtasxCliVen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_VtasxCliVen.aspx.designer.cs">
+      <DependentUpon>rpt_VtasxCliVen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_VtasxFechas.aspx.cs">
+      <DependentUpon>rpt_VtasxFechas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_VtasxFechas.aspx.designer.cs">
+      <DependentUpon>rpt_VtasxFechas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_VtasxItems.aspx.cs">
+      <DependentUpon>rpt_VtasxItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_VtasxItems.aspx.designer.cs">
+      <DependentUpon>rpt_VtasxItems.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_VtasxLinea.aspx.cs">
+      <DependentUpon>rpt_VtasxLinea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_VtasxLinea.aspx.designer.cs">
+      <DependentUpon>rpt_VtasxLinea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_VtasxVenSuper.aspx.cs">
+      <DependentUpon>rpt_VtasxVenSuper.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ventas\rpt_VtasxVenSuper.aspx.designer.cs">
+      <DependentUpon>rpt_VtasxVenSuper.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\frm_DetPedidosg.aspx.cs">
+      <DependentUpon>frm_DetPedidosg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\frm_DetPedidosg.aspx.designer.cs">
+      <DependentUpon>frm_DetPedidosg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Anulacionesg.aspx.cs">
+      <DependentUpon>rpt_Anulacionesg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Anulacionesg.aspx.designer.cs">
+      <DependentUpon>rpt_Anulacionesg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_BultosxUsuariog.aspx.cs">
+      <DependentUpon>rpt_BultosxUsuariog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_BultosxUsuariog.aspx.designer.cs">
+      <DependentUpon>rpt_BultosxUsuariog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_CantConteog.aspx.cs">
+      <DependentUpon>rpt_CantConteog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_CantConteog.aspx.designer.cs">
+      <DependentUpon>rpt_CantConteog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_CierreProcesog.aspx.cs">
+      <DependentUpon>rpt_CierreProcesog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_CierreProcesog.aspx.designer.cs">
+      <DependentUpon>rpt_CierreProcesog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Comprometidosg.aspx.cs">
+      <DependentUpon>rpt_Comprometidosg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Comprometidosg.aspx.designer.cs">
+      <DependentUpon>rpt_Comprometidosg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_ConspenxUsuariog.aspx.cs">
+      <DependentUpon>rpt_ConspenxUsuariog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_ConspenxUsuariog.aspx.designer.cs">
+      <DependentUpon>rpt_ConspenxUsuariog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_DetConteog.aspx.cs">
+      <DependentUpon>rpt_DetConteog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_DetConteog.aspx.designer.cs">
+      <DependentUpon>rpt_DetConteog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_EstadoPedidosFechag.aspx.cs">
+      <DependentUpon>rpt_EstadoPedidosFechag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_EstadoPedidosFechag.aspx.designer.cs">
+      <DependentUpon>rpt_EstadoPedidosFechag.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_EstadoPedidosg.aspx.cs">
+      <DependentUpon>rpt_EstadoPedidosg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_EstadoPedidosg.aspx.designer.cs">
+      <DependentUpon>rpt_EstadoPedidosg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Kardexg.aspx.cs">
+      <DependentUpon>rpt_Kardexg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Kardexg.aspx.designer.cs">
+      <DependentUpon>rpt_Kardexg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_NoStockg.aspx.cs">
+      <DependentUpon>rpt_NoStockg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_NoStockg.aspx.designer.cs">
+      <DependentUpon>rpt_NoStockg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_PackingListg.aspx.cs">
+      <DependentUpon>rpt_PackingListg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_PackingListg.aspx.designer.cs">
+      <DependentUpon>rpt_PackingListg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_PorcentajeConteog.aspx.cs">
+      <DependentUpon>rpt_PorcentajeConteog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_PorcentajeConteog.aspx.designer.cs">
+      <DependentUpon>rpt_PorcentajeConteog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Recepciong.aspx.cs">
+      <DependentUpon>rpt_Recepciong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Recepciong.aspx.designer.cs">
+      <DependentUpon>rpt_Recepciong.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_ResumenDiariog.aspx.cs">
+      <DependentUpon>rpt_ResumenDiariog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_ResumenDiariog.aspx.designer.cs">
+      <DependentUpon>rpt_ResumenDiariog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Reversasg.aspx.cs">
+      <DependentUpon>rpt_Reversasg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Reversasg.aspx.designer.cs">
+      <DependentUpon>rpt_Reversasg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_UbicaProductog.aspx.cs">
+      <DependentUpon>rpt_UbicaProductog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_UbicaProductog.aspx.designer.cs">
+      <DependentUpon>rpt_UbicaProductog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Voidsg.aspx.cs">
+      <DependentUpon>rpt_Voidsg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_Voidsg.aspx.designer.cs">
+      <DependentUpon>rpt_Voidsg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_WmsVsGPg.aspx.cs">
+      <DependentUpon>rpt_WmsVsGPg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScalG\rpt_WmsVsGPg.aspx.designer.cs">
+      <DependentUpon>rpt_WmsVsGPg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScal\rpt_DetConteo.aspx.cs">
+      <DependentUpon>rpt_DetConteo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScal\rpt_DetConteo.aspx.designer.cs">
+      <DependentUpon>rpt_DetConteo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMScal\rpt_PedsinStock.aspx.cs">
+      <DependentUpon>rpt_PedsinStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMScal\rpt_PedsinStock.aspx.designer.cs">
+      <DependentUpon>rpt_PedsinStock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\frm_DetPedidos.aspx.cs">
+      <DependentUpon>frm_DetPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\frm_DetPedidos.aspx.designer.cs">
+      <DependentUpon>frm_DetPedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Anulaciones.aspx.cs">
+      <DependentUpon>rpt_Anulaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Anulaciones.aspx.designer.cs">
+      <DependentUpon>rpt_Anulaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_BultosxUsuario.aspx.cs">
+      <DependentUpon>rpt_BultosxUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_BultosxUsuario.aspx.designer.cs">
+      <DependentUpon>rpt_BultosxUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_CantConteo.aspx.cs">
+      <DependentUpon>rpt_CantConteo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_CantConteo.aspx.designer.cs">
+      <DependentUpon>rpt_CantConteo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_CierreProceso.aspx.cs">
+      <DependentUpon>rpt_CierreProceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_CierreProceso.aspx.designer.cs">
+      <DependentUpon>rpt_CierreProceso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Comprometidos.aspx.cs">
+      <DependentUpon>rpt_Comprometidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Comprometidos.aspx.designer.cs">
+      <DependentUpon>rpt_Comprometidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_ConspenxUsuario.aspx.cs">
+      <DependentUpon>rpt_ConspenxUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_ConspenxUsuario.aspx.designer.cs">
+      <DependentUpon>rpt_ConspenxUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_ConteoDetallado.aspx.cs">
+      <DependentUpon>rpt_ConteoDetallado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_ConteoDetallado.aspx.designer.cs">
+      <DependentUpon>rpt_ConteoDetallado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_DetConteo.aspx.cs">
+      <DependentUpon>rpt_DetConteo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_DetConteo.aspx.designer.cs">
+      <DependentUpon>rpt_DetConteo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_EstadoPedidos.aspx.cs">
+      <DependentUpon>rpt_EstadoPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_EstadoPedidos.aspx.designer.cs">
+      <DependentUpon>rpt_EstadoPedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_EstadoPedidosFecha.aspx.cs">
+      <DependentUpon>rpt_EstadoPedidosFecha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_EstadoPedidosFecha.aspx.designer.cs">
+      <DependentUpon>rpt_EstadoPedidosFecha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Kardex.aspx.cs">
+      <DependentUpon>rpt_Kardex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Kardex.aspx.designer.cs">
+      <DependentUpon>rpt_Kardex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_NoStock.aspx.cs">
+      <DependentUpon>rpt_NoStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_NoStock.aspx.designer.cs">
+      <DependentUpon>rpt_NoStock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_PackingList.aspx.cs">
+      <DependentUpon>rpt_PackingList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_PackingList.aspx.designer.cs">
+      <DependentUpon>rpt_PackingList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_PedPenxFact.aspx.cs">
+      <DependentUpon>rpt_PedPenxFact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_PedPenxFact.aspx.designer.cs">
+      <DependentUpon>rpt_PedPenxFact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_PorcentajeConteo.aspx.cs">
+      <DependentUpon>rpt_PorcentajeConteo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_PorcentajeConteo.aspx.designer.cs">
+      <DependentUpon>rpt_PorcentajeConteo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Recepcion.aspx.cs">
+      <DependentUpon>rpt_Recepcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Recepcion.aspx.designer.cs">
+      <DependentUpon>rpt_Recepcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_ResumenDiario.aspx.cs">
+      <DependentUpon>rpt_ResumenDiario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_ResumenDiario.aspx.designer.cs">
+      <DependentUpon>rpt_ResumenDiario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Reversas.aspx.cs">
+      <DependentUpon>rpt_Reversas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Reversas.aspx.designer.cs">
+      <DependentUpon>rpt_Reversas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_TiemposWMS.aspx.cs">
+      <DependentUpon>rpt_TiemposWMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_TiemposWMS.aspx.designer.cs">
+      <DependentUpon>rpt_TiemposWMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_UbicaProducto.aspx.cs">
+      <DependentUpon>rpt_UbicaProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_UbicaProducto.aspx.designer.cs">
+      <DependentUpon>rpt_UbicaProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_UbicaProductoCuarentena.aspx.cs">
+      <DependentUpon>rpt_UbicaProductoCuarentena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_UbicaProductoCuarentena.aspx.designer.cs">
+      <DependentUpon>rpt_UbicaProductoCuarentena.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Voids.aspx.cs">
+      <DependentUpon>rpt_Voids.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_Voids.aspx.designer.cs">
+      <DependentUpon>rpt_Voids.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_WmsVsGP.aspx.cs">
+      <DependentUpon>rpt_WmsVsGP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMSiav\rpt_WmsVsGP.aspx.designer.cs">
+      <DependentUpon>rpt_WmsVsGP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rptKardexr.aspx.cs">
+      <DependentUpon>rptKardexr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rptKardexr.aspx.designer.cs">
+      <DependentUpon>rptKardexr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rptRecepcionr.aspx.cs">
+      <DependentUpon>rptRecepcionr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rptRecepcionr.aspx.designer.cs">
+      <DependentUpon>rptRecepcionr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_Anulacionesr.aspx.cs">
+      <DependentUpon>rpt_Anulacionesr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_Anulacionesr.aspx.designer.cs">
+      <DependentUpon>rpt_Anulacionesr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_BultosxUsuario.aspx.cs">
+      <DependentUpon>rpt_BultosxUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_BultosxUsuario.aspx.designer.cs">
+      <DependentUpon>rpt_BultosxUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_ConteoDetallador.aspx.cs">
+      <DependentUpon>rpt_ConteoDetallador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_ConteoDetallador.aspx.designer.cs">
+      <DependentUpon>rpt_ConteoDetallador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_DetConteor.aspx.cs">
+      <DependentUpon>rpt_DetConteor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_DetConteor.aspx.designer.cs">
+      <DependentUpon>rpt_DetConteor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_EstadoPedidosFechar.aspx.cs">
+      <DependentUpon>rpt_EstadoPedidosFechar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_EstadoPedidosFechar.aspx.designer.cs">
+      <DependentUpon>rpt_EstadoPedidosFechar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_EstadoPedidosr.aspx.cs">
+      <DependentUpon>rpt_EstadoPedidosr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_EstadoPedidosr.aspx.designer.cs">
+      <DependentUpon>rpt_EstadoPedidosr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_ImpresosAlternos.aspx.cs">
+      <DependentUpon>rpt_ImpresosAlternos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_ImpresosAlternos.aspx.designer.cs">
+      <DependentUpon>rpt_ImpresosAlternos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_packinglistr.aspx.cs">
+      <DependentUpon>rpt_packinglistr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_packinglistr.aspx.designer.cs">
+      <DependentUpon>rpt_packinglistr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_ResumenDiarior.aspx.cs">
+      <DependentUpon>rpt_ResumenDiarior.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_ResumenDiarior.aspx.designer.cs">
+      <DependentUpon>rpt_ResumenDiarior.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_Reversasr.aspx.cs">
+      <DependentUpon>rpt_Reversasr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_Reversasr.aspx.designer.cs">
+      <DependentUpon>rpt_Reversasr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_UbicaProductor.aspx.cs">
+      <DependentUpon>rpt_UbicaProductor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_UbicaProductor.aspx.designer.cs">
+      <DependentUpon>rpt_UbicaProductor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_WmsVsGPr.aspx.cs">
+      <DependentUpon>rpt_WmsVsGPr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\WMStra\rpt_WmsVsGPr.aspx.designer.cs">
+      <DependentUpon>rpt_WmsVsGPr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad\frm_AdministrarMenu.aspx.cs">
+      <DependentUpon>frm_AdministrarMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seguridad\frm_AdministrarMenu.aspx.designer.cs">
+      <DependentUpon>frm_AdministrarMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad\frm_UsuarioEmpresa.aspx.cs">
+      <DependentUpon>frm_UsuarioEmpresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seguridad\frm_UsuarioEmpresa.aspx.designer.cs">
+      <DependentUpon>frm_UsuarioEmpresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad\frm_UsuarioMenu.aspx.cs">
+      <DependentUpon>frm_UsuarioMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seguridad\frm_UsuarioMenu.aspx.designer.cs">
+      <DependentUpon>frm_UsuarioMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad\frm_UsuarioVentana.aspx.cs">
+      <DependentUpon>frm_UsuarioVentana.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seguridad\frm_UsuarioVentana.aspx.designer.cs">
+      <DependentUpon>frm_UsuarioVentana.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccesoEntidades\AccesoEntidades.csproj">
+      <Project>{b301c05b-adf6-492f-93cc-cb8b898771c0}</Project>
+      <Name>AccesoEntidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AccesoNegocios\AccesoNegocios.csproj">
+      <Project>{68fc7fe8-6938-44f5-bd02-854905bc2d94}</Project>
+      <Name>AccesoNegocios</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>65443</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:65443/SIAV_v4</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\NuGet.VisualStudio.4.6.2\build\NuGet.VisualStudio.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NuGet.VisualStudio.4.6.2\build\NuGet.VisualStudio.targets'))" />
+  </Target>
+  <Import Project="..\packages\NuGet.VisualStudio.4.6.2\build\NuGet.VisualStudio.targets" Condition="Exists('..\packages\NuGet.VisualStudio.4.6.2\build\NuGet.VisualStudio.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

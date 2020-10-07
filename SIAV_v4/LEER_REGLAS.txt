@@ -1,0 +1,106 @@
+﻿--#################################################################
+--		REGLAS DE PROGRAMACION
+--#################################################################
+-- NOMENCLATURAS TITULOS
+--#################################################################
+-- Todos los titulos tienen que tener la siguiente nomenclatura.
+/****************************************************************
+-- Titulo:	Titulo de la clase/ Lo que hace la clase
+-- Author:	Nombre y Apellido de quien lo realizo
+-- Fecha:	Fecha Actual {dd/mm/yyyy}
+-- Version:	4.0.{numero de veces que se edita}
+-- Empresa: {Empresas que estan ocupando esta clase}
+-- Reviso:	{Compañero del Area}
+-- Aprobo:	{Jefe Inmediato}
+****************************************************************
+-- AuthorCambio:  Nombre y Apellido de quien realizo el cambio
+-- CambiosRealizados: Especifico el cambio realizado
+-- Fecha: Fecha Actual del cambio {dd/mm/yyyy}
+-- Reviso: {Compañero del Area}
+****************************************************************/
+--#################################################################
+-- NOMENCLATURAS CLASES
+--#################################################################
+-- 1. Entidades
+--		AE_{Nombre Tabla de SQL}
+-- 2. Datos
+--		AD_{CRUD}
+-- 3. Negocios
+--		AN_{Nombre del Proyecto}
+-- 4. Presentacion
+--		frm_{Nombre del Formulario}
+--		rpt_{Nombre del Reporte}
+--#################################################################
+-- NOMENCLATURAS TIPOS DE DATOS
+--#################################################################
+-- String -> str
+-- Integer -> int
+-- Double -> dbl
+-- Boolean -> boo
+-- Datetime -> dtt
+--#################################################################
+-- NOMENCLATURAS COMPONENTES
+--#################################################################
+-- DataTable -> dt
+-- DataSet -> ds
+-- Label -> lbl
+-- Textbox -> txt
+-- Button -> btn
+-- GridView -> gv
+-- DropDownList -> ddl
+-- Mascaras -> msk
+-- Modal -> mdl
+-- DateTimePicker -> dtp
+--#################################################################
+-- NOMENCLATURAS VARIABLES
+--#################################################################
+-- 1. Variables Globales del Proyecto
+--		Todo con mayusculas y creadas en el web.config
+--		Nombres de maximo 10 caracteres.
+--		 <add key="EJEMPLO" value="valor_ejemplo" />
+--		ConfigurationManager.AppSettings["EJEMPLO"] => Asi ocupamos el valor configurado
+-- 2. Variables Globales de la Clase
+--		Todo con mayusculas antecede el guion bajo.
+--		Nombres de maximo 10 caracteres.
+--		Ocupar la nomenclatura de tipo de dato despues del guio bajo
+--		_{tipo}EJEMPLO
+-- 3. Variables Normales
+--		Todo con minusculas antecede el guion medio.
+--		Nombres de maximo 10 caracteres.
+--		Ocupar la nomenclatura de tipo de dato despues del guio bajo
+--		_{tipo}variables
+--#################################################################
+-- NOMENCLATURAS FUNCIONES
+--#################################################################
+-- 1. Cuando la clase envie datos
+--		set{nombre de la funcion}
+-- 2. Cuando pida datos
+--		get{nombre de la funcion}
+--#################################################################
+-- NOMENCLATURAS TABLAS BASE DE DATOS
+--#################################################################
+-- 1. Tablas
+--		GA_{3CaracteresProyecto}_T{10CaracteresMaximoObjeto}
+--			GA_COM_Tconfig
+--			GA_COM_Ttemppagadas
+-- 2. Procedimiento
+--		GA_{3CaracteresProyecto}_P{10CaracteresMaximoObjeto}
+--			GA_COM_Psumcomi
+--			GA_COM_Pdatos
+-- 3. Vistas
+--		GA_{3CaracteresProyecto}_V{10CaracteresMaximoObjeto}
+--			GA_COM_Vsumcomi
+--			GA_COM_Vdatos
+--#################################################################
+-- NOMENCLATURAS GUARDAR COMMIT
+--#################################################################
+-- Titulo: {titulo de lo realizado}
+-- Author: {Author}
+-- Fecha: {Fecha}
+-- Version: 4.0.{Las veces que se edita}
+-- Ejemplo
+Titulo: Actualizacion de Reglas
+Author: Gabriel Reyes
+Fecha: 21/04/2017
+Version: 4.0.3
+--#################################################################
