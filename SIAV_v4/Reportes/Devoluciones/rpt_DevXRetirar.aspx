@@ -171,6 +171,16 @@
                     <asp:Label ID="lblprecio" runat="server" Text='<%# Bind("PrecioUnitario") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+             <asp:TemplateField HeaderText="PLaca" SortExpression="Placa">
+                <ItemTemplate>
+                    <asp:Label ID="lblplaca" runat="server" Text='<%# Bind("Placa") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+             <asp:TemplateField HeaderText="MetodoEnvio" SortExpression="MetodoEnvio">
+                <ItemTemplate>
+                    <asp:Label ID="lblmetodo_envio" runat="server" Text='<%# Bind("metodo_envio") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />

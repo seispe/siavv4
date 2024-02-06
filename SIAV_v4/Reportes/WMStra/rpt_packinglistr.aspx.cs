@@ -23,6 +23,7 @@ namespace SIAV_v4.Reportes.WMStra
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!IsPostBack)
             {
                 GridNE();
@@ -205,7 +206,7 @@ namespace SIAV_v4.Reportes.WMStra
             string pedidos = vg_pedidos;
             string usuario = HttpContext.Current.User.Identity.Name;
             string pedido, pedidoActual;
-            decimal subtotal = 0;
+            //decimal subtotal = 0;
             DataTable dt = an_wms.GetPackingList(empresa, pedidos, 1);
             Document document = new Document(PageSize.A4, 88f, 88f, 10f, 10f);
             Font NormalFont = FontFactory.GetFont("Arial", 12, Font.NORMAL, BaseColor.BLACK);
@@ -222,10 +223,7 @@ namespace SIAV_v4.Reportes.WMStra
                 pedido = "";
 
                 document.Open();
-                foreach (DataRow valores in dt.Rows)
-                {
-                    subtotal += Convert.ToDecimal(valores["PVP"]);
-                }
+                
                 foreach (DataRow row in dt.Rows)
                 {
                     string p = row["DOCUMENTO"].ToString();
@@ -271,7 +269,7 @@ namespace SIAV_v4.Reportes.WMStra
                     if (pedidoActual == "" || pedidoActual != pedido)
                     {
                         pedidoActual = row["DOCUMENTO"].ToString().Trim();
-
+                        string subtotal = an_wms.GetPackingListSubtotal(row["DOCUMENTO"].ToString().Trim());
                         //Tabla Header
                         table = new PdfPTable(4);
                         table.TotalWidth = 500f;

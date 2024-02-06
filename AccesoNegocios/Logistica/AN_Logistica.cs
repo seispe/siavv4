@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 
-using DotNet.Highcharts;
-using DotNet.Highcharts.Helpers;
-using DotNet.Highcharts.Enums;
-using DotNet.Highcharts.Options;
+//using DotNet.Highcharts;
+//using DotNet.Highcharts.Helpers;
+//using DotNet.Highcharts.Enums;
+//using DotNet.Highcharts.Options;
 
 namespace AccesoNegocios.Logistica
 {

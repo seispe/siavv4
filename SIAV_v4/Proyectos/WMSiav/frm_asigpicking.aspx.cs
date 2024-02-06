@@ -355,9 +355,14 @@ namespace SIAV_v4.Proyectos.WMSiav
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                string tipodoc = (e.Row.Cells[10].Text);
+                string tipodoc = e.Row.Cells[10].Text;
+                string cliente = e.Row.Cells[5].Text;
                 foreach (TableCell cell in e.Row.Cells)
                 {
+                    if ((cliente == "2390001625001") || (cliente == "1891757995001"))
+                    {
+                        cell.BackColor = Color.LightGreen;
+                    }
                     if (tipodoc != "PV")
                     {
                         cell.BackColor = Color.LightCoral;

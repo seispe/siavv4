@@ -160,6 +160,11 @@
                     <asp:Label ID="lblNotaCredito" runat="server" Text='<%# Bind("NotaCredito") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:TemplateField HeaderText="F Logistica" SortExpression="F Logistica">
+                <ItemTemplate>
+                    <asp:Label ID="lblflogistica" runat="server" Text='<%# Bind("fLogistica") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />

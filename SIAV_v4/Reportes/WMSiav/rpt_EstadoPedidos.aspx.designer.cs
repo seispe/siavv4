@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SIAV_v4.Reportes.WMSiav {
-    
-    
-    public partial class rpt_EstadoPedidos {
-        
+namespace SIAV_v4.Reportes.WMSiav
+{
+
+
+    public partial class rpt_EstadoPedidos
+    {
+
         /// <summary>
         /// Control form1.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// Control ScriptManager1.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
+
         /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// Control lblError.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
+
         /// <summary>
         /// Control rdbTipo.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rdbTipo;
-        
+
         /// <summary>
         /// Control txtDato.
         /// </summary>
@@ -65,7 +67,16 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDato;
-        
+
+        /// <summary>
+        /// Control UpdatePanel2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+
         /// <summary>
         /// Control txtfdesde.
         /// </summary>
@@ -74,7 +85,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtfdesde;
-        
+
         /// <summary>
         /// Control txtfhasta.
         /// </summary>
@@ -83,7 +94,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtfhasta;
-        
+
         /// <summary>
         /// Control btnBuscar.
         /// </summary>
@@ -92,7 +103,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnBuscar;
-        
+
         /// <summary>
         /// Control btnGenerar.
         /// </summary>
@@ -101,7 +112,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGenerar;
-        
+
         /// <summary>
         /// Control UpdatePanel10.
         /// </summary>
@@ -110,7 +121,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel10;
-        
+
         /// <summary>
         /// Control gvEstadoPedidos.
         /// </summary>

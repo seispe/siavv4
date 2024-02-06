@@ -171,6 +171,59 @@ namespace AccesoNegocios.Wmscal
             }
             return gv;
         }
+
+        public GridView GetConsoxUsu(string dato1, string dato2,string dato3, int opcion)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wmscal.GetConsoxUsu(dato1, dato2, dato3, opcion);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public GridView GetConteoDetallado(int op, string dato)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wmscal.GetConteoDetallado(op, dato);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.AutoGenerateColumns = false;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
         #endregion
     }
 }

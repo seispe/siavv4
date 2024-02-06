@@ -135,14 +135,19 @@
                     <asp:Label ID="lbldespachado" runat="server" Text='<%# Bind("DESPACHADO") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="ENTREGA" SortExpression="ENTREGA">
+            <asp:TemplateField HeaderText="TRANS" SortExpression="TRANS">
                 <ItemTemplate>
-                    <asp:Label ID="lblentrega" runat="server" Text='<%# Bind("ENTREGA") %>'></asp:Label>
+                    <asp:Label ID="lblentrega" runat="server" Text='<%# Bind("TRANSPORTE") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="RECIBE DE LAAR" SortExpression="RECIBE DE LAAR">
+            <asp:TemplateField HeaderText="GUIA SSS" SortExpression="GUIA SSS">
                 <ItemTemplate>
-                    <asp:Label ID="lblrecibido" runat="server" Text='<%# Bind("RECIBIDO") %>'></asp:Label>
+                    <asp:Label ID="lblrecibido" runat="server" Text='<%# Bind("GUIA") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+                 <asp:TemplateField HeaderText="ENTREGA" SortExpression="ENTREGA">
+                <ItemTemplate>
+                    <asp:Label ID="lblentregaG" runat="server" Text='<%# Bind("entrega") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             

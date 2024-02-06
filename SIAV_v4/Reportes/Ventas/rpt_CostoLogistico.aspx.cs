@@ -32,17 +32,9 @@ namespace SIAV_v4.Reportes.Ventas
 
             fechadesde = Convert.ToDateTime(txtDesde.Text.Trim()).ToString("yyyy-MM-dd");
             fechahasta = Convert.ToDateTime(txtHasta.Text.Trim()).ToString("yyyy-MM-dd");
-            if (Convert.ToInt32(rdBodega.SelectedValue) == 1)
-            {
-                GridView1.DataSource = an_ventas.GetVtasCostoLogistico(fechadesde, fechahasta).DataSource;
-                GridView1.DataBind();
-            }
-            else
-            {
-                GridView1.DataSource = an_ventas.GetVtasCostoLogisticoPVG(fechadesde, fechahasta).DataSource;
-                GridView1.DataBind();
-            }
-            
+
+            GridView1.DataSource = an_ventas.GetVtasCostoLogistico(fechadesde, fechahasta, rdBodega.SelectedValue, txtCliente.Text.Trim()).DataSource;
+            GridView1.DataBind();
             Response.Clear();
             Response.Buffer = true;
             Response.AddHeader("content-disposition",

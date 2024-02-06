@@ -384,12 +384,7 @@
                                 <asp:Label ID="lblmarca" runat="server" Text='<%# Bind("marca") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                          <asp:TemplateField HeaderText="StockWMS" SortExpression="StockWMS">
-                            <ItemTemplate>
-                                <asp:Label ID="lblStockWMS" runat="server" Text='<%# Bind("StockWMS") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:BoundField DataField="StockPI" HeaderText="StockPI" Visible="true"/>
+                        <asp:BoundField DataField="StockWMS" HeaderText="StockWMS" Visible="true"/>
                     </Columns>
                         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />

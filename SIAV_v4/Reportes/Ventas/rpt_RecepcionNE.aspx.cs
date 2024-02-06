@@ -1,4 +1,5 @@
 ﻿using AccesoNegocios.Alertas;
+using AccesoNegocios.GP;
 using AccesoNegocios.WMSiav;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,14 @@ namespace SIAV_v4.Reportes.Ventas
         #region VariablesGlobales
         AN_WMS an_wms = new AN_WMS();
         AN_Alertas an_alertas = new AN_Alertas();
+        AN_Ventas an_ventas = null;
         public static string desde, hasta;
         #endregion
 
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            an_ventas = new AN_Ventas(Request.Cookies["basesiav"].Value);
         }
 
         protected void btnGenerarExcel_Click(object sender, EventArgs e)
@@ -52,15 +54,24 @@ namespace SIAV_v4.Reportes.Ventas
         {
             string fechadesde = "";
             string fechahasta = "";
+            int op = 0;
             //Create a dummy GridView
             GridView GridView1 = new GridView();
             GridView1.AllowPaging = false;
 
             fechadesde = Convert.ToDateTime(txtDesde.Text.Trim()).ToString("yyyy-MM-dd");
             fechahasta = Convert.ToDateTime(txtHasta.Text.Trim()).ToString("yyyy-MM-dd");
-
-            GridView1.DataSource = an_wms.GetRecepcionNE(fechadesde, fechahasta, Convert.ToInt32(rdbTipo.SelectedValue)).DataSource;
-            GridView1.DataBind();
+            op = Convert.ToInt32(rdbTipo.SelectedValue);
+            if ( op == 1)
+            {
+                GridView1.DataSource = an_wms.GetRecepcionNE(fechadesde, fechahasta, 1).DataSource;
+                GridView1.DataBind();
+            }
+            else
+            {
+                GridView1.DataSource = an_ventas.GetRecepcionNE(fechadesde, fechahasta, op).DataSource;
+                GridView1.DataBind();
+            }
 
             Response.Clear();
             Response.Buffer = true;

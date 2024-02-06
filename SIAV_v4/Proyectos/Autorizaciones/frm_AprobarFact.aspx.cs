@@ -21,7 +21,7 @@ namespace SIAV_v4.Proyectos.Autorizaciones
         {
             try
             {
-                gvAprobar.DataSource = an_autorizaciones.GetFacturas(1).DataSource;
+                gvAprobar.DataSource = an_autorizaciones.GetFacturas().DataSource;
                 gvAprobar.DataBind();
             }
             catch (Exception ex)
@@ -34,20 +34,26 @@ namespace SIAV_v4.Proyectos.Autorizaciones
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
-            an_autorizaciones = new AN_Autorizaciones(Request.Cookies["basesiav"].Value);
-            GridAprobar();
+            if (!IsPostBack)
+            {
+                an_autorizaciones = new AN_Autorizaciones(Request.Cookies["basesiav"].Value);
+                GridAprobar();
+            }
         }
+
+        #endregion
 
         protected void gvAprobar_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
             {
+                an_autorizaciones = new AN_Autorizaciones(Request.Cookies["basesiav"].Value);
                 lblError.Text = "";
                 if (e.CommandName == "Aprobacion")
                 {
                     int index = Convert.ToInt32(e.CommandArgument);
-                    string factura = (gvAprobar.Rows[index].FindControl("Factura") as Label).Text;
-                    string salida = an_autorizaciones.setAprobarFacturas(factura, 1);
+                    int id = Convert.ToInt32((gvAprobar.Rows[index].FindControl("lblid") as Label).Text);
+                    string salida = an_autorizaciones.setAprobarFacturas(1, id, HttpContext.Current.User.Identity.Name);
                     lblError.Text = an_alertas.Mensaje("MENSAJE. ", salida, "verde");
                     GridAprobar();
                 }
@@ -57,6 +63,5 @@ namespace SIAV_v4.Proyectos.Autorizaciones
                 lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
             }
         }
-        #endregion
     }
 }

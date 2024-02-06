@@ -20,7 +20,7 @@ namespace AccesoDatos.GP
             db = new SqlConnection(ConfigurationManager.ConnectionStrings["con" + empresa].ConnectionString);
             dbdynamics = new SqlConnection(ConfigurationManager.ConnectionStrings["conDYNAMICS"].ConnectionString);
             dbdynamicslocal = new SqlConnection(ConfigurationManager.ConnectionStrings["conDYNAMICSlocal"].ConnectionString);
-            dbwms = new SqlConnection(ConfigurationManager.ConnectionStrings["conWMS"].ConnectionString);
+            dbwms = new SqlConnection(ConfigurationManager.ConnectionStrings["conWMSiav"].ConnectionString);
         }
         #endregion
 
@@ -182,9 +182,156 @@ namespace AccesoDatos.GP
                 throw ex;
             }
         }
+
+        public DataSet GetDetalleFacturaDtos(int op, string dato)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("sp_dtosMercaderia", db);
+                da.SelectCommand.Parameters.AddWithValue("@op",op);
+                da.SelectCommand.Parameters.AddWithValue("@dato", dato);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "sp_dtosMercaderia");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region Insert
+        public string InsDtosMercaderia(string secuencial, string ruc, string cliente, string factura, DateTime ffactura, string item, string descripcion, int cantingreso, 
+                                         decimal porcentajeingreso, int cantfactura, decimal precioUnit, decimal dtoItem, decimal precioTotal, string codvend)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "sp_dtosMercaderiaIns";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@secuencial", secuencial);
+                cmd.Parameters.AddWithValue("@ruc", ruc);
+                cmd.Parameters.AddWithValue("@cliente", cliente);
+                cmd.Parameters.AddWithValue("@factura", factura);
+                cmd.Parameters.AddWithValue("@ffactura", ffactura);
+                cmd.Parameters.AddWithValue("@item", item);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                cmd.Parameters.AddWithValue("@cantingreso", cantingreso);
+                cmd.Parameters.AddWithValue("@porcentajeingreso", porcentajeingreso);
+                cmd.Parameters.AddWithValue("@cantfactura", cantfactura);
+                cmd.Parameters.AddWithValue("@precioUnit", precioUnit);
+                cmd.Parameters.AddWithValue("@dtoItem", dtoItem);
+                cmd.Parameters.AddWithValue("@precioTotal", precioTotal);
+                cmd.Parameters.AddWithValue("@codvend", codvend);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+                    return "OK";
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        public string InsDtosMercaderiaCAL(string secuencial,string bodega, string ruc, string cliente, string factura, DateTime ffactura, string item, string descripcion, int cantingreso,
+                                        decimal porcentajeingreso, int cantfactura, decimal precioUnit, decimal dtoItem, decimal precioTotal, string codvend)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "sp_dtosMercaderiaIns";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@secuencial", secuencial);
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                cmd.Parameters.AddWithValue("@ruc", ruc);
+                cmd.Parameters.AddWithValue("@cliente", cliente);
+                cmd.Parameters.AddWithValue("@factura", factura);
+                cmd.Parameters.AddWithValue("@ffactura", ffactura);
+                cmd.Parameters.AddWithValue("@item", item);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                cmd.Parameters.AddWithValue("@cantingreso", cantingreso);
+                cmd.Parameters.AddWithValue("@porcentajeingreso", porcentajeingreso);
+                cmd.Parameters.AddWithValue("@cantfactura", cantfactura);
+                cmd.Parameters.AddWithValue("@precioUnit", precioUnit);
+                cmd.Parameters.AddWithValue("@dtoItem", dtoItem);
+                cmd.Parameters.AddWithValue("@precioTotal", precioTotal);
+                cmd.Parameters.AddWithValue("@codvend", codvend);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+                    return "OK";
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        public string SecuencialDtoMercaderia(int op)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "sp_dtosMercaderia";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@op", op);
+                cmd.Parameters.AddWithValue("@dato", "");
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        public string CorreoDtoMercaderia(string secuencial)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "sp_dtosMercaderiaCorreo";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@secuencial", secuencial);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
         #endregion
 
         #region Update

@@ -291,17 +291,28 @@
                         <br />
                         <h3>Selecciona la Bodega:</h3>
                         <asp:DropDownList ID="ddlBodegaIAV" class="form-control" runat="server" CssClass="form-control" AutoPostBack="false">
-                            <asp:ListItem Selected="True">PVA1</asp:ListItem>
-                            <asp:ListItem>PVA2</asp:ListItem>
-                            <asp:ListItem>PVG1</asp:ListItem>
-                            <asp:ListItem>PVQ1</asp:ListItem>
-                            <asp:ListItem>PVQ2</asp:ListItem>
-                            <asp:ListItem>PVQ4</asp:ListItem>
-                            <asp:ListItem>PVQ5</asp:ListItem>
-                            <asp:ListItem>PVS1</asp:ListItem>
-                            <asp:ListItem>PVGS</asp:ListItem>
+                            <asp:ListItem Selected="True" Value="PVA1">PVA1</asp:ListItem>
+                            <asp:ListItem Value="PVA2">PVA2</asp:ListItem>
+                            <asp:ListItem Value="PVG1">PVG1</asp:ListItem>
+                            <asp:ListItem Value="PVQ1">PVQ1</asp:ListItem>
+                            <asp:ListItem Value="PVQ2">PVQ2</asp:ListItem>
+                            <asp:ListItem Value="PVQ4">PVQ4</asp:ListItem>
+                            <asp:ListItem Value="PVQ5">PVQ5</asp:ListItem>
+                            <asp:ListItem Value="PVS1">PVS1</asp:ListItem>
+                            <asp:ListItem Value="PVGS">PVGS</asp:ListItem>
                         </asp:DropDownList>
                         <br />
+                      <%--  <h3>Tipo de OC:</h3>
+                        <asp:DropDownList ID="ddlTipoIAV" class="form-control" runat="server" CssClass="form-control" AutoPostBack="false">
+                            <asp:ListItem Selected="True" Value="Abastecimiento">ABASTECIMIENTO</asp:ListItem>
+                            <asp:ListItem Value="Puntual">PUNTUAL</asp:ListItem>
+                        </asp:DropDownList>
+                        <br />
+                        <h3>Responsable de la compra:</h3>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+                            <asp:TextBox ID="txtResponsableIAV" runat="server" Enabled="True" class="form-control" placeholder="compradores" Width="250px"></asp:TextBox>
+                        </div>
+                        <br />--%>
                     </div>
                     <div class="modal-footer">
                         <asp:Button id="btnCrearImportadora" runat="server" Text="Generar" OnClick="btnCrearImportadora_Click" CssClass="btn btn-info" CausesValidation="false"/>
@@ -331,17 +342,28 @@
                         <br />
                         <h3>Selecciona la Bodega:</h3>
                         <asp:DropDownList ID="ddlBodegaCORPAL" class="form-control" runat="server" CssClass="form-control" AutoPostBack="false">
-                            <asp:ListItem Selected="True">PVA1</asp:ListItem>
-                            <asp:ListItem>PVA2</asp:ListItem>
-                            <asp:ListItem>PVG1</asp:ListItem>
-                            <asp:ListItem>PVQ1</asp:ListItem>
-                            <asp:ListItem>PVQ2</asp:ListItem>
-                            <asp:ListItem>PVQ4</asp:ListItem>
-                            <asp:ListItem>PVQ5</asp:ListItem>
-                            <asp:ListItem>PVS1</asp:ListItem>
-                            <asp:ListItem>PVGS</asp:ListItem>
+                            <asp:ListItem Selected="True" Value="PVA1">PVA1</asp:ListItem>
+                            <asp:ListItem Value="PVA2">PVA2</asp:ListItem>
+                            <asp:ListItem Value="PVG1">PVG1</asp:ListItem>
+                            <asp:ListItem Value="PVQ1">PVQ1</asp:ListItem>
+                            <asp:ListItem Value="PVQ2">PVQ2</asp:ListItem>
+                            <asp:ListItem Value="PVQ4">PVQ4</asp:ListItem>
+                            <asp:ListItem Value="PVQ5">PVQ5</asp:ListItem>
+                            <asp:ListItem Value="PVS1">PVS1</asp:ListItem>
+                            <asp:ListItem Value="PVGS">PVGS</asp:ListItem>
                         </asp:DropDownList>
                         <br />
+                      <%--   <h3>Tipo de OC:</h3>
+                        <asp:DropDownList ID="ddlTipoCorpal" class="form-control" runat="server" CssClass="form-control" AutoPostBack="false">
+                            <asp:ListItem Selected="True">ABASTECIMIENTO</asp:ListItem>
+                            <asp:ListItem>PUNTUAL</asp:ListItem>
+                        </asp:DropDownList>
+                        <br />
+                        <h3>Responsable de la compra:</h3>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+                            <asp:TextBox ID="txtResponsableCorpal" runat="server" Enabled="True" class="form-control" placeholder="compradores"></asp:TextBox>
+                        </div>
+                        <br />--%>
                     </div>
                     <div class="modal-footer">
                         <asp:Button id="btnCrearCorpal" runat="server" Text="Generar" OnClick="btnCrearCorpal_Click" CssClass="btn btn-info" CausesValidation="false"/>
@@ -371,17 +393,28 @@
                         <br />
                         <h3>Selecciona la Bodega:</h3>
                         <asp:DropDownList ID="ddlBodegaRectima" class="form-control" runat="server" CssClass="form-control" AutoPostBack="false">
-                            <asp:ListItem Selected="True">PVA1</asp:ListItem>
-                            <asp:ListItem>PVA2</asp:ListItem>
-                            <asp:ListItem>PVG1</asp:ListItem>
-                            <asp:ListItem>PVQ1</asp:ListItem>
-                            <asp:ListItem>PVQ2</asp:ListItem>
-                            <asp:ListItem>PVQ4</asp:ListItem>
-                            <asp:ListItem>PVQ5</asp:ListItem>
-                            <asp:ListItem>PVS1</asp:ListItem>
-                            <asp:ListItem>PVGS</asp:ListItem>
+                            <asp:ListItem Selected="True" Value="PVA1">PVA1</asp:ListItem>
+                            <asp:ListItem Value="PVA2">PVA2</asp:ListItem>
+                            <asp:ListItem Value="PVG1">PVG1</asp:ListItem>
+                            <asp:ListItem Value="PVQ1">PVQ1</asp:ListItem>
+                            <asp:ListItem Value="PVQ2">PVQ2</asp:ListItem>
+                            <asp:ListItem Value="PVQ4">PVQ4</asp:ListItem>
+                            <asp:ListItem Value="PVQ5">PVQ5</asp:ListItem>
+                            <asp:ListItem Value="PVS1">PVS1</asp:ListItem>
+                            <asp:ListItem Value="PVGS">PVGS</asp:ListItem>
                         </asp:DropDownList>
                         <br />
+                        <%-- <h3>Tipo de OC:</h3>
+                        <asp:DropDownList ID="ddlTipoRectima" class="form-control" runat="server" CssClass="form-control" AutoPostBack="false">
+                            <asp:ListItem Selected="True">ABASTECIMIENTO</asp:ListItem>
+                            <asp:ListItem>PUNTUAL</asp:ListItem>
+                        </asp:DropDownList>
+                        <br />
+                        <h3>Responsable de la compra:</h3>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+                            <asp:TextBox ID="txtResponsableRectima" runat="server" Enabled="True" class="form-control" placeholder="compradores"></asp:TextBox>
+                        </div>
+                        <br />--%>
                     </div>
                     <div class="modal-footer">
                         <asp:Button id="btnCrearRectima" runat="server" Text="Generar" OnClick="btnCrearRectima_Click" CssClass="btn btn-info" CausesValidation="false"/>

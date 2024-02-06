@@ -31,6 +31,25 @@ namespace AccesoDatos.WMScalG
         #endregion
 
         #region Select
+        public DataSet GetConteoDetallado(int op, string dato)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PrptConteoCC", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.Parameters.AddWithValue("@dato", dato);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PrptConteoCC");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public DataSet GetConspenxUsuario()
         {
             try
@@ -1147,7 +1166,7 @@ namespace AccesoDatos.WMScalG
             }
         }
 
-        public string UpCerrarProd(string numconsolidado, string pedido, string producto, string coordenada, string observacion, string usuarioanula)
+        public string UpCerrarProd(string numconsolidado, string pedido, string producto, string coordenada, string observacion, string usuarioanula, int cantidad)
         {
             using (SqlCommand cmd = new SqlCommand())
             {
@@ -1159,6 +1178,7 @@ namespace AccesoDatos.WMScalG
                 cmd.Parameters.AddWithValue("@coor_origen", coordenada);
                 cmd.Parameters.AddWithValue("@observacion", observacion);
                 cmd.Parameters.AddWithValue("@usuarioanula", usuarioanula);
+                cmd.Parameters.AddWithValue("@cantidad", cantidad);
                 cmd.Connection = db;
                 try
                 {

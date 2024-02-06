@@ -34,7 +34,7 @@ namespace SIAV_v4.Proyectos.WMStra
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void gvCoordenadas_RowCommand(object sender, GridViewCommandEventArgs e)

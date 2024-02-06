@@ -208,16 +208,24 @@
                                 <asp:HiddenField ID="HiddenField1" runat="server" />
                                 <br />
                             </div>
-                            <div class="container"></div>
+                            
                             <div class="modal-body">
+                                <div class="container">
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <asp:TextBox ID="txtObservacionC" runat="server" CssClass="form-control" Width="350px" TextMode="MultiLine"></asp:TextBox>
+                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <%--<asp:TextBox ID="txtObservacionC" runat="server" CssClass="form-control" Width="350px" TextMode="MultiLine"></asp:TextBox>--%>
+                                        <asp:DropDownList id="ddlmotCierre" runat="server" CssClass="form-control"></asp:DropDownList>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                         <asp:TextBox ID="txtCantCierre" runat="server" CssClass="form-control" placeholder="Cantidad" TextMode="Number"></asp:TextBox>
                                     </div>
                                 </div>
+                                    </div>
                             </div>
                             <div class="modal-footer">
-                                <asp:Button ID="btnCerrarItem" runat="server" Text="Cerrar Item" CssClass="btn btn-success" OnClick="btnCerrarItem_Click" />
+                                <asp:Button ID="btnCerrarItem" runat="server" Text="Cerrar Item" CssClass="btn btn-success" OnClick="btnCerrarItem_Click" OnClientClick="clickOnce(this, 'Buscando...')" ValidationGroup="Cerrar Item"
+                             UseSubmitBehavior="false" />
                                 <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Cancelar</button>
                             </div>
                         </div>
@@ -236,6 +244,6 @@
             btn.value = msg;
             btn.disabled = true;
             return true;
-            }
+        }
     </script>
 </asp:Content>

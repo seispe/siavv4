@@ -29,7 +29,7 @@ namespace AccesoDatos.WMSiav
         #region Constructor
         public AD_WMS()
         {
-            db = new SqlConnection(ConfigurationManager.ConnectionStrings["conWMScal"].ConnectionString);
+            db = new SqlConnection(ConfigurationManager.ConnectionStrings["conWMSiav"].ConnectionString);
             dbDynamics = new SqlConnection(ConfigurationManager.ConnectionStrings["conDYNAMICS"].ConnectionString);
         }
         #endregion
@@ -312,7 +312,7 @@ namespace AccesoDatos.WMSiav
         {
             try
             {
-                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PImpresionNE_hist", db);
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PImpresionNE", db);
                 da.SelectCommand.CommandTimeout = 240;
                 da.SelectCommand.Parameters.AddWithValue("@empresa", bd);
                 da.SelectCommand.Parameters.AddWithValue("@pedidos", pedidos);
@@ -1272,7 +1272,7 @@ namespace AccesoDatos.WMSiav
             }
         }
 
-        public string UpCerrarProd(string numconsolidado, string pedido, string producto, string coordenada, string observacion, string usuarioanula)
+        public string UpCerrarProd(string numconsolidado, string pedido, string producto, string coordenada, string observacion, string usuarioanula, int cantidad)
         {
             using (SqlCommand cmd = new SqlCommand())
             {
@@ -1284,6 +1284,7 @@ namespace AccesoDatos.WMSiav
                 cmd.Parameters.AddWithValue("@coor_origen", coordenada);
                 cmd.Parameters.AddWithValue("@observacion", observacion);
                 cmd.Parameters.AddWithValue("@usuarioanula", usuarioanula);
+                cmd.Parameters.AddWithValue("@cantidad", cantidad);
                 cmd.Connection = db;
                 try
                 {
@@ -1419,6 +1420,31 @@ namespace AccesoDatos.WMSiav
                 db.Open();
                 DataSet ds = new DataSet();
                 da.Fill(ds, "GA_WMS_PrptEstadoPedidos");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                db.Close();
+            }
+        }
+
+        public DataSet GetEstadoPedidoVtas(string dato1, string dato2, int opcion)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PrptEstadoPedidosVtas", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.Parameters.AddWithValue("@dato1", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@dato2", dato2);
+                da.SelectCommand.Parameters.AddWithValue("@opcion", opcion);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                db.Open();
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PrptEstadoPedidosVtas");
                 return ds;
             }
             catch (Exception ex)
@@ -1945,6 +1971,7 @@ namespace AccesoDatos.WMSiav
             using (SqlCommand cmd = new SqlCommand())
             {
                 cmd.CommandText = "GA_WMS_PsubirPVCtemp";
+                cmd.CommandTimeout = 120;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@fac", factura);
                 cmd.Connection = db;
@@ -2189,6 +2216,7 @@ namespace AccesoDatos.WMSiav
             try
             {
                 SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PrptConteoCC", db);
+                da.SelectCommand.CommandTimeout = 180;
                 da.SelectCommand.Parameters.AddWithValue("@op", op);
                 da.SelectCommand.Parameters.AddWithValue("@dato", dato);
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
@@ -2499,6 +2527,155 @@ namespace AccesoDatos.WMSiav
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public DataSet getBahiasxBultos(string dato, int opcion, string dato1, string dato2)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_rptBahiasxBultos", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.Parameters.AddWithValue("@pedido", dato);
+                da.SelectCommand.Parameters.AddWithValue("@op", opcion);
+                da.SelectCommand.Parameters.AddWithValue("@dato1", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@dato2", dato2);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_rptBahiasxBultos");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet getBahiasxBultosBod(string dato, int opcion, string dato1, string dato2)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_rptBahiasxBultosBod", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.Parameters.AddWithValue("@pedido", dato);
+                da.SelectCommand.Parameters.AddWithValue("@op", opcion);
+                da.SelectCommand.Parameters.AddWithValue("@dato1", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@dato2", dato2);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_rptBahiasxBultosBod");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string GetPackingListSubtotal(string pedido)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "GA_WMS_PImpresionNEsubtotal";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@pedido", pedido);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        public DataSet GetPendientesporRevisar()
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_rptPedPendientesxRevisar", db);
+                da.SelectCommand.CommandTimeout = 360;
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                db.Open();
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_rptPedPendientesxRevisar");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                db.Close();
+            }
+        }
+
+        /// TRASPASOS BODEGA MATRIZ A CUARENTENA
+        public DataSet GetMovimientosTraspaso(string desde, string hasta, string numerodocumento, string motivo, string usuario, int op)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PtrasBodCua", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.Parameters.AddWithValue("@desde", desde);
+                da.SelectCommand.Parameters.AddWithValue("@hasta", hasta);
+                da.SelectCommand.Parameters.AddWithValue("@numerodocumento", numerodocumento);
+                da.SelectCommand.Parameters.AddWithValue("@motivo", motivo);
+                da.SelectCommand.Parameters.AddWithValue("@usuario", usuario);
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                db.Open();
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PtrasBodCua");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                db.Close();
+            }
+        }
+
+        /// TRASPASOS BODEGA MATRIZ A CUARENTENA
+        public string UpTraspasosBodCua(string numerodocumento, string motivo, string usuario, int op)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "GA_WMS_PtrasBodCua";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@desde", "");
+                cmd.Parameters.AddWithValue("@hasta", "");
+                cmd.Parameters.AddWithValue("@numerodocumento", numerodocumento);
+                cmd.Parameters.AddWithValue("@motivo", motivo);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@op", op);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
             }
         }
         #endregion

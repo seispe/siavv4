@@ -23,6 +23,7 @@ namespace SIAV_v4.Proyectos.WMStra
         protected void Page_Load(object sender, EventArgs e)
         {
             vg_empresa = Request.Cookies["basesiav"].Value;
+            
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)

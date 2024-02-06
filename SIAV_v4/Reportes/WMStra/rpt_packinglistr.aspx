@@ -76,13 +76,18 @@
                     <asp:Label ID="lblcliente" runat="server" Text='<%# Bind("cliente") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+           
              <asp:TemplateField HeaderText="FECHA PEDIDO" SortExpression="FECHA PEDIDO">
                 <ItemTemplate>
                     <asp:Label ID="lblfechapedido" runat="server" Text='<%# Bind("fechapedido") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="impresiones" HeaderText="Impresiones" Visible="true"/>
-       
+          <asp:TemplateField HeaderText="CIUDAD" SortExpression="CIUDAD">
+                <ItemTemplate>
+                    <asp:Label ID="lblciudad" runat="server" Text='<%# Bind("ciudad") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
     </Columns>
         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />

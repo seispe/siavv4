@@ -106,6 +106,25 @@ namespace AccesoDatos.WMScal
                 throw ex;
             }
         }
+
+        public DataSet GetConteoDetallado(int op, string dato)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PrptConteoCC", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.Parameters.AddWithValue("@dato", dato);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PrptConteoCC");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region Insert
@@ -249,6 +268,32 @@ namespace AccesoDatos.WMScal
                 {
                     db.Close();
                 }
+            }
+        }
+
+        public DataSet GetConsoxUsu(string dato1, string dato2,string dato3, int opcion)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PrptConsxUsuVJ", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.Parameters.AddWithValue("@dato1", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@dato2", dato2);
+                da.SelectCommand.Parameters.AddWithValue("@dato3", dato3);
+                da.SelectCommand.Parameters.AddWithValue("@op", opcion);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                db.Open();
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PrptConsxUsuVJ");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                db.Close();
             }
         }
         #endregion

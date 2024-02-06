@@ -29,7 +29,7 @@ namespace AccesoDatos.WMStra
         #region Constructor
         public AD_WMStra()
         {
-            db = new SqlConnection(ConfigurationManager.ConnectionStrings["conWMStra"].ConnectionString);
+            db = new SqlConnection(ConfigurationManager.ConnectionStrings["conWmstra"].ConnectionString);
             dbDynamics = new SqlConnection(ConfigurationManager.ConnectionStrings["conDYNAMICS"].ConnectionString);
         }
         #endregion
@@ -1778,7 +1778,7 @@ namespace AccesoDatos.WMStra
         {
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "GA_WMS_ParreglarNE";
+                cmd.CommandText = "GA_WMS_ParreglarNEV2";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@ped", pedido);
                 cmd.Connection = db;
@@ -2109,6 +2109,55 @@ namespace AccesoDatos.WMStra
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public DataSet GetrptBodegaDos(string dato1, string dato2)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_rptPedBodDos", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.Parameters.AddWithValue("@desde", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@hasta", dato2);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                db.Open();
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_rptPedBodDos");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                db.Close();
+            }
+        }
+
+        public string GetPackingListSubtotal(string pedido)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "GA_WMS_PImpresionNEsubtotal";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@pedido", pedido);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
             }
         }
         #endregion

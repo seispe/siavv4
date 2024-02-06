@@ -10,7 +10,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <asp:UpdatePanel id="UpdatePanel1" runat="server">
             <ContentTemplate>  
-                <h1 class="page-header">Desaprobar Facturas</h1>
+                <h1 class="page-header">Desaprobar Documentos</h1>
                 <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
             </ContentTemplate>
             <Triggers>
@@ -30,27 +30,42 @@
             <Columns>
                 <asp:TemplateField>
               <ItemTemplate>
-                  <asp:ImageButton CommandName="Aprobacion" CommandArgument="<%# Container.DataItemIndex %>" ImageUrl="~/Recursos/images/grafico.png" runat="server" OnClientClick="return confirm('Desea desaprobar la factura')" />
+                  <asp:ImageButton CommandName="Aprobacion" CommandArgument="<%# Container.DataItemIndex %>" ImageUrl="~/Recursos/images/grafico.png" runat="server" OnClientClick="return confirm('Desea desaprobar el documento')" />
               </ItemTemplate>
             </asp:TemplateField>
-                <asp:TemplateField HeaderText="Fecha" SortExpression="Fecha" Visible="true">
+                <asp:TemplateField HeaderText="#" SortExpression="#" Visible="true">
                     <ItemTemplate>
-                        <asp:Label ID="lblFecha" runat="server" Text='<%# Bind("Fecha") %>'></asp:Label>  
+                        <asp:Label ID="lblid" runat="server" Text='<%# Bind("id") %>'></asp:Label>  
                     </ItemTemplate>
                 </asp:TemplateField>
-             <asp:TemplateField HeaderText="Factura" SortExpression="Factura">
+             <asp:TemplateField HeaderText="Modulo" SortExpression="Modulo">
                     <ItemTemplate>
-                        <asp:Label ID="lblFactura" runat="server" Text='<%# Bind("Factura") %>'></asp:Label>  
+                        <asp:Label ID="lblmodulo" runat="server" Text='<%# Bind("modulo") %>'></asp:Label>  
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Devolucion" SortExpression="Devolucion" >
+                <asp:TemplateField HeaderText="Documento" SortExpression="Documento" >
                     <ItemTemplate>
-                        <asp:Label ID="lblDevolucion" runat="server" Text='<%# Bind("Devolucion") %>'></asp:Label>
+                        <asp:Label ID="lbldocumento" runat="server" Text='<%# Bind("documento") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Motivo" SortExpression="Motivo" >
+                <asp:TemplateField HeaderText="Usuario" SortExpression="Usuario" >
                     <ItemTemplate>
-                        <asp:Label ID="lblMotivo" runat="server" Text='<%# Bind("Motivo") %>'></asp:Label>
+                        <asp:Label ID="lblusuario" runat="server" Text='<%# Bind("usuario_crea") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Fecha Ingreso" SortExpression="Fecha Ingreso" >
+                    <ItemTemplate>
+                        <asp:Label ID="lblfecha" runat="server" Text='<%# Bind("f_ingreso") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Usuario Autoriza" SortExpression="Usuario Autoriza" >
+                    <ItemTemplate>
+                        <asp:Label ID="lblusuario_autoriza" runat="server" Text='<%# Bind("usuario_autoriza") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Fecha Autoriza" SortExpression="Fecha Autoriza" >
+                    <ItemTemplate>
+                        <asp:Label ID="lblf_autoriza" runat="server" Text='<%# Bind("f_autoriza") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

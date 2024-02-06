@@ -166,12 +166,13 @@
                     <asp:Label ID="lblprioridad" runat="server" Text='<%# Bind("prioridad") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-    <%--           <asp:TemplateField HeaderText="TIPODOC" SortExpression="TIPODOC">
-                <ItemTemplate>
-                    <asp:Label ID="lbltipodoc" runat="server" Text='<%# Bind("tipodoc") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>--%>
             <asp:BoundField DataField="tipodoc" HeaderText="TIPODOC" Visible="true"/>
+            <asp:BoundField DataField="bodegados" HeaderText="BODEGA_2" Visible="true"/>
+               <asp:TemplateField HeaderText="ENTREGA" SortExpression="ENTREGA">
+                <ItemTemplate>
+                    <asp:Label ID="lblentrega" runat="server" Text='<%# Bind("entrega") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />

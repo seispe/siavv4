@@ -18,6 +18,9 @@ namespace AccesoNegocios.WMStra
         AD_WMStra ad_wms = new AD_WMStra();
         #endregion
 
+        #region Constructor
+        #endregion
+
         #region Funciones
         public GridView GetrptVoids(string documento, int op)
         {
@@ -1481,6 +1484,44 @@ namespace AccesoNegocios.WMStra
                 gv.Rows[0].Cells[0].Text = "No se encuentra datos";
             }
             return gv;
+        }
+
+        public GridView GetrptBodegaDos(string dato1, string dato2)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wms.GetrptBodegaDos(dato1, dato2);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public string GetPackingListSubtotal(string pedido)
+        {
+            try
+            {
+                return ad_wms.GetPackingListSubtotal(pedido);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         #endregion
     }

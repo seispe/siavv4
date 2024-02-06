@@ -59,7 +59,12 @@ namespace SIAV_v4.Reportes.WMSiav
                 GridView1.DataSource = an_wms.GetEstadoPedido(txtDato.Text.Trim(), "", 1).DataSource;
                 GridView1.DataBind();
             }
-           
+
+            if (Convert.ToInt32(rdbTipo.SelectedValue) == 4)
+            {
+                GridView1.DataSource = an_wms.GetEstadoPedido(txtDato.Text.Trim(), "", 4).DataSource;
+                GridView1.DataBind();
+            }
             Response.Clear();
             Response.Buffer = true;
             Response.AddHeader("content-disposition",
@@ -119,6 +124,13 @@ namespace SIAV_v4.Reportes.WMSiav
                 if (Convert.ToInt32(rdbTipo.SelectedValue) == 1)
                 {
                     gvEstadoPedidos.DataSource = an_wms.GetEstadoPedido(txtDato.Text.Trim(), "", 1).DataSource;
+                    gvEstadoPedidos.DataBind();
+                    PintarGrid();
+                }
+
+                if (Convert.ToInt32(rdbTipo.SelectedValue) == 4)
+                {
+                    gvEstadoPedidos.DataSource = an_wms.GetEstadoPedido(txtDato.Text.Trim(), "", 4).DataSource;
                     gvEstadoPedidos.DataBind();
                     PintarGrid();
                 }

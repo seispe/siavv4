@@ -354,11 +354,11 @@ namespace AccesoNegocios.WMScalG
             }
         }
 
-        public string UpCerrarProd(string numconsolidado, string pedido, string producto, string coordenada, string observacion, string usuarioanula)
+        public string UpCerrarProd(string numconsolidado, string pedido, string producto, string coordenada, string observacion, string usuarioanula, int cantidad)
         {
             try
             {
-                return ad_wms.UpCerrarProd(numconsolidado, pedido, producto, coordenada, observacion, usuarioanula);
+                return ad_wms.UpCerrarProd(numconsolidado, pedido, producto, coordenada, observacion, usuarioanula, cantidad);
             }
             catch (Exception ex)
             {
@@ -1375,6 +1375,33 @@ namespace AccesoNegocios.WMScalG
             {
                 throw ex;
             }
+        }
+
+        public GridView GetConteoDetallado(int op, string dato)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wms.GetConteoDetallado(op, dato);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.AutoGenerateColumns = false;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
         }
         #endregion
     }

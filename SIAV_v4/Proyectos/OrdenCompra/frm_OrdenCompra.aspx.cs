@@ -155,16 +155,20 @@ namespace SIAV_v4.Proyectos.OrdenCompra
             try
             {
                 lblError.Text = "";
-                string resultado = an_ordencompra.setOrdenCompra("GPIAV", HfImportadora.Value,ddlBodegaIAV.SelectedValue,usuariogp);
+               
+                string resultado = an_ordencompra.setOrdenCompra("GPIAV", HfImportadora.Value, ddlBodegaIAV.SelectedValue, usuariogp);
+                //string resultado = "OCPRUEBA";
                 if (resultado.Trim().Length < 12)
                 {
                     VincularGrid();
-                    lblError.Text = an_alertas.Mensaje("GENERADO...!", "Su Numero de Orden de Compra (OCL) es : "+ resultado, "verde");
+                    lblError.Text = an_alertas.Mensaje("GENERADO...!", "Su Numero de Orden de Compra (OCL) es : " + resultado, "verde");
                 }
                 else
                 {
                     lblError.Text = an_alertas.Mensaje("ERROR...!", resultado, "rojo");
                 }
+               
+                    
             }
             catch (Exception ex)
             {
@@ -188,6 +192,7 @@ namespace SIAV_v4.Proyectos.OrdenCompra
             try
             {
                 lblError.Text = "";
+               
                 string resultado = an_ordencompra.setOrdenCompra("GPCAL", HfCorpal.Value, ddlBodegaIAV.SelectedValue, usuariogp);
                 if (resultado.Trim().Length < 12)
                 {
@@ -198,6 +203,7 @@ namespace SIAV_v4.Proyectos.OrdenCompra
                 {
                     lblError.Text = an_alertas.Mensaje("ERROR...!", resultado, "rojo");
                 }
+              
             }
             catch (Exception ex)
             {
@@ -221,6 +227,7 @@ namespace SIAV_v4.Proyectos.OrdenCompra
             try
             {
                 lblError.Text = "";
+                
                 string resultado = an_ordencompra.setOrdenCompra("GPTRA", HfRectima.Value, ddlBodegaIAV.SelectedValue, usuariogp);
                 if (resultado.Trim().Length < 12)
                 {
@@ -230,7 +237,8 @@ namespace SIAV_v4.Proyectos.OrdenCompra
                 else
                 {
                     lblError.Text = an_alertas.Mensaje("ERROR...!", resultado, "rojo");
-                }                
+                }
+                
             }
             catch (Exception ex)
             {

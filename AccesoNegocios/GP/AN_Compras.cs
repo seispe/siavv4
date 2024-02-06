@@ -1,6 +1,7 @@
 ﻿using AccesoDatos.GP;
 using System.Data;
 using System.Web.UI.WebControls;
+using System;
 
 namespace AccesoNegocios.GP
 {
@@ -242,6 +243,91 @@ namespace AccesoNegocios.GP
                 gv.Rows[0].Cells[0].Text = "No se encuentra datos";
             }
             return gv;
+        }
+
+        public DataSet GetDetalleFacturaDtos(int op, string dato)
+        {
+            return ad_compras.GetDetalleFacturaDtos(op, dato);
+        }
+
+        public GridView GetGVDetalleFacturaDtos(int op, string dato)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_compras.GetDetalleFacturaDtos(op, dato);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public string InsDtosMercaderia(string secuencial, string ruc, string cliente, string factura, DateTime ffactura, string item, string descripcion, int cantingreso,
+                                         decimal porcentajeingreso, int cantfactura, decimal precioUnit, decimal dtoItem, decimal precioTotal, string codvend)
+        {
+            try
+            {
+                return ad_compras.InsDtosMercaderia(secuencial, ruc, cliente, factura, ffactura, item, descripcion, cantingreso, porcentajeingreso, cantfactura, precioUnit, dtoItem, precioTotal, codvend);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public string InsDtosMercaderiaCAL(string secuencial, string bodega, string ruc, string cliente, string factura, DateTime ffactura, string item, string descripcion, int cantingreso,
+                                        decimal porcentajeingreso, int cantfactura, decimal precioUnit, decimal dtoItem, decimal precioTotal, string codvend)
+        {
+            try
+            {
+                return ad_compras.InsDtosMercaderiaCAL(secuencial,bodega, ruc, cliente, factura, ffactura, item, descripcion, cantingreso, porcentajeingreso, cantfactura, precioUnit, dtoItem, precioTotal, codvend);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public string CorreoDtoMercaderia(string secuencial)
+        {
+            try
+            {
+                return ad_compras.CorreoDtoMercaderia(secuencial);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public string SecuencialDtoMercaderia(int op)
+        {
+            try
+            {
+                return ad_compras.SecuencialDtoMercaderia(op);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
         #endregion
     }

@@ -70,7 +70,7 @@ namespace SIAV_v4.Reportes.WMStra
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)

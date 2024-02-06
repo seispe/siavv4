@@ -22,8 +22,10 @@
     <%-- SELECCIONAR LA BODEGA --%>
         <div>
             <asp:RadioButtonList ID="rdBodega" runat="server" class="lbl padding-8" RepeatDirection="Horizontal">
-                <asp:ListItem Value="1" Selected="True">MATRIZ </asp:ListItem>
-                <asp:ListItem Value="2">DURAN </asp:ListItem>
+                <asp:ListItem Value="MATRIZ" Selected="True">MATRIZ </asp:ListItem>
+                <asp:ListItem Value="PVG">PVG </asp:ListItem>
+                <asp:ListItem Value="PVQ">PVQ</asp:ListItem>
+                <asp:ListItem Value="">TODO</asp:ListItem>
             </asp:RadioButtonList>
         </div>
         <br />
@@ -37,7 +39,19 @@
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-8">
             <asp:TextBox ID="txtHasta" runat="server" Enabled="True" class="form-control" ></asp:TextBox>
         </div>
-          <asp:Button ID="btnGenerarExcel" runat="server" CssClass="btn btn-success" Text="Generar Excel" OnClick="ExportToExcel"/>
+          
+    </div>
+    <br />
+    <div class="row">
+        <label class="control-label col-lg-1 col-md-1 col-sm-3 col-xs-4">Cliente:</label>
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-8">
+            <asp:TextBox ID="txtCliente" runat="server" Enabled="True" class="form-control" width="250px"></asp:TextBox>
+        </div>
+        <label class="control-label col-lg-1 col-md-1 col-sm-3 col-xs-4"></label>
+          <div class="col-lg-2 col-md-2 col-sm-3 col-xs-8">
+            <asp:Button ID="Button1" runat="server" CssClass="btn btn-success" Text="Generar Excel" OnClick="ExportToExcel"/>
+        </div>
+          
     </div>
     </form>
 </asp:Content>

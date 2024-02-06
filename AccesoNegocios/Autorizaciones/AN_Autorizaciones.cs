@@ -19,12 +19,39 @@ namespace AccesoNegocios.Autorizaciones
         #endregion
 
         #region Funciones
-        public GridView GetFacturas(int opcion)
+        public GridView GetDocDesaprobar()
         {
             DataSet dsp = new DataSet();
             GridView gv = new GridView();
 
-            dsp = ad_aut.GetFacturas(opcion);
+            dsp = ad_aut.GetDocDesaprobar();
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.AutoGenerateColumns = false;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public GridView GetFacturas()
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_aut.GetFacturas();
 
             if (dsp.Tables[0].Rows.Count > 0)
             {
@@ -85,11 +112,11 @@ namespace AccesoNegocios.Autorizaciones
             }
         }
 
-        public string setAprobarFacturas(string factura, int opcion)
+        public string setAprobarFacturas(int tipo, int id, string usuario)
         {
             try
             {
-                return ad_aut.setAprobarFacturas(factura, opcion);
+                return ad_aut.setAprobarFacturas(tipo, id, usuario);
             }
             catch (Exception ex)
             {

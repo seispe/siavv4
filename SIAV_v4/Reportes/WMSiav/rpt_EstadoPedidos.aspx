@@ -26,6 +26,7 @@
                 <asp:ListItem Value="1" Selected="True">PEDIDO</asp:ListItem>
                 <asp:ListItem Value="2">CLIENTE</asp:ListItem>
                 <asp:ListItem Value="3">FECHAS</asp:ListItem>
+                <asp:ListItem Value="4">CIUDAD</asp:ListItem>
             </asp:RadioButtonList> 
 
         </div>
@@ -66,7 +67,8 @@
         <Columns>
         <asp:TemplateField HeaderText="PEDIDO" SortExpression="PEDIDO">
                 <ItemTemplate>
-                    <asp:Label ID="lblpedido" runat="server" Text='<%# Bind("pedido") %>'></asp:Label>
+                    <%--<asp:Label ID="lblpedido" runat="server" Text='<%# Bind("pedido") %>'></asp:Label>--%>
+                    <asp:LinkButton ID="lnkPartial" runat="server" OnClientClick='<%# string.Format("Navigate(\"{0}\"); return false;",  Eval("pedido")) %>' Text='<%# Bind("pedido") %>' CommandArgument='<%# Bind("pedido") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
               <asp:TemplateField HeaderText="ANULADO" SortExpression="ANULADO">
@@ -95,9 +97,9 @@
                     <asp:Label ID="lbltotal_bultos" runat="server" Text='<%# Bind("total_bultos") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-             <asp:TemplateField HeaderText="FECHA PREEMBARQUE" SortExpression="FECHA PREEMBARQUE">
+             <asp:TemplateField HeaderText="FECHA TRANSITO" SortExpression="FECHA TRANSITO">
                 <ItemTemplate>
-                    <asp:Label ID="lblfechapreembarque" runat="server" Text='<%# Bind("fechapreembarque") %>'></asp:Label>
+                    <asp:Label ID="lblfechapreembarque" runat="server" Text='<%# Bind("fechatransito") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="FECHA LOGISTICA" SortExpression="FECHA LOGISTICA">
@@ -122,7 +124,7 @@
             </asp:TemplateField>
                <asp:TemplateField HeaderText="TRANSITO BAHIAS" SortExpression="TRANSITO">
                 <ItemTemplate>
-                    <asp:Label ID="lblpreembarque" runat="server" Text='<%# Bind("PRE_EMBARQUE") %>'></asp:Label>
+                    <asp:Label ID="lblpreembarque" runat="server" Text='<%# Bind("TRANSITO") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
                <asp:TemplateField HeaderText="PRE EMBARQUE" SortExpression="PRE EMBARQUE">
@@ -138,6 +140,11 @@
             <asp:TemplateField HeaderText="RECIBE" SortExpression="RECIBE">
                 <ItemTemplate>
                     <asp:Label ID="lblrecibe" runat="server" Text='<%# Bind("RECIBE") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+             <asp:TemplateField HeaderText="FECHA ENTREGA" SortExpression="FECHA ENTREGA">
+                <ItemTemplate>
+                    <asp:Label ID="lblfentrega" runat="server" Text='<%# Bind("fechaentrega") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
                <asp:TemplateField HeaderText="SUBTOTAL" SortExpression="SUBTOTAL">
@@ -180,5 +187,8 @@
                 $(this).datepicker('hide');
             });;
         });
+        function Navigate(pedido) {
+            javascript: window.open("http://192.168.0.252:81/rwms/index.php?id="+pedido);
+        }  
     </script>
 </asp:Content>

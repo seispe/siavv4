@@ -74,12 +74,12 @@ namespace AccesoNegocios.GP
             return gv;
         }
 
-        public GridView LlenarGrid(string cliente, string vendedor, string ciudad,string fechaEmision,string fechaVencimiento)
+        public GridView LlenarGrid(string cliente, string vendedor, string ciudad,string fechaEmision,string fechaVencimiento, int op)
         {
             DataSet dsp = new DataSet();
             GridView gv = new GridView();
 
-            dsp = ad_cobranzas.GetEstadoCuenta(cliente, vendedor, ciudad,fechaEmision,fechaVencimiento);
+            dsp = ad_cobranzas.GetEstadoCuenta(cliente, vendedor, ciudad,fechaEmision,fechaVencimiento, op);
 
             if (dsp.Tables[0].Rows.Count > 0)
             {
@@ -101,12 +101,12 @@ namespace AccesoNegocios.GP
             return gv;
         }
 
-        public GridView GridChqPostfechados(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento)
+        public GridView GridChqPostfechados(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento, int op)
         {
             DataSet dsp = new DataSet();
             GridView gv = new GridView();
 
-            dsp = ad_cobranzas.GetChqPostfechados(cliente, vendedor, ciudad, fechaEmision, fechaVencimiento);
+            dsp = ad_cobranzas.GetChqPostfechados(cliente, vendedor, ciudad, fechaEmision, fechaVencimiento, op);
 
             if (dsp.Tables[0].Rows.Count > 0)
             {
@@ -128,12 +128,39 @@ namespace AccesoNegocios.GP
             return gv;
         }
 
-        public GridView GridChqProtestados(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento)
+        public GridView GetEstadoCuenta_chqPosfVenc(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento)
         {
             DataSet dsp = new DataSet();
             GridView gv = new GridView();
 
-            dsp = ad_cobranzas.GetChqProtestados(cliente, vendedor, ciudad, fechaEmision, fechaVencimiento);
+            dsp = ad_cobranzas.GetEstadoCuenta_chqPosfVenc(cliente, vendedor, ciudad, fechaEmision, fechaVencimiento);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.AutoGenerateColumns = false;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public GridView GridChqProtestados(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento, int op)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_cobranzas.GetChqProtestados(cliente, vendedor, ciudad, fechaEmision, fechaVencimiento, op);
 
             if (dsp.Tables[0].Rows.Count > 0)
             {
@@ -213,7 +240,7 @@ namespace AccesoNegocios.GP
         {
             DataSet dsp = new DataSet();
 
-            dsp = ad_cobranzas.GetEstadoCuenta(cliente, vendedor,ciudad,fechaEmision,fechaVencimiento);
+            dsp = ad_cobranzas.GetEstadoCuenta(cliente, vendedor,ciudad,fechaEmision,fechaVencimiento, 1);
             
             return dsp;
         }

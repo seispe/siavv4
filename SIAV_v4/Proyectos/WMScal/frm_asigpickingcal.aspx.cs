@@ -256,10 +256,10 @@ namespace SIAV_v4.Proyectos.WMScal
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                string pi = (e.Row.Cells[6].Text);
+                string pi = (e.Row.Cells[5].Text);
                 foreach (TableCell cell in e.Row.Cells)
                 {
-                    if (pi != "0")
+                    if (pi == "0")
                     {
                         cell.BackColor = Color.Orange;
                     }

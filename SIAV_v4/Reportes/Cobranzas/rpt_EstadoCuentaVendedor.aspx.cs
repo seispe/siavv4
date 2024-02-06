@@ -30,26 +30,26 @@ namespace SIAV_v4.Reportes.Cobranzas
             if (!IsPostBack)
             {
                 cod_vendedor = an_autentificar.getconvendedor(HttpContext.Current.User.Identity.Name);
-                VincularGrid(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim());
+                VincularGrid(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim(), 2);
             }            
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-            VincularGrid(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim());
+            VincularGrid(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim(), 2);
         }
 
         #region Funciones Agregadas
-        public void VincularGrid(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento)
+        public void VincularGrid(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento, int op)
         {
-            gvEstadoCuenta.DataSource = an_cobranzas.LlenarGrid(cliente, vendedor, ciudad, fechaEmision, fechaVencimiento).DataSource;
+            gvEstadoCuenta.DataSource = an_cobranzas.LlenarGrid(cliente, vendedor, ciudad, fechaEmision, fechaVencimiento, op).DataSource;
             gvEstadoCuenta.DataBind();
         }
 
         protected void gvEstadoCuenta_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvEstadoCuenta.PageIndex = e.NewPageIndex;
-            VincularGrid("", cod_vendedor, "", "", "");
+            VincularGrid("", cod_vendedor, "", "", "", 2);
         }
 
         protected void ExportToExcel(object sender, EventArgs e)
@@ -130,7 +130,7 @@ namespace SIAV_v4.Reportes.Cobranzas
             //Datos
             GridView GridView1 = new GridView();
             GridView1.AllowPaging = false;
-            GridView1.DataSource = an_cobranzas.LlenarGrid(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim()).DataSource;
+            GridView1.DataSource = an_cobranzas.LlenarGrid(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim(), 2).DataSource;
             GridView1.DataBind();
 
             for (int i = 0; i < GridView1.Rows.Count; i++)
@@ -164,7 +164,7 @@ namespace SIAV_v4.Reportes.Cobranzas
             wsp.Worksheet = ws;
             wsp.Worksheet.Save();
             Sheet sheet = new Sheet();
-            sheet.Name = "EstadoCuenta";
+            sheet.Name = "Facturas";
             sheet.SheetId = 1;
             sheet.Id = wbp.GetIdOfPart(wsp);
             sheets.Append(sheet);
@@ -189,7 +189,7 @@ namespace SIAV_v4.Reportes.Cobranzas
             //Datos
             GridView GridView2 = new GridView();
             GridView2.AllowPaging = false;
-            GridView2.DataSource = an_cobranzas.GridChqProtestados(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim()).DataSource;
+            GridView2.DataSource = an_cobranzas.GridChqProtestados(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim(), 2).DataSource;
             GridView2.DataBind();
 
             for (int i = 0; i < GridView2.Rows.Count; i++)
@@ -238,7 +238,7 @@ namespace SIAV_v4.Reportes.Cobranzas
             //Datos
             GridView GridView3 = new GridView();
             GridView3.AllowPaging = false;
-            GridView3.DataSource = an_cobranzas.GridChqPostfechados(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim()).DataSource;
+            GridView3.DataSource = an_cobranzas.GridChqPostfechados(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim(), 2).DataSource;
             GridView3.DataBind();
 
             for (int i = 0; i < GridView3.Rows.Count; i++)
@@ -289,174 +289,6 @@ namespace SIAV_v4.Reportes.Cobranzas
             Response.AddHeader("Content-Dispostion", string.Format("attachment; filename={0}", filename));
             Response.BinaryWrite(someData);
             Response.End();*/
-        }
-
-        public void CreateExcelDoc(string fileName)
-        {
-            using (SpreadsheetDocument document = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
-            {
-                WorkbookPart workbookPart = document.AddWorkbookPart();
-                workbookPart.Workbook = new Workbook();
-
-                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
-                worksheetPart.Worksheet = new Worksheet();
-
-                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
-
-                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "EstadoCuenta" };
-
-                sheets.Append(sheet);
-
-                workbookPart.Workbook.Save();
-
-                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
-
-                // Constructing header
-                Row row = new Row();
-
-                row.Append(
-                    ConstructCell("RUC", CellValues.String),
-                    ConstructCell("CLIENTE", CellValues.String),
-                    ConstructCell("NOM_COMERCIAL", CellValues.String),
-                    ConstructCell("CIUDAD", CellValues.String),
-                    ConstructCell("TIPO", CellValues.String),
-                    ConstructCell("VEN_CODIGO_TAR", CellValues.String),
-                    ConstructCell("DIRECCION", CellValues.String),
-                    ConstructCell("TELEFONO", CellValues.String),
-                    ConstructCell("FACTURA", CellValues.String),
-                    ConstructCell("F_EMISION", CellValues.String),
-                    ConstructCell("F_VENCIMIENTO", CellValues.String),
-                    ConstructCell("VEN_CODIGO_DOC", CellValues.String),
-                    ConstructCell("COND_PAGO", CellValues.String),
-                    ConstructCell("MONTO_DOC", CellValues.String),
-                    ConstructCell("PENDIENTE", CellValues.String),
-                    ConstructCell("DIAS_VENCIDO", CellValues.String),
-                    ConstructCell("ANULADO", CellValues.String)
-                    );     
-
-                // Insert the header row to the Sheet Data
-                sheetData.AppendChild(row);
-
-                //Datos
-                GridView GridView1 = new GridView();
-                GridView1.AllowPaging = false;
-                GridView1.DataSource = an_cobranzas.LlenarGrid(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim()).DataSource;
-                GridView1.DataBind();
-
-                for (int i = 0; i < GridView1.Rows.Count; i++)
-                {
-                    row = new Row();
-
-                    row.Append(
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[0].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[1].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[2].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[3].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[4].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[5].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[6].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[7].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[8].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[9].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[10].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[11].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[12].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[13].Text.Trim()), CellValues.Number),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[14].Text.Trim()), CellValues.Number),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[15].Text.Trim()), CellValues.Number),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[16].Text.Trim()), CellValues.String)
-                        );
-
-                    sheetData.AppendChild(row);
-                }
-
-                worksheetPart.Worksheet.Save();
-
-                #region Page2
-                WorksheetPart worksheetPart2 = workbookPart.AddNewPart<WorksheetPart>();
-                worksheetPart2.Worksheet = new Worksheet();
-
-                Sheets sheets2 = workbookPart.Workbook.AppendChild(new Sheets());
-
-                Sheet sheet2 = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart2), SheetId = 2, Name = "Prueba" };
-
-                sheets2.Append(sheet2);
-
-                workbookPart.Workbook.Save();
-
-                SheetData sheetData2 = worksheetPart2.Worksheet.AppendChild(new SheetData());
-
-                // Constructing header
-                Row row2 = new Row();
-
-                row2.Append(
-                    ConstructCell("RUC", CellValues.String),
-                    ConstructCell("CLIENTE", CellValues.String),
-                    ConstructCell("NOM_COMERCIAL", CellValues.String),
-                    ConstructCell("CIUDAD", CellValues.String),
-                    ConstructCell("TIPO", CellValues.String),
-                    ConstructCell("VEN_CODIGO_TAR", CellValues.String),
-                    ConstructCell("DIRECCION", CellValues.String),
-                    ConstructCell("TELEFONO", CellValues.String),
-                    ConstructCell("FACTURA", CellValues.String),
-                    ConstructCell("F_EMISION", CellValues.String),
-                    ConstructCell("F_VENCIMIENTO", CellValues.String),
-                    ConstructCell("VEN_CODIGO_DOC", CellValues.String),
-                    ConstructCell("COND_PAGO", CellValues.String),
-                    ConstructCell("MONTO_DOC", CellValues.String),
-                    ConstructCell("PENDIENTE", CellValues.String),
-                    ConstructCell("DIAS_VENCIDO", CellValues.String),
-                    ConstructCell("ANULADO", CellValues.String)
-                    );
-
-                // Insert the header row to the Sheet Data
-                sheetData2.AppendChild(row2);
-
-                //Datos
-                GridView GridView2 = new GridView();
-                GridView2.AllowPaging = false;
-                GridView2.DataSource = an_cobranzas.LlenarGrid(txtCliente.Text.Trim(), cod_vendedor, txtCiudad.Text.Trim(), txtFechaEmision.Text.Trim(), txtFechaVencimiento.Text.Trim()).DataSource;
-                GridView2.DataBind();
-
-                for (int i = 0; i < GridView2.Rows.Count; i++)
-                {
-                    row2 = new Row();
-
-                    row2.Append(
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[0].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[1].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[2].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[3].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[4].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[5].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[6].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[7].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[8].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[9].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[10].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[11].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[12].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[13].Text.Trim()), CellValues.Number),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[14].Text.Trim()), CellValues.Number),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[15].Text.Trim()), CellValues.Number),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView2.Rows[i].Cells[16].Text.Trim()), CellValues.String)
-                        );
-                    
-                    sheetData2.AppendChild(row2);
-                }
-
-                worksheetPart2.Worksheet.Save();
-                #endregion
-            }
-
-            System.IO.FileInfo toDownload = new System.IO.FileInfo(fileName);
-
-            HttpContext.Current.Response.Clear();
-            HttpContext.Current.Response.AddHeader("Content-Disposition","attachment; filename=" + toDownload.Name);
-            HttpContext.Current.Response.AddHeader("Content-Length",toDownload.Length.ToString());
-            HttpContext.Current.Response.ContentType = "application/octet-stream";
-            HttpContext.Current.Response.WriteFile(fileName);
-            HttpContext.Current.Response.End();
         }
 
         private Cell ConstructCell(string value, CellValues dataType)

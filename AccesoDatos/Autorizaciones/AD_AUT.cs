@@ -23,15 +23,32 @@ namespace AccesoDatos.Autorizaciones
         #endregion
 
         #region Select
-        public DataSet GetFacturas(int opcion)
+        public DataSet GetFacturas()
         {
             try
             {
-                SqlDataAdapter da = new SqlDataAdapter("GA_PER_PgetFacturas", db);
-                da.SelectCommand.Parameters.AddWithValue("@opcion", opcion);
+                SqlDataAdapter da = new SqlDataAdapter("jsp_PER_ConsultaDocumentosAutorizacion", db);
+                da.SelectCommand.CommandTimeout = 180;
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                 DataSet ds = new DataSet();
-                da.Fill(ds, "GA_PER_PgetFacturas");
+                da.Fill(ds, "jsp_PER_ConsultaDocumentosAutorizacion");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetDocDesaprobar()
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("jsp_PER_ConsultaDocumentosDesautorizacion", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "jsp_PER_ConsultaDocumentosDesautorizacion");
                 return ds;
             }
             catch (Exception ex)
@@ -64,14 +81,15 @@ namespace AccesoDatos.Autorizaciones
         #endregion
 
         #region Update
-        public string setAprobarFacturas(string factura, int opcion)
+        public string setAprobarFacturas(int tipo, int id, string usuario)
         {
             string resultado = "";
-            using (SqlCommand cmd = new SqlCommand("GA_PER_PsetAprobarFacturas", db))
+            using (SqlCommand cmd = new SqlCommand("jsp_PER_AutorizaDocumentos", db))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@factura", factura);
-                cmd.Parameters.AddWithValue("@opcion", opcion);
+                cmd.Parameters.AddWithValue("@tipo", tipo);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
                 try
                 {
                     db.Open();

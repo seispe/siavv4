@@ -40,7 +40,7 @@ namespace AccesoDatos.GP
                     da.Fill(ds, "GA_INV_InventarioFecha");
                     return ds;
                 }
-                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX")
+                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX" || empresa == "GPCOP")
                 {
                     SqlDataAdapter da = new SqlDataAdapter("GA_INV_Prpt_inventariofecha", dbdynamicscao);
                     da.SelectCommand.CommandTimeout = 180;

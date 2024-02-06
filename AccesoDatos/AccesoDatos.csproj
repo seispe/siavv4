@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AccesoEntidad">
+      <HintPath>..\..\..\SIAV_v3\SIAV_v3\AccesoEntidad\bin\Debug\AccesoEntidad.dll</HintPath>
+    </Reference>
+    <Reference Include="AccesoNegocios">
+      <HintPath>..\..\..\SIAV_v3\SIAV_v3\AccesoNegocios\bin\Debug\AccesoNegocios.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -57,8 +63,13 @@
     <Compile Include="Seguridad\AD_SEG.cs" />
     <Compile Include="TOC\AD_TOC.cs" />
     <Compile Include="WMScalG\AD_WMScalG.cs" />
+    <Compile Include="WMScalU\AD_WMScalU.cs" />
     <Compile Include="WMScal\AD_WMScal.cs" />
+    <Compile Include="WMSiavG\AD_WMSiavG.cs" />
+    <Compile Include="WMSiavQ\AD_WMSiavQ.cs" />
     <Compile Include="WMSiav\AD_WMS.cs" />
+    <Compile Include="WMStec\AD_WMStec.cs" />
+    <Compile Include="WmstraB\AD_WMStraB.cs" />
     <Compile Include="WMStra\AD_WMStra.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,7 +78,9 @@
       <Name>AccesoEntidades</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

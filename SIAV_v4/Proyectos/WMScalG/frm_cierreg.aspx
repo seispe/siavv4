@@ -195,11 +195,18 @@
                             </div>
                             <div class="container"></div>
                             <div class="modal-body">
+                                <div class="container">
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <asp:TextBox ID="txtObservacionC" runat="server" CssClass="form-control" Width="350px" TextMode="MultiLine"></asp:TextBox>
+                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <%--<asp:TextBox ID="txtObservacionC" runat="server" CssClass="form-control" Width="350px" TextMode="MultiLine"></asp:TextBox>--%>
+                                        <asp:DropDownList id="ddlmotCierre" runat="server" CssClass="form-control" Width="250px"></asp:DropDownList>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                         <asp:TextBox ID="txtCantCierre" runat="server" CssClass="form-control" placeholder="Cantidad" TextMode="Number"></asp:TextBox>
                                     </div>
                                 </div>
+                                    </div>
                             </div>
                             <div class="modal-footer">
                                 <asp:Button ID="btnCerrarItem" runat="server" Text="Cerrar Item" CssClass="btn btn-success" OnClick="btnCerrarItem_Click" />

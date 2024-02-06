@@ -11,7 +11,7 @@
         <asp:UpdatePanel id="UpdatePanel1" runat="server">
             <ContentTemplate>  
                 <%--<a href="<% Response.Write(ConfigurationManager.AppSettings["PATH"]); %>Proyectos/Comisiones/frm_MenuConfig.aspx" class="btn btn-primary btn-sm pull-left"><i class="fa fa-arrow-circle-left"></i> Regresar</a>              --%>
-                <h1 class="page-header">Devoluciones en Ventas</h1>
+                <h1 class="page-header">Devoluciones en Transito</h1>
                 <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
             </ContentTemplate>
             <Triggers>

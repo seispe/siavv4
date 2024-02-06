@@ -58,6 +58,33 @@ namespace AccesoNegocios.Devoluciones
             return gv;
         }
 
+        public GridView GetrptVoidsPVQ(string documento, int op)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_dev.GetrptVoidsPVQ(documento, op);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.AutoGenerateColumns = false;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
         public GridView GetItemDV(string iddevolucion, string producto, string empresa, int opcion)
         {
             DataSet dsp = new DataSet();
@@ -91,15 +118,15 @@ namespace AccesoNegocios.Devoluciones
         /// <param name="empresa">Base Empresa</param>
         /// <param name="estado">Estado Devolucion</param>
         /// <returns></returns>
-        public GridView LlenarGrid(string empresa,string estado)
+        public GridView LlenarGrid(string empresa, string estado, int op)
         {
             DataSet dsp = new DataSet();
             GridView gv = new GridView();
-            
-            dsp = ad_dev.GetDevoluciones(empresa,estado);
+
+            dsp = ad_dev.GetDevoluciones(empresa, estado, op);
 
             if (dsp.Tables[0].Rows.Count > 0)
-            {                
+            {
                 gv.DataSource = dsp;
                 gv.DataBind();
             }
@@ -152,30 +179,44 @@ namespace AccesoNegocios.Devoluciones
 
         public DataSet LlenarMotivos()
         {
-            DataSet dsp = new DataSet();           
+            DataSet dsp = new DataSet();
 
             dsp = ad_dev.GetMotivos();
 
             return dsp;
         }
 
-        public string ModificarEstado(string empresa,string iddevolucion, string estado, string usuario,string observacion)
+        public string ModificarEstado(string empresa, string iddevolucion, string estado, string usuario, string observacion)
         {
             string resultado = "";
             switch (estado)
             {
                 case "1":
                     ad_dev.setDevolucionEstado(empresa, iddevolucion, estado, usuario, observacion);
-                    if (empresa != "GPTRA")
+                    if (empresa != "GPTRA" && empresa != "GPPKR")
                     {
                         ad_dev.setDevolucionWMS(empresa); //Descomentar para que se vayan al WMS las devoluciones
                     }
                     break;
-                case "3":
+                case "2": //ENVIAR A GP DEVOLUCIONES DE PROKAR
                     resultado = ad_dev.setDevolucionGP(iddevolucion); //Descomentar para que se vayan al GP las devoluciones
                     if (resultado.Trim().Length < 18)
                     {
                         ad_dev.setDevolucionEstado(empresa, iddevolucion, estado, usuario, observacion);
+                    }
+                    break;
+                case "3":
+                    if (empresa == "GPPKR")
+                    {
+                        ad_dev.setDevolucionEstado(empresa, iddevolucion, estado, usuario, observacion);
+                    }
+                    else
+                    {
+                        resultado = ad_dev.setDevolucionGP(iddevolucion); //Descomentar para que se vayan al GP las devoluciones
+                        if (resultado.Trim().Length < 18)
+                        {
+                            ad_dev.setDevolucionEstado(empresa, iddevolucion, estado, usuario, observacion);
+                        }
                     }
                     break;
                 case "4":
@@ -191,10 +232,10 @@ namespace AccesoNegocios.Devoluciones
 
         public string getCorreoClienteDevolucion(string empresa, string iddevolucionn)
         {
-            string resultado = ad_dev.getDevolucionGPCorreo(empresa,iddevolucionn);
+            string resultado = ad_dev.getDevolucionGPCorreo(empresa, iddevolucionn);
             return resultado;
         }
-        public GridView DetalleDevolucion(string empresa,string iddevolucion)
+        public GridView DetalleDevolucion(string empresa, string iddevolucion)
         {
             GridView gv = new GridView();
             DataSet dsp = new DataSet();
@@ -209,7 +250,7 @@ namespace AccesoNegocios.Devoluciones
             string tabla = "";
             dsp = ad_dev.GetDetalleDevoluciones(empresa, iddevolucion);
             DataTable dt = dsp.Tables[0];
-           
+
             foreach (DataRow row in dt.Rows)
             {
                 tabla += "<tr>";
@@ -221,7 +262,7 @@ namespace AccesoNegocios.Devoluciones
                 tabla += "<td>" + Convert.ToString(row["motiRealTexto"]) + "</td>";
                 tabla += "</tr>";
             }
-           
+
             return tabla;
         }
 
@@ -279,7 +320,7 @@ namespace AccesoNegocios.Devoluciones
             return tabla;
         }
 
-        public string EnvioLogistica(string devolucion,string usuario, int op)
+        public string EnvioLogistica(string devolucion, string usuario, int op)
         {
             try
             {
@@ -334,12 +375,12 @@ namespace AccesoNegocios.Devoluciones
             return gv;
         }
 
-        public GridView rpt_estado(string empresa, string fechaDesde, string fechaHasta,string cliente,string iddevolucion,string vendedor)
+        public GridView rpt_estado(string empresa, string fechaDesde, string fechaHasta, string cliente, string iddevolucion, string vendedor)
         {
             DataSet dsp = new DataSet();
             GridView gv = new GridView();
 
-            dsp = ad_dev.Getrpt_estado(empresa, fechaDesde, fechaHasta,cliente,iddevolucion,vendedor);
+            dsp = ad_dev.Getrpt_estado(empresa, fechaDesde, fechaHasta, cliente, iddevolucion, vendedor);
 
             if (dsp.Tables[0].Rows.Count > 0)
             {
@@ -567,6 +608,32 @@ namespace AccesoNegocios.Devoluciones
             return gv;
         }
 
+        public GridView GetDV64Unamuncho(string dato1, string dato2, string empresa, int opcion)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_dev.GetDV64Unamuncho(dato1, dato2, empresa, opcion);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
         public string GetDetalle(string documento, int op)
         {
             DataSet dsp = new DataSet();
@@ -590,17 +657,194 @@ namespace AccesoNegocios.Devoluciones
             return tabla;
         }
 
+        public string GetDetallePVQ(string documento, int op)
+        {
+            DataSet dsp = new DataSet();
+            string tabla = "";
+            dsp = dsp = ad_dev.GetrptVoidsPVQ(documento, op);
+            DataTable dt = dsp.Tables[0];
+            foreach (DataRow row in dt.Rows)
+            {
+                tabla += "<tr>";
+                tabla += "<td>" + Convert.ToString(row["id"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["producto"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["descripcion"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["void"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["cant"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["pedido"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["factura"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["fecha_factura"]) + "</td>";
+
+                tabla += "</tr>";
+            }
+            return tabla;
+        }
+
         public void InsCodCartServ(string factura, string cliente, string codigo, string descripcion, int cantidad, string guia, string fcourier, DateTime fdev, string usuario, int op)
         {
             try
             {
-                ad_dev.InsCodCartServ(factura,cliente, codigo, descripcion, cantidad, guia, fcourier, fdev, usuario, op);
+                ad_dev.InsCodCartServ(factura, cliente, codigo, descripcion, cantidad, guia, fcourier, fdev, usuario, op);
             }
             catch (Exception ex)
             {
 
                 throw ex;
             }
+        }
+
+        public GridView GetDVCourierTRA(string dato1, string dato2, int opcion)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_dev.GetDVCourierTRA(dato1, dato2, opcion);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public GridView GetDVEliminadas(string dato1, string dato2)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_dev.GetDVEliminadas(dato1, dato2);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public int cargarExcel(DataTable tabla)
+        {
+            return ad_dev.cargarExcel(tabla);
+        }
+
+        public GridView GetDVCompensaciones(int devolucion, int op)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_dev.GetDVCompensaciones(devolucion, op);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public void setDVCompensaciones(int devolucion, string articulo, int cantCompensada,
+                string observacionCompensada, int cantNoCompensada, string observacionNoCompensada, string usuario, int op)
+        {
+            ad_dev.setDVCompensaciones(devolucion, articulo, cantCompensada, observacionCompensada, cantNoCompensada, observacionNoCompensada, usuario, op);
+        }
+
+        public string generaTraspasos(string tipodocumento, string usuario, string motivo)
+        {
+            return ad_dev.generaTraspasos(tipodocumento, usuario, motivo);
+            
+        }
+
+        public GridView GetrptTraspasos(int op, string dato1, string dato2)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_dev.GetrptTraspasos(op, dato1, dato2);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.AutoGenerateColumns = false;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public GridView GetDVingresoMotivos(int devolucion, int op)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_dev.GetDVingresoMotivos(devolucion, op);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public void setDVingresoMotivos(int devolucion, string articulo, int cantFallaFabrica,
+               string observacionFallaFabrica, int cantCuarentena, string observacionCuarentena, string usuario, int op)
+        {
+            ad_dev.setDVingresoMotivos(devolucion, articulo, cantFallaFabrica, observacionFallaFabrica, cantCuarentena, observacionCuarentena, usuario, op);
         }
         #endregion
     }

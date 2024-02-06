@@ -161,7 +161,7 @@
                     <asp:Label ID="lblciudad" runat="server" Text='<%# Bind("ciudad") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="PRIORIDAD" SortExpression="PRIORIDAD">
+            <asp:TemplateField HeaderText="prio Despacho" SortExpression="prio Despacho">
                 <ItemTemplate>
                     <asp:Label ID="lblprioridad" runat="server" Text='<%# Bind("prioridad") %>'></asp:Label>
                 </ItemTemplate>

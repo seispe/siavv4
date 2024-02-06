@@ -21,6 +21,7 @@ namespace SIAV_v4.Reportes.WMStra
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!IsPostBack)
             {
                 GridResumen();

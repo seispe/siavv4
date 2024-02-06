@@ -241,14 +241,16 @@ namespace AccesoDatos.GP
             }
         }
 
-        public DataSet GetVtasCostoLogistico(string desde, string hasta)
+        public DataSet GetVtasCostoLogistico(string desde, string hasta, string bodega, string cliente)
         {
             try
             {
-                SqlDataAdapter da = new SqlDataAdapter("GA_VTA_rptCostoLogistico", db);
+                SqlDataAdapter da = new SqlDataAdapter("GA_VTA_rptCostoLogisticoTODO", db);
                 da.SelectCommand.CommandTimeout = 1800;
                 da.SelectCommand.Parameters.AddWithValue("@fdesde", desde);
                 da.SelectCommand.Parameters.AddWithValue("@fhasta", hasta);
+                da.SelectCommand.Parameters.AddWithValue("@bodega", bodega);
+                da.SelectCommand.Parameters.AddWithValue("@cliente", cliente);
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                 DataSet ds = new DataSet();
                 da.Fill(ds, "GA_VTA_rptCostoLogistico");
@@ -307,6 +309,25 @@ namespace AccesoDatos.GP
                 {
                     db.Close();
                 }
+            }
+        }
+
+        public DataSet GetRecepcionNE(string desde, string hasta, int op)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_REC_PrptRecepcionNE", db);
+                da.SelectCommand.Parameters.AddWithValue("@fdesde", desde);
+                da.SelectCommand.Parameters.AddWithValue("@fhasta", hasta);
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_REC_PrptRecepcionNE");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
         #endregion

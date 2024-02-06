@@ -30,6 +30,7 @@ namespace AccesoDatos.Devoluciones
         {
             db = new SqlConnection(ConfigurationManager.ConnectionStrings["con" + empresa].ConnectionString);
             dbwms = new SqlConnection(ConfigurationManager.ConnectionStrings["conWMSiav"].ConnectionString);
+            dbwmscal = new SqlConnection(ConfigurationManager.ConnectionStrings["conWMScal"].ConnectionString);
             dbdynamics = new SqlConnection(ConfigurationManager.ConnectionStrings["conDYNAMICS"].ConnectionString);
         }
         #endregion
@@ -40,11 +41,31 @@ namespace AccesoDatos.Devoluciones
             try
             {
                 SqlDataAdapter da = new SqlDataAdapter("GA_DEV_PrptVoids", db);
-                da.SelectCommand.Parameters.AddWithValue("@documento", documento);
+                da.SelectCommand.CommandTimeout = 360;
+                da.SelectCommand.Parameters.AddWithValue("@documento", documento);  
                 da.SelectCommand.Parameters.AddWithValue("@op", op);
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                 DataSet ds = new DataSet();
                 da.Fill(ds, "GA_DEV_PrptVoids");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetrptVoidsPVQ(string documento, int op)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_DEV_PrptVoidsPVQ", db);
+                da.SelectCommand.CommandTimeout = 360;
+                da.SelectCommand.Parameters.AddWithValue("@documento", documento);
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_DEV_PrptVoidsPVQ");
                 return ds;
             }
             catch (Exception ex)
@@ -73,7 +94,7 @@ namespace AccesoDatos.Devoluciones
             }
         }
 
-        public DataSet GetDevoluciones(string empresa, string estado)
+        public DataSet GetDevoluciones(string empresa, string estado, int op)
         {
             try
             {
@@ -81,6 +102,7 @@ namespace AccesoDatos.Devoluciones
                 da.SelectCommand.CommandTimeout = 360;
                 da.SelectCommand.Parameters.AddWithValue("@empresa", empresa);
                 da.SelectCommand.Parameters.AddWithValue("@estado", estado);
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                 DataSet ds = new DataSet();
                 da.Fill(ds, "GA_DEV_Tdevoluciones");
@@ -618,6 +640,27 @@ namespace AccesoDatos.Devoluciones
             }
         }
 
+        public DataSet GetDV64Unamuncho(string dato1, string dato2, string empresa, int opcion)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_DEV_Prptdevoluciones", dbwmscal);
+                da.SelectCommand.CommandTimeout = 360;
+                da.SelectCommand.Parameters.AddWithValue("@dato1", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@dato2", dato2);
+                da.SelectCommand.Parameters.AddWithValue("@empresa", empresa);
+                da.SelectCommand.Parameters.AddWithValue("@opcion", opcion);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_DEV_Prptdevoluciones");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public string InsCodCartServ(string factura, string cliente, string codigo, string descripcion, int cantidad, string guia, string fcourier, DateTime fdev, string usuario, int op)
         {
             using (SqlCommand cmd = new SqlCommand())
@@ -652,6 +695,226 @@ namespace AccesoDatos.Devoluciones
             }
         }
 
+        public DataSet GetDVCourierTRA(string dato1, string dato2, int opcion)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_DEV_PrptCourier", db);
+                da.SelectCommand.CommandTimeout = 360;
+                da.SelectCommand.Parameters.AddWithValue("@dato1", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@dato2", dato2);
+                da.SelectCommand.Parameters.AddWithValue("@op", opcion);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_DEV_PrptCourier");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetDVEliminadas(string dato1, string dato2)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_DEV_rptEliminadas", db);
+                da.SelectCommand.CommandTimeout = 360;
+                da.SelectCommand.Parameters.AddWithValue("@finicio", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@ffin", dato2);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_DEV_rptEliminadas");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        //SUBIR ARCHIVO DE EXCEL A SQL
+        public int cargarExcel(DataTable tabla)
+        {
+            int resultado = 0;
+            using (SqlCommand cmd = new SqlCommand("GA_WMS_PcargaTraspasosExcel", dbwms))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("EstructuraCarga", SqlDbType.Structured).Value = tabla;
+                cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                try
+                {
+                    dbwms.Open();
+                    cmd.ExecuteNonQuery();
+                    resultado = Convert.ToInt32(cmd.Parameters["Resultado"].Value);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    dbwms.Close();
+                }
+            }
+            return resultado;
+        }
+
+        public DataSet GetDVCompensaciones(int devolucion, int op)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_DEV_Pcompensaciones", db);
+                da.SelectCommand.CommandTimeout = 360;
+                da.SelectCommand.Parameters.AddWithValue("@devolucion", devolucion);
+                da.SelectCommand.Parameters.AddWithValue("@articulo", "");
+                da.SelectCommand.Parameters.AddWithValue("@cantCompensada", 0);
+                da.SelectCommand.Parameters.AddWithValue("@observacionCompensada", "");
+                da.SelectCommand.Parameters.AddWithValue("@cantNoCompensada", 0);
+                da.SelectCommand.Parameters.AddWithValue("@observacionNoCompensada", 0);
+                da.SelectCommand.Parameters.AddWithValue("@usuario", "");
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_DEV_Pcompensaciones");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void setDVCompensaciones(int devolucion, string articulo, int cantCompensada, 
+                string observacionCompensada, int cantNoCompensada, string observacionNoCompensada, string usuario, int op)
+        {
+            using (SqlCommand cmd = new SqlCommand("GA_DEV_Pcompensaciones", db))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@devolucion", devolucion);
+                cmd.Parameters.AddWithValue("@articulo", articulo);
+                cmd.Parameters.AddWithValue("@cantCompensada", cantCompensada);
+                cmd.Parameters.AddWithValue("@observacionCompensada", observacionCompensada);
+                cmd.Parameters.AddWithValue("@cantNoCompensada", cantNoCompensada);
+                cmd.Parameters.AddWithValue("@observacionNoCompensada", observacionNoCompensada);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@op", op);
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        public string generaTraspasos(string tipodocumento, string usuario, string motivo)
+        {
+            string resultado = "";
+            using (SqlCommand cmd = new SqlCommand("GA_WMS_PgenerarTraspasos", dbwms))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tipodocumento", tipodocumento);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@motivo", motivo);
+                try
+                {
+                    dbwms.Open();
+                    resultado = cmd.ExecuteScalar().ToString();
+                    return resultado;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    dbwms.Close();
+                }
+            }
+        }
+
+        public DataSet GetrptTraspasos(int op, string dato1, string dato2)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PrptTraspasos", dbwms);
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.Parameters.AddWithValue("@dato1", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@dato2", dato2);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PrptTraspasos");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetDVingresoMotivos(int devolucion, int op)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_DEV_PingresoMotivos", db);
+                da.SelectCommand.CommandTimeout = 360;
+                da.SelectCommand.Parameters.AddWithValue("@devolucion", devolucion);
+                da.SelectCommand.Parameters.AddWithValue("@articulo", "");
+                da.SelectCommand.Parameters.AddWithValue("@cantFallaFabrica", 0);
+                da.SelectCommand.Parameters.AddWithValue("@observacionFallaFabrica", "");
+                da.SelectCommand.Parameters.AddWithValue("@cantCuarentena", 0);
+                da.SelectCommand.Parameters.AddWithValue("@observacionCuarentena", 0);
+                da.SelectCommand.Parameters.AddWithValue("@usuario", "");
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_DEV_PingresoMotivos");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void setDVingresoMotivos(int devolucion, string articulo, int cantFallaFabrica,
+               string observacionFallaFabrica, int cantCuarentena, string observacionCuarentena, string usuario, int op)
+        {
+            using (SqlCommand cmd = new SqlCommand("GA_DEV_PingresoMotivos", db))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@devolucion", devolucion);
+                cmd.Parameters.AddWithValue("@articulo", articulo);
+                cmd.Parameters.AddWithValue("@cantFallaFabrica", cantFallaFabrica);
+                cmd.Parameters.AddWithValue("@observacionFallaFabrica", observacionFallaFabrica);
+                cmd.Parameters.AddWithValue("@cantCuarentena", cantCuarentena);
+                cmd.Parameters.AddWithValue("@observacionCuarentena", observacionCuarentena);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@op", op);
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
         #endregion
 
         #region Delete

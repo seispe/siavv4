@@ -44,7 +44,7 @@ namespace SIAV_v4
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
             //Autentificar usuario de logeo.
-            if (an_autentificar.UsuarioAD(txtUsername.Text, txtPassword.Text, "ALVARADO", "18.224.209.11"))
+            if (an_autentificar.UsuarioAD(txtUsername.Text, txtPassword.Text, "ALVARADO", "192.168.0.245"))
             {
                 if (ddlEmpresa.SelectedValue != "-1")
                 {
@@ -55,6 +55,23 @@ namespace SIAV_v4
                     }
                     else
                     {
+                        /*========AGREGADO MAS COOKIES NOMBRE DE LA BASE DEL WMS=================
+                        string[] basegp = (an_menu.BaseEmpresas(ddlEmpresa.SelectedValue)).Split('/');
+                        //Crear la Variable de id de nombre de empresa     
+                        HttpCookie aCookie = new HttpCookie("empresasiav");
+                        aCookie.Value = ddlEmpresa.SelectedValue;
+                        aCookie.Expires = DateTime.Now.AddDays(1);
+                        Response.Cookies.Add(aCookie);
+                        //Crear la Variable de nombre base de empresa
+                        HttpCookie aCookie1 = new HttpCookie("basesiav");
+                        aCookie1.Value = basegp[0];
+                        aCookie1.Expires = DateTime.Now.AddDays(1);
+                        Response.Cookies.Add(aCookie1);
+                        //Crear la Variable de nombre base de empresa WMS
+                        HttpCookie aCookie2 = new HttpCookie("baseswms");
+                        aCookie2.Value = basegp[1];
+                        aCookie2.Expires = DateTime.Now.AddDays(1);
+                        Response.Cookies.Add(aCookie2);*/
                         //Crear la Variable de id de nombre de empresa     
                         HttpCookie aCookie = new HttpCookie("empresasiav");
                         aCookie.Value = ddlEmpresa.SelectedValue;
@@ -65,8 +82,8 @@ namespace SIAV_v4
                         aCookie1.Value = an_menu.BaseEmpresas(ddlEmpresa.SelectedValue);
                         aCookie1.Expires = DateTime.Now.AddDays(1);
                         Response.Cookies.Add(aCookie1);
-                        //Usuarios Logueados
-                        ae_ga_seg_tlogin.usuario = HttpContext.Current.User.Identity.Name;
+                         //Usuarios Logueados
+                         ae_ga_seg_tlogin.usuario = HttpContext.Current.User.Identity.Name;
                         ae_ga_seg_tlogin.empresa = an_menu.BaseEmpresas(ddlEmpresa.SelectedValue);
                         ae_ga_seg_tlogin.fecha = DateTime.Now;
                         an_autentificar.InsertAutLogin(ae_ga_seg_tlogin);

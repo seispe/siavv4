@@ -199,9 +199,14 @@
                     <asp:Label ID="lblDescuento" runat="server" Text='<%# Bind("Descuento") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Motivo" SortExpression="Motivo">
+            <asp:TemplateField HeaderText="MotivoOriginal" SortExpression="MotivoOriginal">
                 <ItemTemplate>
-                    <asp:Label ID="lblMotivo" runat="server" Text='<%# Bind("Motivo") %>'></asp:Label>
+                    <asp:Label ID="lblMotivoOriginal" runat="server" Text='<%# Bind("MotivoOriginal") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+                    <asp:TemplateField HeaderText="MotivoReal" SortExpression="MotivoReal">
+                <ItemTemplate>
+                    <asp:Label ID="lblMotivoReal" runat="server" Text='<%# Bind("MotivoReal") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
                <asp:TemplateField HeaderText="Placa" SortExpression="Placa">

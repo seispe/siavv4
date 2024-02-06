@@ -3,10 +3,8 @@ using AccesoNegocios.WMSiav;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Linq;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -176,7 +174,8 @@ namespace SIAV_v4.Reportes.WMSiav
             }
             catch (Exception ex)
             {
-                lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
+                string apPath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath;
+                lblError.Text = an_alertas.Mensaje("ERROR ", apPath, "rojo");
             }
         }
 
@@ -206,7 +205,7 @@ namespace SIAV_v4.Reportes.WMSiav
             string pedidos = vg_pedidos;
             string usuario = HttpContext.Current.User.Identity.Name;
             string pedido, pedidoActual;
-            decimal subtotal = 0;
+            
             DataTable dt = an_wms.GetPackingList(empresa, pedidos, 1);
             Document document = new Document(PageSize.A4, 88f, 88f, 10f, 10f);
             Font NormalFont = FontFactory.GetFont("Arial", 12, Font.NORMAL, BaseColor.BLACK);
@@ -223,34 +222,34 @@ namespace SIAV_v4.Reportes.WMSiav
                 pedido = "";
 
                 document.Open();
-                foreach (DataRow valores in dt.Rows)
-                {
-                    subtotal += Convert.ToDecimal(valores["PVP"]);
-                }
+                
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    string p = row["DOCUMENTO"].ToString();
-                    p = p.Replace("-", "");
+                    /*string p = row["DOCUMENTO"].ToString();
+                    p = p.Replace("-", "");*/
                     //########################################
-                    //Iniciacion de DATAMATRIX
+                    //Iniciacion de DATAMATRIX, primero elimino la imagen luego creo
                     //########################################
+                    //if (empresa == "GPIAV") File.Delete(@"E:\PUBLICACIONES\WMSiav\Recursos\upload\" + usuario.Trim() + ".png");
                     DataMatrix.net.DmtxImageEncoder Encoder = new DataMatrix.net.DmtxImageEncoder();
                     System.Drawing.Bitmap bmp = Encoder.EncodeImage(row["DOCUMENTO"].ToString().Trim());
-                    string ruta = Server.MapPath("~/Recursos/upload/") + usuario.Trim() + ".png";
+                    string ruta = Server.MapPath("~/Recursos/upload/") + row["DOCUMENTO"].ToString() + ".png";
                     bmp.Save(ruta);//, System.Drawing.Imaging.ImageFormat.Png);
+
                     //System.Drawing.Image image = System.Drawing.Image.FromFile(@"C:\PLANOS\" + row["Documento"].ToString().Trim() + ".png");
                     //########################################
                     //Fin Iniciacion de DATAMATRIX
                     //########################################
 
                     //########################################
-                    //Iniciacion de BARCODE
+                    //Iniciacion de BARCODE, primero elimino la imagen luego creo
                     //########################################
-                    BarcodeLib.Barcode b = new BarcodeLib.Barcode();
+                    //if (empresa == "GPIAV") File.Delete(@"E:\PUBLICACIONES\WMSiav\Recursos\upload\barcode" + usuario.Trim() + ".png");
+                    /*BarcodeLib.Barcode b = new BarcodeLib.Barcode();
                     System.Drawing.Image img = b.Encode(BarcodeLib.TYPE.CODE128, "R" + p, System.Drawing.Color.Black, System.Drawing.Color.White, 500, 50);
-                    string rutab = Server.MapPath("~/Recursos/upload/barcode") + usuario.Trim() + ".png";
-                    img.Save(rutab);
+                    string rutab = Server.MapPath("~/Recursos/upload/barcode") + row["DOCUMENTO"].ToString() + ".png";
+                    img.Save(rutab);*/
                     //########################################
                     //Fin Iniciacion de BARCODE
                     //########################################
@@ -272,8 +271,9 @@ namespace SIAV_v4.Reportes.WMSiav
                     //Llenamos lo basico
                     if (pedidoActual == "" || pedidoActual != pedido)
                     {
+                        
                         pedidoActual = row["DOCUMENTO"].ToString().Trim();
-
+                        string subtotal = an_wms.GetPackingListSubtotal(row["DOCUMENTO"].ToString().Trim());
                         //Tabla Header
                         table = new PdfPTable(4);
                         table.TotalWidth = 500f;
@@ -335,28 +335,27 @@ namespace SIAV_v4.Reportes.WMSiav
                         table.AddCell(PhraseCell(new Phrase("Cliente:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase(row["CLIENTE"].ToString(), FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
 
-                        cell = ImageCodigo(@"~\Recursos\upload\" + usuario.Trim() + ".png", 40f, PdfPCell.ALIGN_LEFT);
+                        cell = ImageCodigo(@"~\Recursos\upload\" + row["DOCUMENTO"].ToString() + ".png", 40f, PdfPCell.ALIGN_LEFT);
                         cell.Rowspan = 4;
                         cell.Colspan = 1;
                         table.AddCell(cell);
 
-                        cell = ImageCodigo(@"~\Recursos\upload\barcode" + usuario.Trim() + ".png", 40f, PdfPCell.ALIGN_LEFT);
-                        cell.Rowspan = 4;
-                        cell.Colspan = 1;
-                        table.AddCell(cell);
+                        table.AddCell(PhraseCell(new Phrase("      ", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                       
 
                         //table.AddCell(PhraseCell(new Phrase("", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         //table.AddCell(PhraseCell(new Phrase("", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase("Ruc:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase(row["RUC"].ToString(), FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         //table.AddCell(PhraseCell(new Phrase("", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        //table.AddCell(PhraseCell(new Phrase("", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        table.AddCell(PhraseCell(new Phrase("      ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase("Dirección:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase(row["DIRECCION"].ToString(), FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         //table.AddCell(PhraseCell(new Phrase("", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        //table.AddCell(PhraseCell(new Phrase("", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        table.AddCell(PhraseCell(new Phrase("      ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase("Razon Social:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase(row["RAZON_SOCIAL"].ToString(), FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        table.AddCell(PhraseCell(new Phrase("      ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase("Ciudad:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase(row["CIUDAD"].ToString(), FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase("Tipo Pedido:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
@@ -388,18 +387,66 @@ namespace SIAV_v4.Reportes.WMSiav
                         table1.AddCell(CeldaEspaciosTop(new Phrase(row["OBSPEDIDO"].ToString(), FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table1.AddCell(CeldaEspaciosTop(new Phrase("", FontFactory.GetFont("Arial", 12, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table1.AddCell(CeldaEspaciosTop(new Phrase("", FontFactory.GetFont("Arial", 12, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(CeldaEspaciosTop(new Phrase("Recibido, Revisado, Conforme:", FontFactory.GetFont("Arial", 9, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(CeldaEspaciosTop(new Phrase("__________________", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(CeldaEspaciosTop(new Phrase("C.I.:", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(CeldaEspaciosTop(new Phrase("__________________", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(PhraseCell(new Phrase("Nombre:", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(PhraseCell(new Phrase("__________________", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(PhraseCell(new Phrase("Hora:", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table1.AddCell(PhraseCell(new Phrase("__________________", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        //CAMBIOS SOLICITADOS EN IMPORTADORA ALVARO
+                        if (empresa == "IMPORTADORA ALVARADO")
+                        {
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("Recibi Conforme", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("_________________________", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("Entregue Conforme", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("_________________________", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("Nombres y Apellidos", FontFactory.GetFont("Arial", 7, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("Importadora Alvarado", FontFactory.GetFont("Arial", 7, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("Firma", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("______________________", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("Firma", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("______________________", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("C.C", FontFactory.GetFont("Arial", 7, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("RUC 1890090423001", FontFactory.GetFont("Arial", 7, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        }
+                        else
+                        {
+                            table1.AddCell(CeldaEspaciosTop(new Phrase("Recibido, Revisado, Conforme:", FontFactory.GetFont("Arial", 9, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(CeldaEspaciosTop(new Phrase("__________________", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(CeldaEspaciosTop(new Phrase("C.I.:", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(CeldaEspaciosTop(new Phrase("__________________", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("   ", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("Nombre:", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("__________________", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("Hora:", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                            table1.AddCell(PhraseCell(new Phrase("__________________", FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        }
+                        
                         cell = PhraseCell(new Phrase(), PdfPCell.ALIGN_CENTER);
                         cell.Colspan = 4;
                         cell.PaddingBottom = 10f;
@@ -525,7 +572,7 @@ namespace SIAV_v4.Reportes.WMSiav
             {
                 if (txtPedido.Text.Length > 0)
                 {
-                    gvNE.DataSource = an_wms.GetNE(txtPedido.Text.Trim(), 3).DataSource;
+                    gvNE.DataSource = an_wms.GetNE(txtPedido.Text.Trim(), 2).DataSource;
                     gvNE.DataBind();
                 }
                 else

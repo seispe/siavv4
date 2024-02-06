@@ -33,6 +33,19 @@ namespace SIAV_v4.Proyectos.WMSiav
         #endregion
 
         #region Funciones
+        public void VincularDdlMotivosCierre()
+        {
+            //Llenar Informacion
+            DataSet dsp = new DataSet();
+            dsp = an_wms.GetMotivosReversa(2);
+
+            ddlmotCierre.DataSource = dsp;
+            ddlmotCierre.DataTextField = "motivo";
+            ddlmotCierre.DataValueField = "nombre";
+            ddlmotCierre.DataBind();
+            ddlmotCierre.Items.Insert(0, new ListItem("Escoga un motivo..", "ninguno"));
+        }
+
         public void GridPicking()
         {
             try
@@ -93,6 +106,8 @@ namespace SIAV_v4.Proyectos.WMSiav
                 vg_producto = (gvDetallePicking.SelectedRow.FindControl("lblproducto") as Label).Text;
                 vg_pedido = (gvDetallePicking.SelectedRow.FindControl("lblpedido") as Label).Text;
                 vg_coordenada = (gvDetallePicking.SelectedRow.FindControl("lblcoordenada") as Label).Text;
+                //Cargar Motivos Cierre
+                VincularDdlMotivosCierre();
                 //Abrir el modal
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");
@@ -235,14 +250,14 @@ namespace SIAV_v4.Proyectos.WMSiav
             {
                 lblError.Text = "";
                 string salida = "";
-                if (txtObservacionC.Text.Length>0)
+                if (ddlmotCierre.SelectedValue != "ninguno" && txtCantCierre.Text.Trim() != "")
                 {
-                    salida = an_wms.UpCerrarProd(vg_consolidado, vg_pedido, vg_producto, vg_coordenada, txtObservacionC.Text.Trim(), HttpContext.Current.User.Identity.Name);
+                    salida = an_wms.UpCerrarProd(vg_consolidado, vg_pedido, vg_producto, vg_coordenada, ddlmotCierre.SelectedValue, HttpContext.Current.User.Identity.Name, Convert.ToInt32(txtCantCierre.Text.Trim()));
                     GridPicking();
                 }
                 else
                 {
-                    lblError.Text = an_alertas.Mensaje("ERROR ", " OBSERVACION OBLIGATORIA", "rojo");
+                    lblError.Text = an_alertas.Mensaje("ERROR ", " MOTIVO Y CANTIDAD OBLIGATORIOS", "rojo");
                 }
                 if (salida.Contains("ERROR"))
                 {

@@ -32,6 +32,7 @@ namespace SIAV_v4.Proyectos.Devoluciones
             {
                 //lblError.Text = "";
                 int index = Convert.ToInt32(e.CommandArgument);
+                lblError.Text = "";
                 if (e.CommandName.Equals("deleteRecord"))
                 {
                     string code = gvLogistica.DataKeys[index].Value.ToString();
@@ -42,7 +43,7 @@ namespace SIAV_v4.Proyectos.Devoluciones
                     sb.Append("$('#deleteModal').modal('show');");
                     sb.Append(@"</script>");
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "DeleteModalScript", sb.ToString(), false);
-                }               
+                }
                 if (e.CommandName.Equals("editRecord"))
                 {
                     string id = (gvLogistica.Rows[index].FindControl("lbliddevolucion") as LinkButton).Text;
@@ -50,6 +51,11 @@ namespace SIAV_v4.Proyectos.Devoluciones
                     {
                         an_devolucion.ModificarEstado(Request.Cookies["basesiav"].Value, id, "4", User.Identity.Name, "");
                         lblError.Text = an_alertas.Mensaje("ENVIADO...!", "Se envio a Bodega", "verde");
+                    }
+                    if (Request.Cookies["basesiav"].Value == "GPPKR")
+                    {
+                        an_devolucion.ModificarEstado(Request.Cookies["basesiav"].Value, id, "1", User.Identity.Name, "");
+                        lblError.Text = an_alertas.Mensaje("ENVIADO...!", "Se envio a Tránsito", "verde");
                     }
                     else
                     {
@@ -109,8 +115,16 @@ namespace SIAV_v4.Proyectos.Devoluciones
                 try
                 {
                     lblError.Text = "";
-                    an_devolucion.ModificarEstado(Request.Cookies["basesiav"].Value, HfDeleteID.Value, "-1", User.Identity.Name, txtObservacion.Text);
-                    lblError.Text = an_alertas.Mensaje("ELIMINADO...!", "Se elimino correctamente la devolucion, proceda a eliminar en la wica.", "verde");
+                    if (Request.Cookies["basesiav"].Value == "GPPKR")
+                    {
+                        an_devolucion.ModificarEstado(Request.Cookies["basesiav"].Value, HfDeleteID.Value, "3", User.Identity.Name, txtObservacion.Text);
+                        lblError.Text = an_alertas.Mensaje("ELIMINADO...!", "Se elimino correctamente la devolucion, proceda a eliminar en la wica.", "verde");
+                    }
+                    else
+                    {
+                        an_devolucion.ModificarEstado(Request.Cookies["basesiav"].Value, HfDeleteID.Value, "-1", User.Identity.Name, txtObservacion.Text);
+                        lblError.Text = an_alertas.Mensaje("ELIMINADO...!", "Se elimino correctamente la devolucion, proceda a eliminar en la wica.", "verde");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -126,6 +140,7 @@ namespace SIAV_v4.Proyectos.Devoluciones
                     sb.Append("$('#deleteModal').modal('hide');");
                     sb.Append(@"</script>");
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "delHideModalScript", sb.ToString(), false);
+                    VincularGrid();
                 }
             }
             else
@@ -138,7 +153,7 @@ namespace SIAV_v4.Proyectos.Devoluciones
         #region Funciones Agregadas
         public void VincularGrid()
         {
-            gvLogistica.DataSource = an_devolucion.LlenarGrid(Request.Cookies["basesiav"].Value, "0").DataSource;
+            gvLogistica.DataSource = an_devolucion.LlenarGrid(Request.Cookies["basesiav"].Value, "0", 0).DataSource;
             gvLogistica.DataBind();
         }
 

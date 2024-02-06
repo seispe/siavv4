@@ -66,8 +66,13 @@
     <Compile Include="Seguridad\AN_Menu.cs" />
     <Compile Include="TOC\AN_TOC.cs" />
     <Compile Include="WMScalG\AN_WMScalG.cs" />
+    <Compile Include="WMScalU\AN_WMScalU.cs" />
     <Compile Include="Wmscal\AN_WMScal.cs" />
+    <Compile Include="WMSiavG\AN_WMSiavG.cs" />
+    <Compile Include="WMSiavQ\AN_WMSiavQ.cs" />
     <Compile Include="WMSiav\AN_WMS.cs" />
+    <Compile Include="WMStec\AN_WMStec.cs" />
+    <Compile Include="WmstraB\AN_WMStraB.cs" />
     <Compile Include="WMStra\AN_WMStra.cs" />
   </ItemGroup>
   <ItemGroup>

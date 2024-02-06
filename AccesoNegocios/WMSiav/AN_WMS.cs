@@ -363,11 +363,11 @@ namespace AccesoNegocios.WMSiav
             }
         }
 
-        public string UpCerrarProd(string numconsolidado, string pedido, string producto, string coordenada, string observacion, string usuarioanula)
+        public string UpCerrarProd(string numconsolidado, string pedido, string producto, string coordenada, string observacion, string usuarioanula, int cantidad)
         {
             try
             {
-                return ad_wms.UpCerrarProd(numconsolidado, pedido, producto, coordenada, observacion, usuarioanula);
+                return ad_wms.UpCerrarProd(numconsolidado, pedido, producto, coordenada, observacion, usuarioanula, cantidad);
             }
             catch (Exception ex)
             {
@@ -535,6 +535,32 @@ namespace AccesoNegocios.WMSiav
             GridView gv = new GridView();
 
             dsp = ad_wms.GetEstadoPedido(dato1, dato2, opcion);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public GridView GetEstadoPedidoVtas(string dato1, string dato2, int opcion)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wms.GetEstadoPedidoVtas(dato1, dato2, opcion);
 
             if (dsp.Tables[0].Rows.Count > 0)
             {
@@ -1454,12 +1480,12 @@ namespace AccesoNegocios.WMSiav
             return gv;
         }
 
-        public GridView GetrptAnulaciones(string dato1, string dato2, int op)
+        public GridView GetPendientesporRevisar()
         {
             DataSet dsp = new DataSet();
             GridView gv = new GridView();
 
-            dsp = ad_wms.GetrptAnulaciones(dato1, dato2, op);
+            dsp = ad_wms.GetPendientesporRevisar();
 
             if (dsp.Tables[0].Rows.Count > 0)
             {
@@ -1847,6 +1873,140 @@ namespace AccesoNegocios.WMSiav
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+        }
+
+        public GridView getBahiasxBultos(string dato, int opcion, string dato1, string dato2)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wms.getBahiasxBultos(dato, opcion, dato1, dato2);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public GridView getBahiasxBultosBod(string dato, int opcion, string dato1, string dato2)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wms.getBahiasxBultosBod(dato, opcion, dato1, dato2);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public string GetPackingListSubtotal(string pedido)
+        {
+            try
+            {
+                return ad_wms.GetPackingListSubtotal(pedido);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public GridView GetrptAnulaciones(string dato1, string dato2, int op)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wms.GetrptAnulaciones(dato1, dato2, op);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        /// TRASPASOS BODEGA MATRIZ A CUARENTENA
+        public GridView GetMovimientosTraspaso(string desde, string hasta, string numerodocumento, string motivo, string usuario, int op)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wms.GetMovimientosTraspaso(desde, hasta, numerodocumento, motivo, usuario, op);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+        /// TRASPASOS BODEGA MATRIZ A CUARENTENA
+        public DataSet GetDetalleTraspasos()
+        {
+            return ad_wms.GetMovimientosTraspaso("", "", "", "", "", 3);
+        }
+        /// TRASPASOS BODEGA MATRIZ A CUARENTENA
+        public string UpTraspasosBodCua(string numerodocumento, string motivo, string usuario, int op)
+        {
+            try
+            {
+                return ad_wms.UpTraspasosBodCua(numerodocumento, motivo, usuario, op);
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }

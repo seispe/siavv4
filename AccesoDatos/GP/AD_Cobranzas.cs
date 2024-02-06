@@ -52,11 +52,34 @@ namespace AccesoDatos.GP
             }
         }
 
-        public DataSet GetEstadoCuenta(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento)
+        public DataSet GetEstadoCuenta(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento, int op)
         {
             try
             {
                 SqlDataAdapter da = new SqlDataAdapter("GA_SEG_Pestadocuenta", db);
+                da.SelectCommand.CommandTimeout = 360;
+                da.SelectCommand.Parameters.AddWithValue("@cliente", cliente);
+                da.SelectCommand.Parameters.AddWithValue("@vendedor", vendedor);
+                da.SelectCommand.Parameters.AddWithValue("@ciudad", ciudad);
+                da.SelectCommand.Parameters.AddWithValue("@fechaEmision", fechaEmision);
+                da.SelectCommand.Parameters.AddWithValue("@fechaVencimiento", fechaVencimiento);
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_DEV_Tdevoluciones");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetEstadoCuenta_chqPosfVenc(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_SEG_Pestadocuenta_chqPosfVenc", db);
                 da.SelectCommand.Parameters.AddWithValue("@cliente", cliente);
                 da.SelectCommand.Parameters.AddWithValue("@vendedor", vendedor);
                 da.SelectCommand.Parameters.AddWithValue("@ciudad", ciudad);
@@ -73,7 +96,7 @@ namespace AccesoDatos.GP
             }
         }
 
-        public DataSet GetChqPostfechados(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento)
+        public DataSet GetChqPostfechados(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento, int op)
         {
             try
             {
@@ -83,6 +106,7 @@ namespace AccesoDatos.GP
                 da.SelectCommand.Parameters.AddWithValue("@ciudad", ciudad);
                 da.SelectCommand.Parameters.AddWithValue("@fechaEmision", fechaEmision);
                 da.SelectCommand.Parameters.AddWithValue("@fechaVencimiento", fechaVencimiento);
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                 DataSet ds = new DataSet();
                 da.Fill(ds, "GA_DEV_Tdevoluciones");
@@ -94,7 +118,7 @@ namespace AccesoDatos.GP
             }
         }
 
-        public DataSet GetChqProtestados(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento)
+        public DataSet GetChqProtestados(string cliente, string vendedor, string ciudad, string fechaEmision, string fechaVencimiento, int op)
         {
             try
             {
@@ -104,6 +128,7 @@ namespace AccesoDatos.GP
                 da.SelectCommand.Parameters.AddWithValue("@ciudad", ciudad);
                 da.SelectCommand.Parameters.AddWithValue("@fechaEmision", fechaEmision);
                 da.SelectCommand.Parameters.AddWithValue("@fechaVencimiento", fechaVencimiento);
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                 DataSet ds = new DataSet();
                 da.Fill(ds, "GA_DEV_Tdevoluciones");
@@ -129,7 +154,7 @@ namespace AccesoDatos.GP
                     da.Fill(ds, "GA_DEV_Tdevoluciones");
                     return ds;
                 }
-                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX")
+                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX" || empresa == "GPCOP")
                 {
                     SqlDataAdapter da = new SqlDataAdapter("GA_DEV_Prpt_cuentasxcobrar", dbdynamicscao);
                     da.SelectCommand.Parameters.AddWithValue("@empresa", empresa);
@@ -171,7 +196,7 @@ namespace AccesoDatos.GP
                     da.Fill(ds, "GA_DEV_Tdevoluciones");
                     return ds;
                 }
-                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX")
+                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX" || empresa == "GPCOP")
                 {
                     SqlDataAdapter da = new SqlDataAdapter("GA_DEV_Prpt_cuentasxpagar", dbdynamicscao);
                     da.SelectCommand.Parameters.AddWithValue("@empresa", empresa);

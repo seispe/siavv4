@@ -19,7 +19,7 @@ namespace SIAV_v4.Proyectos.WMStra
         AE_GA_WMS_Trol ae_ga_wms_trol = new AE_GA_WMS_Trol();
         AE_GA_WMS_TUsuario ae_ga_wms_tusuario = new AE_GA_WMS_TUsuario();
         AE_GA_WMS_TPedusuario ae_ga_wms_tpedusuario = new AE_GA_WMS_TPedusuario();
-        AN_WMStra an_wms = new AN_WMStra();
+        AN_WMStra an_wms = new AN_WMStra(); 
 
         #endregion
 
@@ -359,11 +359,16 @@ namespace SIAV_v4.Proyectos.WMStra
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 string tipodoc = (e.Row.Cells[10].Text);
+                string bodegados = (e.Row.Cells[11].Text);
                 foreach (TableCell cell in e.Row.Cells)
                 {
                     if (tipodoc != "PV")
                     {
                         cell.BackColor = Color.LightCoral;
+                    }
+                    if (bodegados != "0")
+                    {
+                        cell.BackColor = Color.YellowGreen;
                     }
                 }
             }

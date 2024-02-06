@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla/Menu.Master" AutoEventWireup="true" CodeBehind="Reporte247.aspx.cs" Inherits="SIAV_v4.Reportes.Reporte247" %>
-<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+<%--<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>--%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -21,8 +21,8 @@
     </div>
 </div>
 <br />
-    <rsweb:reportviewer id="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" Height="600" ProcessingMode="Remote" Width="100%">
+   <%-- <rsweb:reportviewer id="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" Height="600" ProcessingMode="Remote" Width="100%">
         <ServerReport ReportServerUrl="" />
-    </rsweb:reportviewer>
+    </rsweb:reportviewer>--%>
 </form>
 </asp:Content>

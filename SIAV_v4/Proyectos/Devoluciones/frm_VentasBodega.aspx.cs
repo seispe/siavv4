@@ -111,7 +111,7 @@ namespace SIAV_v4.Proyectos.Devoluciones
         #region Funciones Agregadas
         public void VincularGrid()
         {
-            gvVentas.DataSource = an_devolucion.LlenarGrid(Request.Cookies["basesiav"].Value, "2").DataSource;
+            gvVentas.DataSource = an_devolucion.LlenarGrid(Request.Cookies["basesiav"].Value, "2", 0).DataSource;
             gvVentas.DataBind();
         }
 
