@@ -4,6 +4,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using AccesoNegocios.Devoluciones;
 using AccesoNegocios.Alertas;
+using System.Web;
 
 namespace SIAV_v4.Reportes.Devoluciones
 {
@@ -31,8 +32,80 @@ namespace SIAV_v4.Reportes.Devoluciones
                 }
                 else
                 {
-                    ExportToExcel(2, txtfdesde.Text, txtfhasta.Text);
+                    ExportToExcel(Convert.ToInt32(rdbTipo.SelectedValue), txtfdesde.Text, txtfhasta.Text);
                 }
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
+            }
+        }
+
+        protected void btnTraspaso_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblError.Text = "";
+                if (rdbTipo.SelectedValue == "1")
+                {
+                    
+                    string documentos = an_devolucion.GetTraspasosDocs(3, txtDato.Text.Trim(), "");
+                    lblDocumentos.Text = documentos;
+                }
+                else
+                {
+                    string documentos = an_devolucion.GetTraspasosDocs(4, txtfdesde.Text.Trim(), txtfhasta.Text.Trim());
+                    lblDocumentos.Text = documentos;
+                }
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#traspasoModal').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "reversaModalScript", sb.ToString(), false);
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
+            }
+        }
+
+        protected void btnGuardarR_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblError.Text = "";
+                if (rdbTipo.SelectedValue == "1")
+                {
+                    if (lblDocumentos.Text.Length > 0 && txtnumeroDocGP.Text.Length > 0)
+                    {
+                        string usuario = HttpContext.Current.User.Identity.Name;
+                        string resultado = an_devolucion.UpLiberaTraspasos(5, txtDato.Text.Trim(), "", txtnumeroDocGP.Text.Trim(), usuario);
+                        lblError.Text = an_alertas.Mensaje("CORRECTO ", resultado, "verde");
+                    }
+                    else
+                    {
+                        lblError.Text = an_alertas.Mensaje("ERROR ", "Documentos vacios", "rojo");
+                    }
+                }
+                else
+                {
+                    if (lblDocumentos.Text.Length > 0 && txtnumeroDocGP.Text.Length > 0)
+                    {
+                        string usuario = HttpContext.Current.User.Identity.Name;
+                        string resultado = an_devolucion.UpLiberaTraspasos(6, txtfdesde.Text.Trim(), txtfhasta.Text.Trim(), txtnumeroDocGP.Text.Trim(), usuario);
+                        lblError.Text = an_alertas.Mensaje("CORRECTO ", resultado, "verde");
+                    }
+                    else
+                    {
+                        lblError.Text = an_alertas.Mensaje("ERROR ", "Documentos vacios", "rojo");
+                    }
+                }
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#traspasoModal').modal('hide');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "reversaModalScript", sb.ToString(), false);
+
             }
             catch (Exception ex)
             {
@@ -75,6 +148,8 @@ namespace SIAV_v4.Reportes.Devoluciones
             Response.Flush();
             Response.End();
         }
+
+
         #endregion
 
        

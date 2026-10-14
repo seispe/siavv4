@@ -332,6 +332,62 @@ namespace AccesoDatos.GP
                 }
             }
         }
+
+        //SUBIR ARCHIVO DE EXCEL A SQL
+        public string cargarReservaAllxlsx(DataTable tabla)
+        {
+            string resultado = "";
+            using (SqlCommand cmd = new SqlCommand("GA_COM_PreservaAllTemp", db))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Carga", SqlDbType.Structured).Value = tabla;
+                cmd.Parameters.Add("Resultado", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+                    resultado = Convert.ToString(cmd.Parameters["Resultado"].Value);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+            return resultado;
+        }
+
+        //RESERVAR Y LIBERAR STOCK PARA ALLPARTS
+        public string reservaStockAllparts(string recibo, string usuario, int tipo)
+        {
+            string resultado = "";
+            using (SqlCommand cmd = new SqlCommand("GA_COM_PreservaAllRecib", db))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@recibo", recibo);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@tipo", tipo);
+                cmd.Parameters.Add("Resultado", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+                    resultado = Convert.ToString(cmd.Parameters["Resultado"].Value);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+            return resultado;
+        }
         #endregion
 
         #region Update

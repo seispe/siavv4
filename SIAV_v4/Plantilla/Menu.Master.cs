@@ -69,6 +69,14 @@ namespace SIAV_v4.Plantilla
                     {
                         ventana = ae_ga_seg_tloginvent.ventana.Substring(20, ae_ga_seg_tloginvent.ventana.Length - 20);
                     }
+                    else if (ae_ga_seg_tloginvent.ventana.Contains("192.168.0.179"))
+                    {
+                        ventana = ae_ga_seg_tloginvent.ventana.Substring(20, ae_ga_seg_tloginvent.ventana.Length - 20);
+                    }
+                    else if (ae_ga_seg_tloginvent.ventana.Contains("192.168.0.197"))
+                    {
+                        ventana = ae_ga_seg_tloginvent.ventana.Substring(20, ae_ga_seg_tloginvent.ventana.Length - 20);
+                    }
                     else
                     {
                         ventana = ae_ga_seg_tloginvent.ventana.Substring(21, ae_ga_seg_tloginvent.ventana.Length - 21);

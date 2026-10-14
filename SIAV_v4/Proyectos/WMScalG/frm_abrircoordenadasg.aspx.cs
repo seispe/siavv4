@@ -15,17 +15,38 @@ namespace SIAV_v4.Proyectos.WMScalG
         #endregion
 
         #region Funciones
-
+        public void GridDetalleConteo()
+        {
+            try
+            {
+                gvDetConteo.DataSource = an_wms.GetDetConteo(txtCoordenada.Text.Trim(), ddlConteo.SelectedValue, Request.Cookies["basesiav"].Value, 1).DataSource;
+                gvDetConteo.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
+            }
+        }
         #endregion
 
         #region Eventos
-
-        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 VincularDdlCC();
+            }
+        }
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblError.Text = "";
+                GridDetalleConteo();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
             }
         }
 
@@ -42,14 +63,38 @@ namespace SIAV_v4.Proyectos.WMScalG
             ddlConteo.Items.Insert(0, new ListItem("Eliga un Conteo..", "0"));
         }
 
-        protected void btnAbrir_Click(object sender, EventArgs e)
+        protected void gvDetConteo_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
             {
+                lblError.Text = "";
+                if (e.CommandName == "VaciarCantidad")
+                {
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    string coordenada = (gvDetConteo.Rows[index].FindControl("lblcoordenada") as Label).Text; //txtcosto.text
+                    string producto = (gvDetConteo.Rows[index].FindControl("lblproducto") as Label).Text; //txtcosto.text
+                    an_wms.UpVaciarCoordenada(coordenada, Convert.ToInt32(ddlConteo.SelectedValue), producto, Request.Cookies["basesiav"].Value, 1);
+                    lblError.Text = an_alertas.Mensaje("CORRECTO ", "VACIADO", "verde");
+                    GridDetalleConteo();
+                }
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
+            }
+        }
+
+        protected void btnVaciar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblError.Text = "";
                 if (txtCoordenada.Text.Length > 0 && Convert.ToInt32(ddlConteo.SelectedValue) != 0)
                 {
-                    string salida = an_wms.AbrirCoor(txtCoordenada.Text.Trim(), Request.Cookies["basesiav"].Value, Convert.ToInt32(ddlConteo.SelectedValue));
-                    lblError.Text = an_alertas.Mensaje("MENSAJE ", salida, "verde");
+                    string coordenada = txtCoordenada.Text.Trim();
+                    string salida = an_wms.UpVaciarCoordenada(coordenada, Convert.ToInt32(ddlConteo.SelectedValue), "", Request.Cookies["basesiav"].Value, 2);
+                    lblError.Text = an_alertas.Mensaje("MENSAJE ", salida, "azul");
+                    GridDetalleConteo();
                 }
                 else
                 {
@@ -61,5 +106,11 @@ namespace SIAV_v4.Proyectos.WMScalG
                 lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
             }
         }
+        #endregion
+
+
+
+
+
     }
 }

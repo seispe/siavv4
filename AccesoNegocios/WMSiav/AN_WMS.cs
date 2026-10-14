@@ -1,9 +1,12 @@
-﻿using AccesoDatos.WMSiav;
+﻿using AccesoDatos.GP;
+using AccesoDatos.WMSiav;
 using AccesoEntidades.WMSiav;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
@@ -439,7 +442,7 @@ namespace AccesoNegocios.WMSiav
             return gv;
         }
 
-        public GridView getCierrePicking(string dato, int opcion)
+        /*public GridView getCierrePicking(string dato, int opcion)
         {
             DataSet dsp = new DataSet();
             GridView gv = new GridView();
@@ -463,6 +466,17 @@ namespace AccesoNegocios.WMSiav
                 gv.Rows[0].Cells[0].Text = "No se encuentra datos";
             }
             return gv;
+        }*/
+        public DataTable getCierrePicking(string dato, int opcion)
+        {
+            DataSet dsp = ad_wms.getCierrePicking(dato, opcion);
+            return dsp.Tables[0];
+        }
+
+        public DataTable getCierrePickingHIST(string dato)
+        {
+            DataSet dsp = ad_wms.getCierrePickingHIST(dato);
+            return dsp.Tables[0];
         }
 
         public string getCoorPedvalida(string coordenada, string pedido, string tipocoor, string opcion)
@@ -995,11 +1009,11 @@ namespace AccesoNegocios.WMSiav
             return gv;
         }
 
-        public string UpdateTraspasos(string traspaso)
+        public string UpdateTraspasos(int bodega, string traspaso)
         {
             try
             {
-                return ad_wms.UpdateTraspasos(traspaso);
+                return ad_wms.UpdateTraspasos(bodega, traspaso);
             }
             catch (Exception ex)
             {
@@ -1394,6 +1408,18 @@ namespace AccesoNegocios.WMSiav
             try
             {
                 return ad_wms.ExportarGPCuarentena(maestro);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string CerrarCC(int maestro)
+        {
+            try
+            {
+                return ad_wms.CerrarCC(maestro);
             }
             catch (Exception ex)
             {
@@ -1968,12 +1994,12 @@ namespace AccesoNegocios.WMSiav
         }
 
         /// TRASPASOS BODEGA MATRIZ A CUARENTENA
-        public GridView GetMovimientosTraspaso(string desde, string hasta, string numerodocumento, string motivo, string usuario, int op)
+        public GridView GetrptTraspasosMatrizCtna(string desde, string hasta, int op)
         {
             DataSet dsp = new DataSet();
             GridView gv = new GridView();
 
-            dsp = ad_wms.GetMovimientosTraspaso(desde, hasta, numerodocumento, motivo, usuario, op);
+            dsp = ad_wms.GetrptTraspasosMatrizCtna(desde, hasta, op);
 
             if (dsp.Tables[0].Rows.Count > 0)
             {
@@ -1993,17 +2019,115 @@ namespace AccesoNegocios.WMSiav
             }
             return gv;
         }
-        /// TRASPASOS BODEGA MATRIZ A CUARENTENA
-        public DataSet GetDetalleTraspasos()
+
+        public DataSet GetdocsTraspasosMatrizCtna(string desde, string hasta, int op)
         {
-            return ad_wms.GetMovimientosTraspaso("", "", "", "", "", 3);
+            return ad_wms.GetrptTraspasosMatrizCtna(desde, hasta, op);
+            
         }
-        /// TRASPASOS BODEGA MATRIZ A CUARENTENA
-        public string UpTraspasosBodCua(string numerodocumento, string motivo, string usuario, int op)
+
+        public string UpLiberaTraspasosMatriz(string desde, string hasta, int op, string numdocGP, string usuario)
         {
             try
             {
-                return ad_wms.UpTraspasosBodCua(numerodocumento, motivo, usuario, op);
+                return ad_wms.UpLiberaTraspasosMatriz(desde, hasta, op, numdocGP, usuario);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetrptCtrlCalidad(string fdesde, string fhasta, int op)
+        {
+            /*DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wms.GetrptCtrlCalidad(fdesde, fhasta, op);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;*/
+            return ad_wms.GetrptCtrlCalidad(fdesde, fhasta, op);
+        }
+
+        public string AumentoStock(string producto, int cantidad, string motivo, string observacion, string coordenada, string usuario, int op)
+        {
+            try
+            {
+                return ad_wms.AumentoStock(producto, cantidad, motivo, observacion, coordenada, usuario, op);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public int cargarExcel(DataTable tabla)
+        {
+            return ad_wms.cargarExcel(tabla);
+        }
+
+        public string generaTraspasos(string tipodocumento, string usuario, string motivo)
+        {
+            return ad_wms.generaTraspasos(tipodocumento, usuario, motivo);
+
+        }
+
+        public string guardarObsWms(string pedido, string observacion, string usuario)
+        {
+            try
+            {
+                return ad_wms.guardarObsWms(pedido, observacion, usuario);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetConteosAbiertos(int op, string producto, int idmconteo)
+        {
+            return ad_wms.GetConteosAbiertos(op, producto, idmconteo);
+        }
+
+        public string AgregarProdConteos(int op, string producto, int idmconteo)
+        {
+            try
+            {
+                return ad_wms.AgregarProdConteos(op, producto, idmconteo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataTable GetHoratencionCli(string ruc, string sucursal)
+        {
+            return ad_wms.GetHoratencionCli(ruc, sucursal).Tables[0];
+        }
+
+        public string UpContenedoresxDia(string fecha, int cont, int carga, int op)
+        {
+            try
+            {
+                return ad_wms.UpContenedoresxDia(fecha, cont, carga, op);
             }
             catch (Exception ex)
             {

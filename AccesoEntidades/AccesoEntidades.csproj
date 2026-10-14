@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Autorizaciones\GP_AUTH_MOD.cs" />
     <Compile Include="Cobranzas\AE_GA_COB.cs" />
     <Compile Include="Comisiones\AE_GA_COM.cs" />
     <Compile Include="Despacho\AE_GA_DES.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="OrdenCompra\AE_GA_OCL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\AE_GA_SEG.cs" />
+    <Compile Include="WMScal\AE_GA_WMScal.cs" />
     <Compile Include="WMSiav\AE_GA_WMS.cs" />
   </ItemGroup>
   <ItemGroup>

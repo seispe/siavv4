@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccesoEntidades.WMScal;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -19,6 +20,110 @@ namespace AccesoDatos.WMScal
         #endregion
 
         #region Select
+        public DataSet GetDetallePed(string pedido)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PGetDetallePed", db);
+                da.SelectCommand.Parameters.AddWithValue("@pedido", pedido);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PGetDetallePed");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetPedidosNoAsignados(string pedido, string ciudad, string tipo, string cliente, string empresa, string opcion)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PGetpedidos", db);
+                da.SelectCommand.CommandTimeout = 120;
+                da.SelectCommand.Parameters.AddWithValue("@pedido", pedido);
+                da.SelectCommand.Parameters.AddWithValue("@ciudad", ciudad);
+                da.SelectCommand.Parameters.AddWithValue("@tipo", tipo);
+                da.SelectCommand.Parameters.AddWithValue("@soc_cliente", cliente);
+                da.SelectCommand.Parameters.AddWithValue("@empresa", empresa);
+                da.SelectCommand.Parameters.AddWithValue("@opcion", opcion);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PGetpedidos");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet Gettiposciudades(string empresa, string opcion)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PGettiposciucli", db);
+                da.SelectCommand.Parameters.AddWithValue("@empresa", empresa);
+                da.SelectCommand.Parameters.AddWithValue("@opcion", opcion);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PGettiposciucli");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetConsolidado(string empresa, string dato, string opcion)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PGetConsolidados", db);
+                da.SelectCommand.Parameters.AddWithValue("@empresa", empresa);
+                da.SelectCommand.Parameters.AddWithValue("@dato", dato);
+                da.SelectCommand.Parameters.AddWithValue("@opcion", opcion);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PGetConsolidados");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string getConsolidadoMax(string empresa, string dato, string opcion)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "GA_WMS_PGetConsolidados";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@empresa", empresa);
+                cmd.Parameters.AddWithValue("@dato", dato);
+                cmd.Parameters.AddWithValue("@opcion", opcion);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
         public DataSet GetPicking(int id_rol, string empresa)
         {
             try
@@ -125,9 +230,114 @@ namespace AccesoDatos.WMScal
                 throw ex;
             }
         }
+
+        public DataSet GetEstadoPedido(string dato1, string dato2, int opcion)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PrptEstadoPedidos", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.Parameters.AddWithValue("@dato1", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@dato2", dato2);
+                da.SelectCommand.Parameters.AddWithValue("@opcion", opcion);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                db.Open();
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PrptEstadoPedidos");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                db.Close();
+            }
+        }
         #endregion
 
         #region Insert
+        public string UpdatePedidoConsol(string numconsolidado, string pedido)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "GA_WMS_Pactconsolidados";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@numconsolidado", numconsolidado);
+                cmd.Parameters.AddWithValue("@pedido", pedido);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        public string AnulaPedido(string pedido, int opcion)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "GA_WMS_Panulapedido";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@pedido", pedido);
+                cmd.Parameters.AddWithValue("@opcion", opcion);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        public string InsGA_WMS_Tconsolidado(int id, AE_GA_WMS_TPedusuario ae_ga_wms_tpedusuario, string empresa)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "GA_WMS_Pinsconsolidados";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@pedido", ae_ga_wms_tpedusuario.pedido);
+                cmd.Parameters.AddWithValue("@usuario", ae_ga_wms_tpedusuario.id_usuario);
+                cmd.Parameters.AddWithValue("@empresa", empresa);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
         public string InsConteoCiclico(int op, string tipo, string documento, int cantidad, string codigoproducto, string descripcion,
             string observacion, string origen, string empresa, int idcc, string usuario, string usuarioasigna)
         {

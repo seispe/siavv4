@@ -70,11 +70,6 @@
                     <asp:Label ID="lblobservacion" runat="server" Text='<%# Bind("OBSERVACION") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-                 <asp:TemplateField HeaderText="Camion" SortExpression="Camion">
-                <ItemTemplate>
-                    <asp:Label ID="lblcamion" runat="server" Text='<%# Bind("CAMION") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
     </Columns>
         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />

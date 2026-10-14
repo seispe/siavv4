@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SIAV_v4.Proyectos.WMScalG {
-    
-    
-    public partial class frm_abrircoordenadasg {
-        
+namespace SIAV_v4.Proyectos.WMScalG
+{
+
+
+    public partial class frm_abrircoordenadasg
+    {
+
         /// <summary>
         /// Control form1.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SIAV_v4.Proyectos.WMScalG {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// Control ScriptManager2.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SIAV_v4.Proyectos.WMScalG {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager2;
-        
+
         /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SIAV_v4.Proyectos.WMScalG {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
-        
+
         /// <summary>
         /// Control lblError.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SIAV_v4.Proyectos.WMScalG {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
+
         /// <summary>
         /// Control ddlConteo.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SIAV_v4.Proyectos.WMScalG {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlConteo;
-        
+
         /// <summary>
         /// Control txtCoordenada.
         /// </summary>
@@ -65,14 +67,41 @@ namespace SIAV_v4.Proyectos.WMScalG {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCoordenada;
-        
+
         /// <summary>
-        /// Control btnAbrir.
+        /// Control btnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAbrir;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
+
+        /// <summary>
+        /// Control btnVaciar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVaciar;
+
+        /// <summary>
+        /// Control UpdatePanel10.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel10;
+
+        /// <summary>
+        /// Control gvDetConteo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvDetConteo;
     }
 }

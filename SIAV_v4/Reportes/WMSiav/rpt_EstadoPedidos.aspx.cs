@@ -65,10 +65,20 @@ namespace SIAV_v4.Reportes.WMSiav
                 GridView1.DataSource = an_wms.GetEstadoPedido(txtDato.Text.Trim(), "", 4).DataSource;
                 GridView1.DataBind();
             }
+            if (Convert.ToInt32(rdbTipo.SelectedValue) == 5)
+            {
+                GridView1.DataSource = an_wms.GetEstadoPedido(txtDato.Text.Trim(), "", 5).DataSource;
+                GridView1.DataBind();
+            }
+            if (Convert.ToInt32(rdbTipo.SelectedValue) == 6)
+            {
+                GridView1.DataSource = an_wms.GetEstadoPedido("", "", 6).DataSource;
+                GridView1.DataBind();
+            }
             Response.Clear();
             Response.Buffer = true;
             Response.AddHeader("content-disposition",
-             "attachment;filename=rptRecepciones.xls");
+             "attachment;filename=rptEstadoPedidos.xls");
             Response.Charset = "";
             Response.ContentType = "application/vnd.ms-excel";
             StringWriter sw = new StringWriter();
@@ -131,6 +141,18 @@ namespace SIAV_v4.Reportes.WMSiav
                 if (Convert.ToInt32(rdbTipo.SelectedValue) == 4)
                 {
                     gvEstadoPedidos.DataSource = an_wms.GetEstadoPedido(txtDato.Text.Trim(), "", 4).DataSource;
+                    gvEstadoPedidos.DataBind();
+                    PintarGrid();
+                }
+                if (Convert.ToInt32(rdbTipo.SelectedValue) == 5)
+                {
+                    gvEstadoPedidos.DataSource = an_wms.GetEstadoPedido(txtDato.Text.Trim(), "", 5).DataSource;
+                    gvEstadoPedidos.DataBind();
+                    PintarGrid();
+                }
+                if (Convert.ToInt32(rdbTipo.SelectedValue) == 6)
+                {
+                    gvEstadoPedidos.DataSource = an_wms.GetEstadoPedido("", "", 6).DataSource;
                     gvEstadoPedidos.DataBind();
                     PintarGrid();
                 }
@@ -209,11 +231,11 @@ namespace SIAV_v4.Reportes.WMSiav
                 picking = (row.FindControl("lbllogistica") as Label).Text;
                 switch (picking.Trim())
                 {
-                    case "OK":
-                        row.Cells[13].BackColor = Color.LightGreen;
-                        break;
                     case "EN PROCESO":
                         row.Cells[13].BackColor = Color.LightCoral;
+                        break;
+                    default:
+                        row.Cells[13].BackColor = Color.LightGreen;
                         break;
                 }
 
@@ -273,7 +295,7 @@ namespace SIAV_v4.Reportes.WMSiav
             try
             {
                 lblError.Text = "";
-                if (Convert.ToInt32(rdbTipo.SelectedValue) == 1 || Convert.ToInt32(rdbTipo.SelectedValue) == 2)
+                if (Convert.ToInt32(rdbTipo.SelectedValue) == 1 || Convert.ToInt32(rdbTipo.SelectedValue) == 2 || Convert.ToInt32(rdbTipo.SelectedValue) == 5)
                 {
                     if (txtDato.Text.Length > 0)
                     {

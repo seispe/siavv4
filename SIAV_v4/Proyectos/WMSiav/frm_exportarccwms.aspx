@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
-                        <h1 class="page-header">Exportar Conteo WMS</h1>
+                        <h1 class="page-header">Cerrar y Exportar Conteo WMS</h1>
                         <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
                     </ContentTemplate>
                     <Triggers>
@@ -30,7 +30,12 @@
             CssClass="grid" ForeColor="#333333" GridLines="None" AllowPaging="True" AllowSorting="True" HeaderStyle-BackColor = "green" PageSize="50" OnRowCommand="gvMaestros_RowCommand">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
-                 <asp:TemplateField>
+            <asp:TemplateField HeaderText="Cerrar" HeaderStyle-Width="70">
+              <ItemTemplate>
+                  <asp:ImageButton CommandName="CerrarCC" CommandArgument="<%# Container.DataItemIndex %>" ImageUrl="~/Recursos/images/export.png" runat="server" OnClientClick="return confirm('Desea cerrar el conteo')" />
+              </ItemTemplate>
+            </asp:TemplateField>
+                 <asp:TemplateField HeaderText="Exportar" HeaderStyle-Width="70">
               <ItemTemplate>
                   <asp:ImageButton CommandName="ExportarGP" CommandArgument="<%# Container.DataItemIndex %>" ImageUrl="~/Recursos/images/grafico.png" runat="server" OnClientClick="return confirm('Desea exportar al WMS')" />
               </ItemTemplate>

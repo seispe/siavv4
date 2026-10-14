@@ -127,7 +127,7 @@ namespace SIAV_v4.Reportes.WMSiav
             Response.Clear();
             Response.Buffer = true;
             Response.AddHeader("content-disposition",
-             "attachment;filename=rptRecepciones.xls");
+             "attachment;filename=rptKardex.xls");
             Response.Charset = "";
             Response.ContentType = "application/vnd.ms-excel";
             StringWriter sw = new StringWriter();

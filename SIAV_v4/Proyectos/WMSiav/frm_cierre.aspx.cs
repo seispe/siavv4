@@ -1,4 +1,5 @@
 ﻿using AccesoNegocios.Alertas;
+using AccesoNegocios.GP;
 using AccesoNegocios.WMSiav;
 using System;
 using System.Data;
@@ -26,49 +27,19 @@ namespace SIAV_v4.Proyectos.WMSiav
             if (!IsPostBack)
             {
                 btnCerrar.Visible = false;
+                btnObservacion.Visible = false;
             }
         }
-
-
-        #endregion
-
-        #region Funciones
-        public void VincularDdlMotivosCierre()
-        {
-            //Llenar Informacion
-            DataSet dsp = new DataSet();
-            dsp = an_wms.GetMotivosReversa(2);
-
-            ddlmotCierre.DataSource = dsp;
-            ddlmotCierre.DataTextField = "motivo";
-            ddlmotCierre.DataValueField = "nombre";
-            ddlmotCierre.DataBind();
-            ddlmotCierre.Items.Insert(0, new ListItem("Escoga un motivo..", "ninguno"));
-        }
-
-        public void GridPicking()
-        {
-            try
-            {
-                //btnCerrar.Text = Txt_consolidado.Text.Trim();
-                gvDetallePicking.DataSource = an_wms.getCierrePicking(Txt_consolidado.Text.Trim(), Convert.ToInt32(rdbTipo.SelectedValue)).DataSource;
-                gvDetallePicking.DataBind();
-            }
-            catch (Exception ex)
-            {
-                lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
-            }
-        }
-        #endregion
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             lblError.Text = "";
 
-            if (Txt_consolidado.Text.Length>0)
+            if (Txt_consolidado.Text.Length > 0)
             {
                 gvDetallePicking.Visible = true;
                 btnCerrar.Visible = true;
+                btnObservacion.Visible = true;
                 if (Convert.ToInt32(rdbTipo.SelectedValue) == 1)
                 {
                     DataSet gpi = new DataSet();
@@ -92,6 +63,7 @@ namespace SIAV_v4.Proyectos.WMSiav
             else
             {
                 btnCerrar.Visible = false;
+                btnObservacion.Visible = false;
                 gvDetallePicking.Visible = false;
                 lblError.Text = an_alertas.Mensaje("ERROR ", "INGRESE UN NUMERO DE CONSOLIDADO/PEDIDO", "rojo");
             }
@@ -186,7 +158,7 @@ namespace SIAV_v4.Proyectos.WMSiav
                 lblError.Text = "";
                 if (Txt_consolidado.Text.Length > 0)
                 {
-                    string resultado = an_wms.AnulaPedidoV2(Txt_consolidado.Text.Trim(),txtObservacion.Text.Trim(), HttpContext.Current.User.Identity.Name);
+                    string resultado = an_wms.AnulaPedidoV2(Txt_consolidado.Text.Trim(), txtObservacion.Text.Trim(), HttpContext.Current.User.Identity.Name);
                     if (resultado.Contains("CORRECTO"))
                     {
                         lblError.Text = an_alertas.Mensaje("", resultado.Trim(), "verde");
@@ -263,7 +235,7 @@ namespace SIAV_v4.Proyectos.WMSiav
                 {
                     lblError.Text = an_alertas.Mensaje("", salida, "rojo");
                 }
-                
+
 
             }
             catch (Exception ex)
@@ -271,5 +243,163 @@ namespace SIAV_v4.Proyectos.WMSiav
                 lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
             }
         }
+
+        protected void btnObservacion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblError.Text = "";
+                VincularDdlObservacionesWMS();
+                //Abrir el modal
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#obsWMS').modal('show');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditModalScript", sb.ToString(), false);
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
+            }
+        }
+
+        protected void btnGuardarObs_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblError.Text = "";
+                if (Txt_consolidado.Text.Length > 0)
+                {
+                    string resultado = an_wms.guardarObsWms(Txt_consolidado.Text.Trim(), ddlObservacionWMS.SelectedValue, HttpContext.Current.User.Identity.Name);
+                    if (resultado.Contains("CORRECTO"))
+                    {
+                        lblError.Text = an_alertas.Mensaje("", resultado.Trim(), "verde");
+                    }
+                    else
+                    {
+                        lblError.Text = an_alertas.Mensaje("", resultado.Trim(), "rojo");
+                    }
+                }
+                else
+                {
+                    lblError.Text = an_alertas.Mensaje("ERROR ", "INGRESE UN PEDIDO", "rojo");
+                }
+
+                //Cerrar el modal
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(@"<script type='text/javascript'>");
+                sb.Append("$('#obsWMS').modal('hide');");
+                sb.Append(@"</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "EditModalScript", sb.ToString(), false);
+                txtObservacion.Text = "";
+
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
+            }
+        }
+
+        protected void gvDetallePicking_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (e.SortExpression != "can_pendiente")
+                return;
+            DataTable dt = Session["PickingData"] as DataTable;
+            if (dt == null) return;
+
+            string sortDirection = ViewState["SortDirection"] as string;
+
+            if (sortDirection == "DESC")
+            {
+                sortDirection = "ASC";
+            }
+            else
+            {
+                sortDirection = "DESC";
+            }
+
+            ViewState["SortDirection"] = sortDirection;
+            ViewState["SortColumn"] = e.SortExpression;
+
+            dt.DefaultView.Sort = e.SortExpression + " " + sortDirection;
+
+            gvDetallePicking.DataSource = dt;
+            gvDetallePicking.DataBind();
+        }
+        protected void gvDetallePicking_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                string col = ViewState["SortColumn"] as string;
+                string dir = ViewState["SortDirection"] as string;
+
+                if (col == "can_pendiente")
+                {
+                    int colIndex = 14; // ajusta esto
+
+                    if (!string.IsNullOrEmpty(dir))
+                    {
+                        Literal icon = new Literal();
+
+                        if (dir == "ASC")
+                            icon.Text = "<span style='margin-left:5px;'>▲</span>";
+                        else
+                            icon.Text = "<span style='margin-left:5px;'>▼</span>";
+
+                        e.Row.Cells[colIndex].Controls.Add(icon);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Funciones
+        public void VincularDdlMotivosCierre()
+        {
+            //Llenar Informacion
+            DataSet dsp = new DataSet();
+            dsp = an_wms.GetMotivosReversa(2);
+
+            ddlmotCierre.DataSource = dsp;
+            ddlmotCierre.DataTextField = "motivo";
+            ddlmotCierre.DataValueField = "nombre";
+            ddlmotCierre.DataBind();
+            ddlmotCierre.Items.Insert(0, new ListItem("Escoga un motivo..", "ninguno"));
+        }
+
+        public void GridPicking()
+        {
+            try
+            {
+                //btnCerrar.Text = Txt_consolidado.Text.Trim();
+                /*gvDetallePicking.DataSource = an_wms.getCierrePicking(Txt_consolidado.Text.Trim(), Convert.ToInt32(rdbTipo.SelectedValue)).DataSource;
+                gvDetallePicking.DataBind();*/
+                DataTable dt = an_wms.getCierrePicking(Txt_consolidado.Text.Trim(), Convert.ToInt32(rdbTipo.SelectedValue));
+                // 🔥 Guardas en sesión
+                Session["PickingData"] = dt;
+                ViewState["SortDirection"] = null;
+                ViewState["SortColumn"] = null;
+                gvDetallePicking.DataSource = dt;
+                gvDetallePicking.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = an_alertas.Mensaje("ERROR ", ex.Message, "rojo");
+            }
+        }
+
+        public void VincularDdlObservacionesWMS()
+        {
+            //Llenar Informacion
+            DataSet dsp = new DataSet();
+            dsp = an_wms.GetMotivosReversa(4);
+
+            ddlObservacionWMS.DataSource = dsp;
+            ddlObservacionWMS.DataTextField = "motivo";
+            ddlObservacionWMS.DataValueField = "nombre";
+            ddlObservacionWMS.DataBind();
+            ddlObservacionWMS.Items.Insert(0, new ListItem("Escoga un motivo..", "ninguno"));
+        }
+        #endregion
     }
 }

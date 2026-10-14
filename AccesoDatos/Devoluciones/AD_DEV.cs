@@ -40,7 +40,7 @@ namespace AccesoDatos.Devoluciones
         {
             try
             {
-                SqlDataAdapter da = new SqlDataAdapter("GA_DEV_PrptVoids", db);
+                SqlDataAdapter da = new SqlDataAdapter("GA_DEV_PrptVoids", dbwms);
                 da.SelectCommand.CommandTimeout = 360;
                 da.SelectCommand.Parameters.AddWithValue("@documento", documento);  
                 da.SelectCommand.Parameters.AddWithValue("@op", op);
@@ -388,6 +388,26 @@ namespace AccesoDatos.Devoluciones
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                 DataSet ds = new DataSet();
                 da.Fill(ds, "GA_DEV_PcartaServ");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetKardexDevoluciones(string dato1, string dato2, string dato3, int opcion)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PrptKardexDevoluciones", dbwms);
+                da.SelectCommand.Parameters.AddWithValue("@dato1", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@dato2", dato2);
+                da.SelectCommand.Parameters.AddWithValue("@dato3", dato3);
+                da.SelectCommand.Parameters.AddWithValue("@opcion", opcion);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PrptKardexDevoluciones");
                 return ds;
             }
             catch (Exception ex)
@@ -842,7 +862,7 @@ namespace AccesoDatos.Devoluciones
             }
         }
 
-        public DataSet GetrptTraspasos(int op, string dato1, string dato2)
+        public DataSet GetrptTraspasos(int op, string dato1, string dato2, string numdocGP, string usuario)
         {
             try
             {
@@ -850,6 +870,8 @@ namespace AccesoDatos.Devoluciones
                 da.SelectCommand.Parameters.AddWithValue("@op", op);
                 da.SelectCommand.Parameters.AddWithValue("@dato1", dato1);
                 da.SelectCommand.Parameters.AddWithValue("@dato2", dato2);
+                da.SelectCommand.Parameters.AddWithValue("@numdocGP", numdocGP);
+                da.SelectCommand.Parameters.AddWithValue("@usuario", usuario);
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                 DataSet ds = new DataSet();
                 da.Fill(ds, "GA_WMS_PrptTraspasos");
@@ -913,6 +935,55 @@ namespace AccesoDatos.Devoluciones
                 {
                     db.Close();
                 }
+            }
+        }
+
+        public string UpLiberaTraspasos(int op, string dato1, string dato2, string numdocGP, string usuario)
+        {
+            string resultado = "";
+            using (SqlCommand cmd = new SqlCommand("GA_WMS_PrptTraspasos", dbwms))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@op", op);
+                cmd.Parameters.AddWithValue("@dato1", dato1);
+                cmd.Parameters.AddWithValue("@dato2", dato2);
+                cmd.Parameters.AddWithValue("@numdocGP", numdocGP);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                try
+                {
+                    dbwms.Open();
+                    resultado = cmd.ExecuteScalar().ToString();
+                    return resultado;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    dbwms.Close();
+                }
+            }
+        }
+
+        public DataSet GetDVIngresoMotivos(string iddevolucion, string fdesde, string fhasta, int op)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_rptIngresoMotivos", db);
+                da.SelectCommand.CommandTimeout = 360;
+                da.SelectCommand.Parameters.AddWithValue("@iddevolucion", iddevolucion);
+                da.SelectCommand.Parameters.AddWithValue("@fdesde", fdesde);
+                da.SelectCommand.Parameters.AddWithValue("@fhasta", fhasta);
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_rptIngresoMotivos");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
         #endregion

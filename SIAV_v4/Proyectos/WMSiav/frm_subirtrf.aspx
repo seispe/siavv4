@@ -22,20 +22,32 @@
        <%-- SELECCIONAR EL TIPO DE TRANSFERENCIA --%>
       <div>
             <asp:RadioButtonList ID="rdbTipo" runat="server" class="lbl padding-8" RepeatDirection="Horizontal">
-                <asp:ListItem Value="1" Selected="True">PVG</asp:ListItem>
-                <asp:ListItem Value="2">NO CONFORME</asp:ListItem>
-                <asp:ListItem Value="3">CUARENTENA</asp:ListItem>
-            </asp:RadioButtonList> 
+                <asp:ListItem Value="1" Selected="True">PVQ</asp:ListItem>
+                <asp:ListItem Value="2">PVG</asp:ListItem>
+            </asp:RadioButtonList> 
       </div>
     <br />
     <%-- INGRESAR EL NUMERO DE TRASPASO --%>
+           <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+            <ContentTemplate>
     <div class="row">
         <label class="col-md-1 col-sm-1 col-xs-12 label label-info"><h5>TRASPASO:</h5></label>  
         <div class="col-md-3 col-sm-3 col-xs-12">
             <asp:TextBox ID="txtTraspaso" runat="server" CssClass="form-control" ></asp:TextBox>
         </div>
-        <asp:Button ID="btnSubir" runat="server" Text="Subir" CssClass="btn btn-success" Width="200px" OnClick="btnSubir_Click"/>
+        <asp:Button ID="btnSubir" runat="server" Text="Subir" CssClass="btn btn-success" Width="200px" OnClick="btnSubir_Click" OnClientClick="clickOnce(this, 'Subiendo...')" ValidationGroup="Subir" UseSubmitBehavior="false"/>
     </div>
+                    </ContentTemplate>
+        </asp:UpdatePanel>
     <br />
 </form>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <script type="text/javascript">
+       function clickOnce(btn, msg) {
+            btn.value = msg;
+            btn.disabled = true;
+            return true;
+        }
+    </script>
 </asp:Content>

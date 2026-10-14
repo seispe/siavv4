@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SIAV_v4.Proyectos.WMSiav {
-    
-    
-    public partial class frm_cierre {
-        
+namespace SIAV_v4.Proyectos.WMSiav
+{
+
+
+    public partial class frm_cierre
+    {
+
         /// <summary>
         /// Control form1.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// Control ScriptManager2.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager2;
-        
+
         /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
-        
+
         /// <summary>
         /// Control lblError.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
+
         /// <summary>
         /// Control rdbTipo.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rdbTipo;
-        
+
         /// <summary>
         /// Control UpdatePanel3.
         /// </summary>
@@ -65,7 +67,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-        
+
         /// <summary>
         /// Control Txt_consolidado.
         /// </summary>
@@ -74,7 +76,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Txt_consolidado;
-        
+
         /// <summary>
         /// Control btnBuscar.
         /// </summary>
@@ -83,7 +85,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnBuscar;
-        
+
         /// <summary>
         /// Control txtTipo.
         /// </summary>
@@ -92,7 +94,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTipo;
-        
+
         /// <summary>
         /// Control UpdatePanel2.
         /// </summary>
@@ -101,7 +103,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
+
         /// <summary>
         /// Control btnCerrar.
         /// </summary>
@@ -110,7 +112,25 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCerrar;
-        
+
+        /// <summary>
+        /// Control UpdatePanel6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel6;
+
+        /// <summary>
+        /// Control btnObservacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnObservacion;
+
         /// <summary>
         /// Control upCrudGrid.
         /// </summary>
@@ -119,7 +139,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upCrudGrid;
-        
+
         /// <summary>
         /// Control gvDetallePicking.
         /// </summary>
@@ -128,7 +148,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvDetallePicking;
-        
+
         /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
@@ -137,7 +157,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// Control hfConsolidado.
         /// </summary>
@@ -146,7 +166,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfConsolidado;
-        
+
         /// <summary>
         /// Control txtObservacion.
         /// </summary>
@@ -155,7 +175,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtObservacion;
-        
+
         /// <summary>
         /// Control btnAnular.
         /// </summary>
@@ -164,7 +184,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAnular;
-        
+
         /// <summary>
         /// Control UpdatePanel5.
         /// </summary>
@@ -173,7 +193,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
-        
+
         /// <summary>
         /// Control HiddenField1.
         /// </summary>
@@ -182,7 +202,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
-        
+
         /// <summary>
         /// Control ddlmotCierre.
         /// </summary>
@@ -191,7 +211,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlmotCierre;
-        
+
         /// <summary>
         /// Control txtCantCierre.
         /// </summary>
@@ -200,7 +220,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCantCierre;
-        
+
         /// <summary>
         /// Control btnCerrarItem.
         /// </summary>
@@ -209,5 +229,41 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCerrarItem;
+
+        /// <summary>
+        /// Control UpdatePanel7.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel7;
+
+        /// <summary>
+        /// Control HiddenField2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenField2;
+
+        /// <summary>
+        /// Control ddlObservacionWMS.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlObservacionWMS;
+
+        /// <summary>
+        /// Control btnGuardarObs.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardarObs;
     }
 }

@@ -646,12 +646,13 @@ namespace AccesoNegocios.Devoluciones
                 tabla += "<td>" + Convert.ToString(row["id"]) + "</td>";
                 tabla += "<td>" + Convert.ToString(row["producto"]) + "</td>";
                 tabla += "<td>" + Convert.ToString(row["descripcion"]) + "</td>";
-                tabla += "<td>" + Convert.ToString(row["void"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["voidArmado"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["voidCtrlCalidadAnt"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["voidCtrlCalidadNue"]) + "</td>";
                 tabla += "<td>" + Convert.ToString(row["cant"]) + "</td>";
                 tabla += "<td>" + Convert.ToString(row["pedido"]) + "</td>";
                 tabla += "<td>" + Convert.ToString(row["factura"]) + "</td>";
                 tabla += "<td>" + Convert.ToString(row["fecha_factura"]) + "</td>";
-
                 tabla += "</tr>";
             }
             return tabla;
@@ -793,7 +794,7 @@ namespace AccesoNegocios.Devoluciones
             DataSet dsp = new DataSet();
             GridView gv = new GridView();
 
-            dsp = ad_dev.GetrptTraspasos(op, dato1, dato2);
+            dsp = ad_dev.GetrptTraspasos(op, dato1, dato2, "", "");
 
             if (dsp.Tables[0].Rows.Count > 0)
             {
@@ -845,6 +846,83 @@ namespace AccesoNegocios.Devoluciones
                string observacionFallaFabrica, int cantCuarentena, string observacionCuarentena, string usuario, int op)
         {
             ad_dev.setDVingresoMotivos(devolucion, articulo, cantFallaFabrica, observacionFallaFabrica, cantCuarentena, observacionCuarentena, usuario, op);
+        }
+
+        public string GetTraspasosDocs(int op, string dato1, string dato2)
+        {
+            DataSet dsp = new DataSet();
+            string documentos = "";
+            dsp = dsp = ad_dev.GetrptTraspasos(op, dato1, dato2, "", "");
+            DataTable dt = dsp.Tables[0];
+            foreach (DataRow row in dt.Rows)
+            {
+                documentos += Convert.ToString(row["documentos"]) + "/";
+            }
+            return documentos;
+        }
+
+        public string UpLiberaTraspasos(int op, string dato1, string dato2, string numdocGP, string usuario)
+        {
+            try
+            {
+                return ad_dev.UpLiberaTraspasos(op, dato1, dato2, numdocGP, usuario);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public GridView GetDVIngresoMotivos(string iddevolucion, string fdesde, string fhasta, int op)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_dev.GetDVIngresoMotivos(iddevolucion, fdesde, fhasta, op);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public GridView GetKardexDevoluciones(string dato1, string dato2, string dato3, int opcion)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_dev.GetKardexDevoluciones(dato1, dato2, dato3, opcion);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
         }
         #endregion
     }

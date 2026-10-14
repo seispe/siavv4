@@ -359,13 +359,14 @@ namespace SIAV_v4.Reportes.WMScalU
                         //table.AddCell(PhraseCell(new Phrase("", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase("Razon Social:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase(row["RAZON_SOCIAL"].ToString(), FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table.AddCell(CeldaEspaciosBottom(new Phrase("Ciudad:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table.AddCell(CeldaEspaciosBottom(new Phrase(row["CIUDAD"].ToString(), FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table.AddCell(CeldaEspaciosBottom(new Phrase("Tipo Pedido:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        table.AddCell(CeldaEspaciosBottom(new Phrase(row["TIPO_PEDIDO"].ToString(), FontFactory.GetFont("Arial", 9, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        //table.AddCell(CeldaEspaciosBottom(new Phrase("", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-                        //table.AddCell(CeldaEspaciosBottom(new Phrase("", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
-
+                        table.AddCell(PhraseCell(new Phrase("Ciudades:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        table.AddCell(PhraseCell(new Phrase(row["CIUDAD"].ToString(), FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        table.AddCell(PhraseCell(new Phrase("Tipo Pedido:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        table.AddCell(PhraseCell(new Phrase(row["TIPO_PEDIDO"].ToString(), FontFactory.GetFont("Arial", 9, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        table.AddCell(CeldaEspaciosBottom(new Phrase("Transporte Cliente", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        table.AddCell(CeldaEspaciosBottom(new Phrase(row["transporte"].ToString(), FontFactory.GetFont("Arial", 9, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        table.AddCell(CeldaEspaciosBottom(new Phrase("", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+                        table.AddCell(CeldaEspaciosBottom(new Phrase("", FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         //Detalle de Articulos
                         tableDetalle.AddCell(CeldaTabla(new Phrase("CODIGO", FontFactory.GetFont("Arial", 7, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         //tableDetalle.AddCell(CeldaTabla(new Phrase("COD ANTERIOR", FontFactory.GetFont("Arial", 7, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));

@@ -141,9 +141,9 @@
                     <asp:Label ID="lblnumitems" runat="server" Text='<%# Bind("num_items") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="RUC CLIENTE" SortExpression="RUCCLIENTE">
+            <asp:TemplateField HeaderText="GARITA" SortExpression="GARITA">
                 <ItemTemplate>
-                    <asp:Label ID="lblruc_cliente" runat="server" Text='<%# Bind("ruc_cliente") %>'></asp:Label>
+                    <asp:Label ID="lblgarita" runat="server" Text='<%# Bind("garita") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="CLIENTE" SortExpression="CLIENTE">
@@ -161,7 +161,7 @@
                     <asp:Label ID="lblciudad" runat="server" Text='<%# Bind("ciudad") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="prio Despacho" SortExpression="prio Despacho">
+            <asp:TemplateField HeaderText="TRANSPORTE" SortExpression="TRANSPORTE">
                 <ItemTemplate>
                     <asp:Label ID="lblprioridad" runat="server" Text='<%# Bind("prioridad") %>'></asp:Label>
                 </ItemTemplate>
@@ -171,7 +171,7 @@
                     <asp:Label ID="lbltipodoc" runat="server" Text='<%# Bind("tipodoc") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>--%>
-            <asp:BoundField DataField="tipodoc" HeaderText="TIPODOC" Visible="true"/>
+            <asp:BoundField DataField="tipodoc" HeaderText="TIPO" Visible="true"/>
         </Columns>
         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />

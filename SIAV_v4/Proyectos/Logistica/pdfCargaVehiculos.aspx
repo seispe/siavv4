@@ -1,0 +1,2 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pdfCargaVehiculos.aspx.cs" Inherits="SIAV_v4.Proyectos.Logistica.pdfCargaVehiculos" %>
+        <asp:Label ID="lblError" runat="server" Text=""></asp:Label>

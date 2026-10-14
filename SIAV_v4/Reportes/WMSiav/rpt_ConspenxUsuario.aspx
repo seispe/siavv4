@@ -23,6 +23,7 @@
     <div class="row">
         <asp:Button ID="btnBuscar" runat="server" Text="Pendientes por Usuario" CssClass="btn btn-primary" OnClick="btnBuscar_Click"/>
         <asp:Button ID="btnPendxEmpacar" runat="server" Text="Pendientes 3ra Etapa" CssClass="btn btn-success" OnClick="btnPendxEmpacar_Click"/>
+        <asp:Button ID="btnPend3raEtapa" runat="server" Text="Pendientes 6ta Etapa" CssClass="btn btn-info" OnClick="btnPend3raEtapa_Click"/>
         <asp:Button ID="btnPendxFamilia" runat="server" Text="Pendientes por Familia" CssClass="btn btn-warning" OnClick="btnPendxFamilia_Click" />
     </div>
     <br />

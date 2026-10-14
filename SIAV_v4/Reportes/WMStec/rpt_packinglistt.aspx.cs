@@ -236,8 +236,9 @@ namespace SIAV_v4.Reportes.WMStec
                     //########################################
                     DataMatrix.net.DmtxImageEncoder Encoder = new DataMatrix.net.DmtxImageEncoder();
                     System.Drawing.Bitmap bmp = Encoder.EncodeImage(row["DOCUMENTO"].ToString().Trim());
-                    string ruta = Server.MapPath("~/Recursos/upload/") + usuario.Trim() + ".png";
-                    bmp.Save(ruta);//, System.Drawing.Imaging.ImageFormat.Png);
+                    //string ruta = Server.MapPath("~/Recursos/upload/") + usuario.Trim() + ".png";
+                    //bmp.Save(ruta);//, System.Drawing.Imaging.ImageFormat.Png);
+                    bmp.Save(@"E:\APP\Recursos\upload\" + row["DOCUMENTO"].ToString() + ".png", System.Drawing.Imaging.ImageFormat.Png);
                     //System.Drawing.Image image = System.Drawing.Image.FromFile(@"C:\PLANOS\" + row["Documento"].ToString().Trim() + ".png");
                     //########################################
                     //Fin Iniciacion de DATAMATRIX
@@ -246,10 +247,10 @@ namespace SIAV_v4.Reportes.WMStec
                     //########################################
                     //Iniciacion de BARCODE
                     //########################################
-                    BarcodeLib.Barcode b = new BarcodeLib.Barcode();
+                    /*BarcodeLib.Barcode b = new BarcodeLib.Barcode();
                     System.Drawing.Image img = b.Encode(BarcodeLib.TYPE.CODE128, "R" + p, System.Drawing.Color.Black, System.Drawing.Color.White, 500, 50);
                     string rutab = Server.MapPath("~/Recursos/upload/barcode") + usuario.Trim() + ".png";
-                    img.Save(rutab);
+                    img.Save(rutab);*/
                     //########################################
                     //Fin Iniciacion de BARCODE
                     //########################################
@@ -335,12 +336,13 @@ namespace SIAV_v4.Reportes.WMStec
                         table.AddCell(PhraseCell(new Phrase("Cliente:", FontFactory.GetFont("Arial", 8, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
                         table.AddCell(PhraseCell(new Phrase(row["CLIENTE"].ToString(), FontFactory.GetFont("Arial", 8, Font.NORMAL, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
 
-                        cell = ImageCodigo(@"~\Recursos\upload\" + usuario.Trim() + ".png", 40f, PdfPCell.ALIGN_LEFT);
+                        cell = ImageCodigo(@"~\Recursos\upload\" + row["DOCUMENTO"].ToString() + ".png", 40f, PdfPCell.ALIGN_LEFT);
                         cell.Rowspan = 4;
                         cell.Colspan = 1;
                         table.AddCell(cell);
 
-                        cell = ImageCodigo(@"~\Recursos\upload\barcode" + usuario.Trim() + ".png", 40f, PdfPCell.ALIGN_LEFT);
+                        cell = PhraseCell(new Phrase(" ", FontFactory.GetFont("Arial", 12, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_CENTER);
+                        //ImageCodigo(@"~\Recursos\upload\barcode" + usuario.Trim() + ".png", 40f, PdfPCell.ALIGN_LEFT);
                         cell.Rowspan = 4;
                         cell.Colspan = 1;
                         table.AddCell(cell);

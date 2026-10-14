@@ -106,9 +106,9 @@
                     <asp:Label ID="lblVEN_CODIGO_TAR" runat="server" Text='<%# Bind("VEN_CODIGO_TAR") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="DIRECCION" SortExpression="DIRECCION">
+            <asp:TemplateField HeaderText="DIRECCION_TAR" SortExpression="DIRECCION_TAR">
                 <ItemTemplate>
-                    <asp:Label ID="lblDIRECCION" runat="server" Text='<%# Bind("DIRECCION") %>'></asp:Label>
+                    <asp:Label ID="lblDIRECCION_TAR" runat="server" Text='<%# Bind("DIRECCION_TAR") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="TELEFONO" SortExpression="TELEFONO">
@@ -134,6 +134,11 @@
             <asp:TemplateField HeaderText="VEN_CODIGO_DOC" SortExpression="VEN_CODIGO_DOC">
                 <ItemTemplate>
                     <asp:Label ID="lblVEN_CODIGO_DOC" runat="server" Text='<%# Bind("VEN_CODIGO_DOC") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+                <asp:TemplateField HeaderText="DIRECCION_DOC" SortExpression="DIRECCION_DOC">
+                <ItemTemplate>
+                    <asp:Label ID="lblDIRECCION_DOC" runat="server" Text='<%# Bind("DIRECCION_DOC") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="COND_PAGO" SortExpression="COND_PAGO">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccesoDatos.WMSiav;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -40,7 +41,7 @@ namespace AccesoDatos.GP
                     da.Fill(ds, "GA_INV_InventarioFecha");
                     return ds;
                 }
-                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX" || empresa == "GPCOP")
+                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPCTP" || empresa == "GPCCC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX" || empresa == "GPCOP")
                 {
                     SqlDataAdapter da = new SqlDataAdapter("GA_INV_Prpt_inventariofecha", dbdynamicscao);
                     da.SelectCommand.CommandTimeout = 180;
@@ -62,6 +63,24 @@ namespace AccesoDatos.GP
                     da.Fill(ds, "GA_INV_InventarioFecha");
                     return ds;
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetKardexGP(string dato1, string dato2)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("jspKDX_GetKardexBodega", db);
+                da.SelectCommand.Parameters.AddWithValue("@articulo", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@bodega", dato2);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "jspKDX_GetKardexBodega");
+                return ds;
             }
             catch (Exception ex)
             {

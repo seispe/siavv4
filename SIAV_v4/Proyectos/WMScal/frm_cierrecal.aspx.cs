@@ -49,7 +49,12 @@ namespace SIAV_v4.Proyectos.WMScal
             try
             {
                 //btnCerrar.Text = Txt_consolidado.Text.Trim();
-                gvDetallePicking.DataSource = an_wms.getCierrePicking(Txt_consolidado.Text.Trim(), Convert.ToInt32(rdbTipo.SelectedValue)).DataSource;
+                /*gvDetallePicking.DataSource = an_wms.getCierrePicking(Txt_consolidado.Text.Trim(), Convert.ToInt32(rdbTipo.SelectedValue)).DataSource;
+                gvDetallePicking.DataBind();*/
+                DataTable dt = an_wms.getCierrePicking(Txt_consolidado.Text.Trim(), Convert.ToInt32(rdbTipo.SelectedValue));
+                // 🔥 Guardas en sesión
+                Session["PickingData"] = dt;
+                gvDetallePicking.DataSource = dt;
                 gvDetallePicking.DataBind();
             }
             catch (Exception ex)

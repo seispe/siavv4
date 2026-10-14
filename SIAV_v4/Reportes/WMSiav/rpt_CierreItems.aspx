@@ -21,6 +21,15 @@
         </div>
         <br />
         <br />
+    <div>
+            <asp:RadioButtonList ID="rdbBodega" runat="server" class="lbl padding-8" RepeatDirection="Horizontal">
+                <asp:ListItem Value="2" Selected="True">MATRIZ</asp:ListItem>
+                <asp:ListItem Value="3">PVQ</asp:ListItem>
+                <asp:ListItem Value="4">PVG</asp:ListItem>
+            </asp:RadioButtonList> 
+
+        </div>
+    <br />
      <%-- SELECCION DE FECHAS PARA LA GENERACION DEL REPORTE --%>
     <div class="row">
         <label class="col-md-1 col-sm-1 col-xs-12 label label-info"><h5>FECHAS:</h5></label>  

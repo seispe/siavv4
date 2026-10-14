@@ -45,7 +45,7 @@ namespace SIAV_v4.Proyectos.WMScalG
                 }
                 if (op == 2)
                 {
-                    gvProdFam.DataSource = an_wms.GetCCproductofamilia(op, "");
+                    gvProdFam.DataSource = an_wms.GetCCproductofamilia(op, txtDato.Text.Trim());
                     gvProdFam.DataBind();
                 }
             }
@@ -121,8 +121,8 @@ namespace SIAV_v4.Proyectos.WMScalG
                 if (ddlTipo.SelectedValue == "familia")
                 {
                     op = 2;
-                    txtDato.Visible = false;
-                    imgB.Visible = false;
+                    txtDato.Visible = true;
+                    imgB.Visible = true;
                     imgAsigna.Visible = true;
                     gvProdFam.Visible = true;
                     GridProdFam();

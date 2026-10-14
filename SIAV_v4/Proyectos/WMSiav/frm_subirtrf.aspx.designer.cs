@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SIAV_v4.Proyectos.WMSiav {
-    
-    
-    public partial class frm_subirtrf {
-        
+namespace SIAV_v4.Proyectos.WMSiav
+{
+
+
+    public partial class frm_subirtrf
+    {
+
         /// <summary>
         /// Control form1.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// Control ScriptManager2.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager2;
-        
+
         /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
-        
+
         /// <summary>
         /// Control lblError.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
+
         /// <summary>
         /// Control rdbTipo.
         /// </summary>
@@ -56,7 +58,16 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rdbTipo;
-        
+
+        /// <summary>
+        /// Control UpdatePanel3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+
         /// <summary>
         /// Control txtTraspaso.
         /// </summary>
@@ -65,7 +76,7 @@ namespace SIAV_v4.Proyectos.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTraspaso;
-        
+
         /// <summary>
         /// Control btnSubir.
         /// </summary>

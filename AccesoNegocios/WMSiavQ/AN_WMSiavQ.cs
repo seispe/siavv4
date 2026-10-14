@@ -979,11 +979,11 @@ namespace AccesoNegocios.WMSiavQ
             }
         }
 
-        public string UpdateTraspasosOUTLET(string traspaso)
+        public string UpdateTraspasosPVQ(string traspaso)
         {
             try
             {
-                return ad_wms.UpdateTraspasosOUTLET(traspaso);
+                return ad_wms.UpdateTraspasosPVQ(traspaso);
             }
             catch (Exception ex)
             {
@@ -1898,6 +1898,11 @@ namespace AccesoNegocios.WMSiavQ
                 gv.Rows[0].Cells[0].Text = "No se encuentra datos";
             }
             return gv;
+        }
+
+        public DataTable GetHoratencionCli(string ruc, string sucursal)
+        {
+            return ad_wms.GetHoratencionCli(ruc, sucursal).Tables[0];
         }
         #endregion
     }

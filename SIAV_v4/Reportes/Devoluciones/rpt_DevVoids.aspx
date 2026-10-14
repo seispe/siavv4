@@ -48,7 +48,9 @@
                     <th>Código</th>
                     <th>Producto</th>
                     <th>Descripcion</th>
-                    <th>Void</th>
+                    <th>VoidArmado</th>
+                    <th>voidCtrlCalidadAnt</th>
+                    <th>voidCtrlCalidadNue</th>
                     <th>Cantidad</th>
                     <th>Pedido</th>
                     <th>Factura</th>

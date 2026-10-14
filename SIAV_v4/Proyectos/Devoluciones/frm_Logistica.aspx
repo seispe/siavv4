@@ -32,8 +32,8 @@
         <Columns>
             <asp:ButtonField CommandName="editRecord" ButtonType="Image" ImageUrl="~/Recursos/images/select.png" Text="Editar" ItemStyle-Width="20px" >
             </asp:ButtonField>
-            <asp:ButtonField CommandName="deleteRecord" ButtonType="Image" ImageUrl="~/Recursos/images/delete.png" Text="Eliminar" ItemStyle-Width="20px">
-            </asp:ButtonField>
+            <%--<asp:ButtonField CommandName="deleteRecord" ButtonType="Image" ImageUrl="~/Recursos/images/delete.png" Text="Eliminar" ItemStyle-Width="20px">
+            </asp:ButtonField>--%>
             <asp:TemplateField HeaderText="Id Devolucion" SortExpression="iddevolucion">
                 <ItemTemplate>
                     <asp:LinkButton ID="lbliddevolucion" runat="server" CommandArgument='<%# Bind("iddevolucion") %>' OnClick="iddevolucion_Click" Text='<%# Bind("iddevolucion") %>'></asp:LinkButton>

@@ -355,7 +355,22 @@
                 </div>
                 <div class="container"></div>
                 <div class="modal-body">
-                   <asp:GridView ID="gvDetPed" runat="server" AutoGenerateColumns="False" CellPadding="8"
+                       <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Pedido</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Descripcion</th>
+                            <th>Marca</th>
+                            <th>StockWMS</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <asp:Label ID="lbldetalleped" runat="server" Text=""></asp:Label>
+                        </tbody>
+                      </table>
+                 <%--  <asp:GridView ID="gvDetPed" runat="server" AutoGenerateColumns="False" CellPadding="8"
                    AllowPaging="True" AllowSorting="True" CssClass="grid"  ForeColor="#333333" GridLines="None" PageSize="50" OnRowDataBound="gvDetPed_RowDataBound" >
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
@@ -389,7 +404,7 @@
                         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                         <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
-                    </asp:GridView>
+                    </asp:GridView>--%>
                 </div>
                 <div class="modal-footer">	
                     <button class="btn btn-info"data-dismiss="modal"aria-hidden="true">Cancel</button>

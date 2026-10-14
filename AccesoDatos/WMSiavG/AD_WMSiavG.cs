@@ -810,6 +810,25 @@ namespace AccesoDatos.WMSiavG
                 throw ex;
             }
         }
+
+        public DataSet GetHoratencionCli(string ruc, string sucursal)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PhoratencionCli", db);
+                da.SelectCommand.CommandTimeout = 120;
+                da.SelectCommand.Parameters.AddWithValue("@ruc", ruc);
+                da.SelectCommand.Parameters.AddWithValue("@sucursal", sucursal);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PhoratencionCli");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region Insert

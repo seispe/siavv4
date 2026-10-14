@@ -57,6 +57,7 @@
     <Compile Include="GP\AD_Inventario.cs" />
     <Compile Include="GP\AD_Produccion.cs" />
     <Compile Include="GP\AD_Ventas.cs" />
+    <Compile Include="IMSall\AD_IMSall.cs" />
     <Compile Include="Logistica\AD_Logistica.cs" />
     <Compile Include="OrdenCompra\AD_OCL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

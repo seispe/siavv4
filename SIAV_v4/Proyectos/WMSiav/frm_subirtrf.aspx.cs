@@ -36,16 +36,8 @@ namespace SIAV_v4.Proyectos.WMSiav
                     string salida = an_wms.ValidaTrapasos(txtTraspaso.Text.Trim());
                     if (salida == "EXISTE")
                     {
-                        if (rdbTipo.SelectedValue == "1")
-                        {
-                            an_wms.UpdateTraspasos(txtTraspaso.Text.Trim());
-                            lblError.Text = an_alertas.Mensaje("CORRECTO ", "SUBIDO", "verde");
-                        }
-                        if (rdbTipo.SelectedValue == "2")
-                        {
-                            an_wms.UpdateTraspasosOUTLET(txtTraspaso.Text.Trim());
-                            lblError.Text = an_alertas.Mensaje("CORRECTO ", "SUBIDO", "verde");
-                        }
+                        an_wms.UpdateTraspasos(Convert.ToInt32(rdbTipo.SelectedValue), txtTraspaso.Text.Trim());
+                        lblError.Text = an_alertas.Mensaje("CORRECTO ", "SUBIDO", "verde");
                     }
                     else
                     {

@@ -2074,6 +2074,27 @@ namespace AccesoDatos.WMScalU
                 }
             }
         }
+
+        public DataSet getBahiasxBultos(string dato, int opcion, string dato1, string dato2)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_rptBahiasxBultos", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.Parameters.AddWithValue("@pedido", dato);
+                da.SelectCommand.Parameters.AddWithValue("@op", opcion);
+                da.SelectCommand.Parameters.AddWithValue("@dato1", dato1);
+                da.SelectCommand.Parameters.AddWithValue("@dato2", dato2);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_rptBahiasxBultos");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
     }
 }

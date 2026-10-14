@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using AccesoEntidades.Autorizaciones;
 
 namespace AccesoDatos.Autorizaciones
 {
@@ -125,6 +127,78 @@ namespace AccesoDatos.Autorizaciones
                 catch (Exception ex)
                 {
                     return ex.Message;
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        public List<GP_AUTH_MOD> getAutorizacionesPendientes()
+        {
+            List<GP_AUTH_MOD> listaAutorizacionesPendientes = new List<GP_AUTH_MOD>();
+            String query = @"SELECT Id
+                                   ,usuario_solicita_permiso
+                                   ,CONVERT(date, fecha_solicitud) AS fecha_solicitud
+                                   ,modulo
+                                   ,año
+                                   ,mes
+                              FROM mtPF_Permiso_Habilitar_Modulo
+                              WHERE estado = 1";
+            using (SqlCommand cmd = new SqlCommand(query, db))
+            {
+                try
+                {
+                    db.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int valorMes = Convert.ToInt32(reader["mes"]);
+                            string nombreMes = new DateTime(1900, valorMes, 1).ToString("MMMM");
+                            GP_AUTH_MOD gp_auth_mod = new GP_AUTH_MOD(
+                                Convert.ToInt32(reader["Id"]),
+                                reader["usuario_solicita_permiso"].ToString(),
+                                Convert.ToDateTime(reader["fecha_solicitud"]),
+                                reader["modulo"].ToString().ToUpper(),
+                                Convert.ToInt32(reader["año"]),
+                                nombreMes.ToUpper()
+                            );
+                            listaAutorizacionesPendientes.Add(gp_auth_mod);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    listaAutorizacionesPendientes = new List<GP_AUTH_MOD>();
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+            return listaAutorizacionesPendientes;
+        }
+
+        public int updateAutorizacionesPendientes(string usuario, int id, int time)
+        {
+            int autorizado = 0;
+            using (SqlCommand cmd = new SqlCommand("mspPF_autorizar_permiso", db))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@tiempo", time);
+                try
+                {
+                    db.Open();
+                    autorizado = Convert.ToInt32(cmd.ExecuteScalar());
+                    return autorizado;
+                }
+                catch (Exception ex)
+                {
+                    return 0;
                 }
                 finally
                 {

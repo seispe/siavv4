@@ -171,13 +171,14 @@ namespace SIAV_v4.Reportes.Cobranzas
                     ConstructCell("CIUDAD", CellValues.String),
                     ConstructCell("TIPO", CellValues.String),
                     ConstructCell("VEN_CODIGO_TAR", CellValues.String),
-                    ConstructCell("DIRECCION", CellValues.String),
+                    ConstructCell("DIRECCION_TAR", CellValues.String),
                     ConstructCell("TELEFONO", CellValues.String),
                     ConstructCell("TIPO_DOC", CellValues.String),
                     ConstructCell("FACTURA", CellValues.String),
                     ConstructCell("F_EMISION", CellValues.String),
                     ConstructCell("F_VENCIMIENTO", CellValues.String),
                     ConstructCell("VEN_CODIGO_DOC", CellValues.String),
+                    ConstructCell("DIRECCION_DOC", CellValues.String),
                     ConstructCell("COND_PAGO", CellValues.String),
                     ConstructCell("MONTO_DOC", CellValues.String),
                     ConstructCell("PENDIENTE", CellValues.String),
@@ -209,10 +210,10 @@ namespace SIAV_v4.Reportes.Cobranzas
                         ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[11].Text.Trim()), CellValues.String),
                         ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[12].Text.Trim()), CellValues.String),
                         ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[13].Text.Trim()), CellValues.String),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[14].Text.Trim()), CellValues.Number),
+                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[14].Text.Trim()), CellValues.String),
                         ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[15].Text.Trim()), CellValues.Number),
-                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[16].Text.Trim()), CellValues.Number)
-                        //ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[17].Text.Trim()), CellValues.String)
+                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[16].Text.Trim()), CellValues.Number),
+                        ConstructCell(HttpUtility.HtmlDecode(GridView1.Rows[i].Cells[17].Text.Trim()), CellValues.Number)
                         );
                     sd.AppendChild(row);
                 }

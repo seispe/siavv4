@@ -11,7 +11,7 @@
             <div class="col-lg-12">
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
-                        <h1 class="page-header">Proceso</h1>
+                        <h1 class="page-header">Proceso Pedidos HISTORICOS</h1>
                         <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
                     </ContentTemplate>
                     <Triggers>
@@ -20,25 +20,18 @@
             </div>
         </div>
         <br />
-        <%-- SELECCIONAR EL TIPO DE BUSQUEDA POR CONSOLIDADO O POR PEDIDO --%>
-        <div>
-            <asp:RadioButtonList ID="rdbTipo" runat="server" class="lbl padding-8" RepeatDirection="Horizontal">
-                <asp:ListItem Value="1" Selected="True">CONSOLIDADO</asp:ListItem>
-                <asp:ListItem Value="2">PEDIDO</asp:ListItem>
-            </asp:RadioButtonList>
-        </div>
-        <br />
         <%--SELECCIONAR EL CONSOLIDADO A CERRAR--%>
         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
             <ContentTemplate>
                 <div class="row">
                     <label class="col-md-1 col-sm-1 col-xs-12 label label-info">
-                        <h5>Dato:</h5>
+                        <h5>PEDIDO:</h5>
                     </label>
                     <div class="col-md-3 col-sm-3 col-xs-12">
-                        <asp:TextBox ID="Txt_consolidado" runat="server" CssClass="form-control" Width="200px" placeholder="#consolidado/pedido" ReadOnly="false"></asp:TextBox>
+                        <asp:TextBox ID="Txt_consolidado" runat="server" CssClass="form-control" Width="200px" placeholder="#pedido" ReadOnly="false"></asp:TextBox>
                     </div>
-                    <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" Width="200px" OnClick="btnBuscar_Click" />
+                    <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" Width="200px" OnClick="btnBuscar_Click" OnClientClick="clickOnce(this, 'Buscando...')" ValidationGroup="Buscar"
+                             UseSubmitBehavior="false"/>
                 </div>
                 <br />
                 <br />
@@ -138,4 +131,13 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </form>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <script type="text/javascript">
+       function clickOnce(btn, msg) {
+            btn.value = msg;
+            btn.disabled = true;
+            return true;
+        }
+    </script>
 </asp:Content>

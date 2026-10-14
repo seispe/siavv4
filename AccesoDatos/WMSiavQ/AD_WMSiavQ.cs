@@ -1832,11 +1832,12 @@ namespace AccesoDatos.WMSiavQ
             }
         }
 
-        public string UpdateTraspasosOUTLET(string traspaso)
+        public string UpdateTraspasosPVQ(string traspaso)
         {
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "GA_WMS_PUpdateTraspasosOUTLET";
+                cmd.CommandText = "GA_WMS_PUpdateTraspasosPVQ";
+                cmd.CommandTimeout = 360;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@TRASPASO", traspaso);
                 cmd.Connection = db;
@@ -2529,6 +2530,25 @@ namespace AccesoDatos.WMSiavQ
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                 DataSet ds = new DataSet();
                 da.Fill(ds, "GA_WMS_rptBahiasxBultosBod");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetHoratencionCli(string ruc, string sucursal)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PhoratencionCli", db);
+                da.SelectCommand.CommandTimeout = 120;
+                da.SelectCommand.Parameters.AddWithValue("@ruc", ruc);
+                da.SelectCommand.Parameters.AddWithValue("@sucursal", sucursal);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PhoratencionCli");
                 return ds;
             }
             catch (Exception ex)

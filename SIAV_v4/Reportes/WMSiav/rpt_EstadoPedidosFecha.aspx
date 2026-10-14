@@ -152,7 +152,7 @@
             dp.datepicker({
                 changeMonth: true,
                 changeYear: true,
-                format: "dd/mm/yyyy",
+                format: "yyyy-mm-dd",
                 autoclose: true
             }).on('changeDate', function (ev) {
                 $(this).datepicker('hide');
@@ -162,7 +162,7 @@
             dp.datepicker({
                 changeMonth: true,
                 changeYear: true,
-                format: "dd/mm/yyyy",
+                format: "yyyy-mm-dd",
                 autoclose: true
             }).on('changeDate', function (ev) {
                 $(this).datepicker('hide');

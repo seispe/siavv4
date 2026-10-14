@@ -346,6 +346,256 @@ namespace SIAV_v4.Reportes.WMSiav
             sheet6.Id = wbp.GetIdOfPart(wsp6);
             sheets.Append(sheet6);
 
+            //SEPTIMA Sheet
+            WorksheetPart wsp7 = wbp.AddNewPart<WorksheetPart>();
+            Worksheet ws7 = new Worksheet();
+            SheetData sd7 = new SheetData();
+
+            #region PostFechados
+            Row row7 = new Row();
+            row7.Append(
+                ConstructCell("PEDIDO", CellValues.String),
+                ConstructCell("CLIENTE", CellValues.String),
+                ConstructCell("CIUDAD", CellValues.String),
+                ConstructCell("CONSOLIDADO", CellValues.String),
+                ConstructCell("PRODUCTO", CellValues.String),
+                ConstructCell("DESCRIPCION", CellValues.String),
+                ConstructCell("CANT PROCESADA", CellValues.String),
+                ConstructCell("CANT FALTANTE", CellValues.String)
+                );
+            sd7.AppendChild(row7);
+            //Datos
+            GridView GridView7 = new GridView();
+            GridView7.AllowPaging = false;
+            GridView7.DataSource = an_wms.GetPendxFamilia(7).DataSource;
+            GridView7.DataBind();
+
+            for (int i = 0; i < GridView7.Rows.Count; i++)
+            {
+                row7 = new Row();
+                row7.Append(
+                    ConstructCell(HttpUtility.HtmlDecode(GridView7.Rows[i].Cells[0].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView7.Rows[i].Cells[1].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView7.Rows[i].Cells[2].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView7.Rows[i].Cells[3].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView7.Rows[i].Cells[4].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView7.Rows[i].Cells[5].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView7.Rows[i].Cells[6].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView7.Rows[i].Cells[7].Text.Trim()), CellValues.String)
+                    );
+                sd7.AppendChild(row7);
+            }
+            #endregion
+
+            ws7.AppendChild(sd7);
+            wsp7.Worksheet = ws7;
+            wsp7.Worksheet.Save();
+            Sheet sheet7 = new Sheet();
+            sheet7.Name = "APRON";
+            sheet7.SheetId = 7;
+            sheet7.Id = wbp.GetIdOfPart(wsp7);
+            sheets.Append(sheet7);
+
+            //OCTAVA Sheet
+            WorksheetPart wsp8 = wbp.AddNewPart<WorksheetPart>();
+            Worksheet ws8 = new Worksheet();
+            SheetData sd8 = new SheetData();
+
+            #region PostFechados
+            Row row8 = new Row();
+            row8.Append(
+                ConstructCell("PEDIDO", CellValues.String),
+                ConstructCell("CLIENTE", CellValues.String),
+                ConstructCell("CIUDAD", CellValues.String),
+                ConstructCell("CONSOLIDADO", CellValues.String),
+                ConstructCell("PRODUCTO", CellValues.String),
+                ConstructCell("DESCRIPCION", CellValues.String),
+                ConstructCell("CANT PROCESADA", CellValues.String),
+                ConstructCell("CANT FALTANTE", CellValues.String)
+                );
+            sd8.AppendChild(row8);
+            //Datos
+            GridView GridView8 = new GridView();
+            GridView8.AllowPaging = false;
+            GridView8.DataSource = an_wms.GetPendxFamilia(8).DataSource;
+            GridView8.DataBind();
+
+            for (int i = 0; i < GridView8.Rows.Count; i++)
+            {
+                row8 = new Row();
+                row8.Append(
+                    ConstructCell(HttpUtility.HtmlDecode(GridView8.Rows[i].Cells[0].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView8.Rows[i].Cells[1].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView8.Rows[i].Cells[2].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView8.Rows[i].Cells[3].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView8.Rows[i].Cells[4].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView8.Rows[i].Cells[5].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView8.Rows[i].Cells[6].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView8.Rows[i].Cells[7].Text.Trim()), CellValues.String)
+                    );
+                sd8.AppendChild(row8);
+            }
+            #endregion
+
+            ws8.AppendChild(sd8);
+            wsp8.Worksheet = ws8;
+            wsp8.Worksheet.Save();
+            Sheet sheet8 = new Sheet();
+            sheet8.Name = "ELECTROVENTILADOR";
+            sheet8.SheetId = 8;
+            sheet8.Id = wbp.GetIdOfPart(wsp8);
+            sheets.Append(sheet8);
+
+            //NOVENA Sheet
+            WorksheetPart wsp9 = wbp.AddNewPart<WorksheetPart>();
+            Worksheet ws9 = new Worksheet();
+            SheetData sd9 = new SheetData();
+
+            #region PostFechados
+            Row row9 = new Row();
+            row9.Append(
+                ConstructCell("PEDIDO", CellValues.String),
+                ConstructCell("CLIENTE", CellValues.String),
+                ConstructCell("CIUDAD", CellValues.String),
+                ConstructCell("CONSOLIDADO", CellValues.String),
+                ConstructCell("PRODUCTO", CellValues.String),
+                ConstructCell("DESCRIPCION", CellValues.String),
+                ConstructCell("CANT PROCESADA", CellValues.String),
+                ConstructCell("CANT FALTANTE", CellValues.String)
+                );
+            sd9.AppendChild(row9);
+            //Datos
+            GridView GridView9 = new GridView();
+            GridView9.AllowPaging = false;
+            GridView9.DataSource = an_wms.GetPendxFamilia(9).DataSource;
+            GridView9.DataBind();
+
+            for (int i = 0; i < GridView9.Rows.Count; i++)
+            {
+                row9 = new Row();
+                row9.Append(
+                    ConstructCell(HttpUtility.HtmlDecode(GridView9.Rows[i].Cells[0].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView9.Rows[i].Cells[1].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView9.Rows[i].Cells[2].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView9.Rows[i].Cells[3].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView9.Rows[i].Cells[4].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView9.Rows[i].Cells[5].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView9.Rows[i].Cells[6].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView9.Rows[i].Cells[7].Text.Trim()), CellValues.String)
+                    );
+                sd9.AppendChild(row9);
+            }
+            #endregion
+
+            ws9.AppendChild(sd9);
+            wsp9.Worksheet = ws9;
+            wsp9.Worksheet.Save();
+            Sheet sheet9 = new Sheet();
+            sheet9.Name = "CONDENSADOR";
+            sheet9.SheetId = 9;
+            sheet9.Id = wbp.GetIdOfPart(wsp9);
+            sheets.Append(sheet9);
+
+            //DECIMA Sheet
+            WorksheetPart wsp10 = wbp.AddNewPart<WorksheetPart>();
+            Worksheet ws10 = new Worksheet();
+            SheetData sd10 = new SheetData();
+
+            #region PostFechados
+            Row row10 = new Row();
+            row10.Append(
+                ConstructCell("PEDIDO", CellValues.String),
+                ConstructCell("CLIENTE", CellValues.String),
+                ConstructCell("CIUDAD", CellValues.String),
+                ConstructCell("CONSOLIDADO", CellValues.String),
+                ConstructCell("PRODUCTO", CellValues.String),
+                ConstructCell("DESCRIPCION", CellValues.String),
+                ConstructCell("CANT PROCESADA", CellValues.String),
+                ConstructCell("CANT FALTANTE", CellValues.String)
+                );
+            sd10.AppendChild(row10);
+            //Datos
+            GridView GridView10 = new GridView();
+            GridView10.AllowPaging = false;
+            GridView10.DataSource = an_wms.GetPendxFamilia(10).DataSource;
+            GridView10.DataBind();
+
+            for (int i = 0; i < GridView10.Rows.Count; i++)
+            {
+                row10 = new Row();
+                row10.Append(
+                    ConstructCell(HttpUtility.HtmlDecode(GridView10.Rows[i].Cells[0].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView10.Rows[i].Cells[1].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView10.Rows[i].Cells[2].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView10.Rows[i].Cells[3].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView10.Rows[i].Cells[4].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView10.Rows[i].Cells[5].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView10.Rows[i].Cells[6].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView10.Rows[i].Cells[7].Text.Trim()), CellValues.String)
+                    );
+                sd10.AppendChild(row10);
+            }
+            #endregion
+
+            ws10.AppendChild(sd10);
+            wsp10.Worksheet = ws10;
+            wsp10.Worksheet.Save();
+            Sheet sheet10 = new Sheet();
+            sheet10.Name = "PANEL";
+            sheet10.SheetId = 10;
+            sheet10.Id = wbp.GetIdOfPart(wsp10);
+            sheets.Append(sheet10);
+
+            //ONCEAVA Sheet
+            WorksheetPart wsp11 = wbp.AddNewPart<WorksheetPart>();
+            Worksheet ws11 = new Worksheet();
+            SheetData sd11 = new SheetData();
+
+            #region PostFechados
+            Row row11 = new Row();
+            row11.Append(
+                ConstructCell("PEDIDO", CellValues.String),
+                ConstructCell("CLIENTE", CellValues.String),
+                ConstructCell("CIUDAD", CellValues.String),
+                ConstructCell("CONSOLIDADO", CellValues.String),
+                ConstructCell("PRODUCTO", CellValues.String),
+                ConstructCell("DESCRIPCION", CellValues.String),
+                ConstructCell("CANT PROCESADA", CellValues.String),
+                ConstructCell("CANT FALTANTE", CellValues.String)
+                );
+            sd11.AppendChild(row11);
+            //Datos
+            GridView GridView11 = new GridView();
+            GridView11.AllowPaging = false;
+            GridView11.DataSource = an_wms.GetPendxFamilia(11).DataSource;
+            GridView11.DataBind();
+
+            for (int i = 0; i < GridView11.Rows.Count; i++)
+            {
+                row11 = new Row();
+                row11.Append(
+                    ConstructCell(HttpUtility.HtmlDecode(GridView11.Rows[i].Cells[0].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView11.Rows[i].Cells[1].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView11.Rows[i].Cells[2].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView11.Rows[i].Cells[3].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView11.Rows[i].Cells[4].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView11.Rows[i].Cells[5].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView11.Rows[i].Cells[6].Text.Trim()), CellValues.String),
+                    ConstructCell(HttpUtility.HtmlDecode(GridView11.Rows[i].Cells[7].Text.Trim()), CellValues.String)
+                    );
+                sd11.AppendChild(row11);
+            }
+            #endregion
+
+            ws11.AppendChild(sd11);
+            wsp11.Worksheet = ws11;
+            wsp11.Worksheet.Save();
+            Sheet sheet11 = new Sheet();
+            sheet11.Name = "GUARDAPOLVO";
+            sheet11.SheetId = 11;
+            sheet11.Id = wbp.GetIdOfPart(wsp11);
+            sheets.Append(sheet11);
+
             wbp.Workbook.Save();
             xl.Close();
 
@@ -405,7 +655,7 @@ namespace SIAV_v4.Reportes.WMSiav
             //Create a dummy GridView
             GridView GridView1 = new GridView();
             GridView1.AllowPaging = false;
-            GridView1.DataSource = an_wms.GetPendxEmpacar("", "09", 1).DataSource;
+            GridView1.DataSource = an_wms.GetPendxEmpacar("", "09", 4).DataSource;
             GridView1.DataBind();
 
             Response.Clear();
@@ -427,12 +677,40 @@ namespace SIAV_v4.Reportes.WMSiav
             Response.End();
         }
 
+        protected void btnPend3raEtapa_Click(object sender, EventArgs e)
+        {
+            //Create a dummy GridView
+            GridView GridView1 = new GridView();
+            GridView1.AllowPaging = false;
+            GridView1.DataSource = an_wms.GetPendxEmpacar("", "06", 4).DataSource;
+            GridView1.DataBind();
+
+            Response.Clear();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition",
+             "attachment;filename=rptPendxEmpacar6taEtapa.xls");
+            Response.Charset = "";
+            Response.ContentType = "application/vnd.ms-excel";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            GridView1.RenderControl(hw);
+
+            //style to format numbers to string
+            //string style = @"<style> .textmode { mso-number-format:\@; } </style>";
+            //Response.Write(style);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+        }
+
         protected void btnPendxFamilia_Click(object sender, EventArgs e)
         {
             CrearDoc();
         }
+
         #endregion
 
-
+        
     }
 }

@@ -34,7 +34,7 @@
         <div class="col-md-3 col-sm-3 col-xs-12">
             <asp:TextBox ID="txtDato" runat="server" CssClass="form-control" Width="250px" ></asp:TextBox>
         </div>
-</div>
+    </div>
     <br />
      <div class="row">
         <label class="col-md-1 col-sm-1 col-xs-12 label label-info"><h5>FECHAS:</h5></label>  
@@ -124,7 +124,7 @@
             dp.datepicker({
                 changeMonth: true,
                 changeYear: true,
-                format: "dd/mm/yyyy",
+                format: "yyyy-mm-dd",
                 autoclose: true
             }).on('changeDate', function (ev) {
                 $(this).datepicker('hide');
@@ -134,7 +134,7 @@
             dp.datepicker({
                 changeMonth: true,
                 changeYear: true,
-                format: "dd/mm/yyyy",
+                format: "yyyy-mm-dd",
                 autoclose: true
             }).on('changeDate', function (ev) {
                 $(this).datepicker('hide');

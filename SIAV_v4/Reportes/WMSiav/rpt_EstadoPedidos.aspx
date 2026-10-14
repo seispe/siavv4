@@ -24,9 +24,11 @@
       <div>
             <asp:RadioButtonList ID="rdbTipo" runat="server" class="lbl padding-8" RepeatDirection="Horizontal">
                 <asp:ListItem Value="1" Selected="True">PEDIDO</asp:ListItem>
+                <asp:ListItem Value="5">FACTURA</asp:ListItem>
                 <asp:ListItem Value="2">CLIENTE</asp:ListItem>
                 <asp:ListItem Value="3">FECHAS</asp:ListItem>
                 <asp:ListItem Value="4">CIUDAD</asp:ListItem>
+                <asp:ListItem Value="6">GARITA</asp:ListItem>
             </asp:RadioButtonList> 
 
         </div>
@@ -127,14 +129,14 @@
                     <asp:Label ID="lblpreembarque" runat="server" Text='<%# Bind("TRANSITO") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-               <asp:TemplateField HeaderText="PRE EMBARQUE" SortExpression="PRE EMBARQUE">
+               <asp:TemplateField HeaderText="CARGACAMION" SortExpression="CARGACAMION">
                 <ItemTemplate>
-                    <asp:Label ID="lbllogistica" runat="server" Text='<%# Bind("LOGISTICA") %>'></asp:Label>
+                    <asp:Label ID="lbllogistica" runat="server" Text='<%# Bind("CARGACAMION") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-              <asp:TemplateField HeaderText="CARGA DE CAMION" SortExpression="CARGA DE CAMION">
+              <asp:TemplateField HeaderText="TRANS_ASIGNADO" SortExpression="TRANS_ASIGNADO">
                 <ItemTemplate>
-                    <asp:Label ID="lbldespachado" runat="server" Text='<%# Bind("DESPACHADO") %>'></asp:Label>
+                    <asp:Label ID="lbldespachado" runat="server" Text='<%# Bind("TRANS_ASIGNADO") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="RECIBE" SortExpression="RECIBE">
@@ -150,6 +152,11 @@
                <asp:TemplateField HeaderText="SUBTOTAL" SortExpression="SUBTOTAL">
                 <ItemTemplate>
                     <asp:Label ID="lblsubtotal" runat="server" Text='<%# Bind("SUBTOTAL") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+                 <asp:TemplateField HeaderText="FACTURA" SortExpression="FACTURA">
+                <ItemTemplate>
+                    <asp:Label ID="lblfactura" runat="server" Text='<%# Bind("factura") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
     </Columns>
@@ -171,7 +178,7 @@
             dp.datepicker({
                 changeMonth: true,
                 changeYear: true,
-                format: "dd/mm/yyyy",
+                format: "yyyy-mm-dd",
                 autoclose: true
             }).on('changeDate', function (ev) {
                 $(this).datepicker('hide');
@@ -181,7 +188,7 @@
             dp.datepicker({
                 changeMonth: true,
                 changeYear: true,
-                format: "dd/mm/yyyy",
+                format: "yyyy-mm-dd",
                 autoclose: true
             }).on('changeDate', function (ev) {
                 $(this).datepicker('hide');

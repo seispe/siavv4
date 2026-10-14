@@ -53,6 +53,91 @@ namespace AccesoNegocios.Logistica
             }
             return gv;
         }
+
+        public DataSet GetConductores(int op, string placa, int idconductor)
+        {
+            return ad_logistica.GetConductores(op, placa, idconductor);
+        }
+
+        public GridView gvConductores(int op, string placa, int idconductor)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_logistica.GetConductores(op, placa, idconductor);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public string UpConductores(int op, string placa, int idconductor)
+        {
+            try
+            {
+                return ad_logistica.UpConductores(op, placa, idconductor);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public DataSet CargaVehiculos(int op, string fecha, string placa, string bodega, int fr)
+        {
+            return ad_logistica.CargaVehiculos(op, fecha, placa, bodega, fr);
+        }
+
+        public DataSet ActualizaPlacaPedido(int op, string pedido, string placa)
+        {
+            return ad_logistica.ActualizaPlacaPedido(op, pedido, placa);
+        }
+
+        public string StringCargaVehiculos(int op, string fecha, string placa, string bodega, int fr)
+        {
+            try
+            {
+                return ad_logistica.StringCargaVehiculos(op, fecha, placa, bodega, fr);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public DataTable TablaCargaVehiculos(int op, string fecha, string placa, string bodega, int fr)
+        {
+            return ad_logistica.CargaVehiculos(op, fecha, placa, bodega, fr).Tables[0];
+        }
+
+        public string UpPlacaPedido(int op, string pedido, string placa)
+        {
+            try
+            {
+                return ad_logistica.UpPlacaPedido(op, pedido, placa);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         /*
         public string getBasicaLinea()
         {

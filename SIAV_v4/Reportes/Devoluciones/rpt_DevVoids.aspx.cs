@@ -44,6 +44,8 @@ namespace SIAV_v4.Reportes.Devoluciones
                 GridView1.Rows[i].Cells[1].Attributes.Add("style", @"mso-number-format:\@");
                 GridView1.Rows[i].Cells[2].Attributes.Add("style", @"mso-number-format:\@");
                 GridView1.Rows[i].Cells[3].Attributes.Add("style", @"mso-number-format:\@");
+                GridView1.Rows[i].Cells[4].Attributes.Add("style", @"mso-number-format:\@");
+                GridView1.Rows[i].Cells[5].Attributes.Add("style", @"mso-number-format:\@");
             }
             GridView1.RenderControl(hw);
 

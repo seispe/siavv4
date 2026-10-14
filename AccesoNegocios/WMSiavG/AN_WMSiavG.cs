@@ -1900,6 +1900,11 @@ namespace AccesoNegocios.WMSiavG
             }
             return gv;
         }
+
+        public DataTable GetHoratencionCli(string ruc, string sucursal)
+        {
+            return ad_wms.GetHoratencionCli(ruc, sucursal).Tables[0];
+        }
         #endregion
     }
 }

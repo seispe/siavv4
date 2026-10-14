@@ -60,6 +60,7 @@ namespace SIAV_v4.Reportes.Ventas
                 //GridView1.Rows[i].Attributes.Add("style", @"mso-number-format:\@");
                 GridView1.Rows[i].Cells[0].Attributes.Add("style", @"mso-number-format:\@");
             }
+
             GridView1.RenderControl(hw);
 
             //style to format numbers to string

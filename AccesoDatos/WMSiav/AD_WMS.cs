@@ -417,6 +417,24 @@ namespace AccesoDatos.WMSiav
             }
         }
 
+        public DataSet getCierrePickingHIST(string dato)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PGetdatosPicking_hist", db);
+                da.SelectCommand.CommandTimeout = 180;
+                da.SelectCommand.Parameters.AddWithValue("@pedido", dato);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PGetdatosPicking_hist");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         /// <summary>
         /// OBTIENE EL DETALLE DE PICADO DE LOS ARTICULOS
         /// </summary>
@@ -1213,6 +1231,39 @@ namespace AccesoDatos.WMSiav
                 }
             }
         }
+
+        public string CerrarCC(int maestro)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "GA_CC_PCierreConteoCiclico";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@usuario", "");
+                cmd.Parameters.AddWithValue("@coordenada", "");
+                cmd.Parameters.AddWithValue("@maestro", maestro);
+                cmd.Parameters.AddWithValue("@reconteo", "");
+                cmd.Parameters.AddWithValue("@producto", "");
+                cmd.Parameters.AddWithValue("@empresa", "GPIAV");
+                cmd.Parameters.AddWithValue("@op", 3);
+                cmd.Parameters.Add("@msg", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+                    string msg = Convert.ToString(cmd.Parameters["@msg"].Value);
+                    return msg;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR" + ex.Message;
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
         //INGRESAR RECIBIMIENTO LOGISTICA
         public string InsRecibimientoLogistica(string pedido, string usuario)
         {
@@ -1841,13 +1892,14 @@ namespace AccesoDatos.WMSiav
             }
         }
 
-        public string UpdateTraspasos(string traspaso)
+        public string UpdateTraspasos(int bodega, string traspaso)
         {
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "GA_WMS_PUpdateTraspasos";
+                cmd.CommandText = "GA_WMS_PsubirTraspasos";
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@TRASPASO", traspaso);
+                cmd.Parameters.AddWithValue("@bodega", bodega);
+                cmd.Parameters.AddWithValue("@traspaso", traspaso);
                 cmd.Connection = db;
                 try
                 {
@@ -2620,22 +2672,19 @@ namespace AccesoDatos.WMSiav
         }
 
         /// TRASPASOS BODEGA MATRIZ A CUARENTENA
-        public DataSet GetMovimientosTraspaso(string desde, string hasta, string numerodocumento, string motivo, string usuario, int op)
+        public DataSet GetrptTraspasosMatrizCtna(string desde, string hasta, int op)
         {
             try
             {
-                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PtrasBodCua", db);
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PrptTraspasosMatrizCtna", db);
                 da.SelectCommand.CommandTimeout = 180;
                 da.SelectCommand.Parameters.AddWithValue("@desde", desde);
                 da.SelectCommand.Parameters.AddWithValue("@hasta", hasta);
-                da.SelectCommand.Parameters.AddWithValue("@numerodocumento", numerodocumento);
-                da.SelectCommand.Parameters.AddWithValue("@motivo", motivo);
-                da.SelectCommand.Parameters.AddWithValue("@usuario", usuario);
                 da.SelectCommand.Parameters.AddWithValue("@op", op);
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                 db.Open();
                 DataSet ds = new DataSet();
-                da.Fill(ds, "GA_WMS_PtrasBodCua");
+                da.Fill(ds, "GA_WMS_PrptTraspasosMatrizCtna");
                 return ds;
             }
             catch (Exception ex)
@@ -2648,18 +2697,250 @@ namespace AccesoDatos.WMSiav
             }
         }
 
-        /// TRASPASOS BODEGA MATRIZ A CUARENTENA
-        public string UpTraspasosBodCua(string numerodocumento, string motivo, string usuario, int op)
+        public string UpLiberaTraspasosMatriz(string desde, string hasta, int op, string numdocGP, string usuario)
+        {
+            string resultado = "";
+            using (SqlCommand cmd = new SqlCommand("GA_WMS_PrptTraspasosMatrizCtna", db))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@desde", desde);
+                cmd.Parameters.AddWithValue("@hasta", hasta);
+                cmd.Parameters.AddWithValue("@op", op);
+                cmd.Parameters.AddWithValue("@numdocGP", numdocGP);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                try
+                {
+                    db.Open();
+                    resultado = cmd.ExecuteScalar().ToString();
+                    return resultado;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        /// <summary>
+        /// REPORTE PROCESO CONTROL DE CALIDAD
+        /// </summary>
+        /// <param name="fdesde"></param>
+        /// <param name="fhasta"></param>
+        /// <param name="op"></param>
+        /// <returns></returns>
+        public DataSet GetrptCtrlCalidad(string fdesde, string fhasta, int op)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PrptCtrlCalidad", db);
+                da.SelectCommand.CommandTimeout = 360;
+                da.SelectCommand.Parameters.AddWithValue("@fdesde", fdesde);
+                da.SelectCommand.Parameters.AddWithValue("@fhasta", fhasta);
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PrptCtrlCalidad");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// PROCESO PARA AUMENTAR STOCK DE ITEMS EN DISTINTAS COORDENADAS
+        public string AumentoStock(string producto, int cantidad, string motivo, string observacion, string coordenada, string usuario, int op)
         {
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "GA_WMS_PtrasBodCua";
+                cmd.CommandText = "GA_WMS_AumentoStock";
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@desde", "");
-                cmd.Parameters.AddWithValue("@hasta", "");
-                cmd.Parameters.AddWithValue("@numerodocumento", numerodocumento);
+                cmd.Parameters.AddWithValue("@producto", producto);
+                cmd.Parameters.AddWithValue("@cantidad", cantidad);
                 cmd.Parameters.AddWithValue("@motivo", motivo);
+                cmd.Parameters.AddWithValue("@observacion", observacion);
+                cmd.Parameters.AddWithValue("@coordenada", coordenada);
                 cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@op", op);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        //SUBIR ARCHIVO DE EXCEL A SQL
+        public int cargarExcel(DataTable tabla)
+        {
+            int resultado = 0;
+            using (SqlCommand cmd = new SqlCommand("GA_WMS_PcargaTraspasosMatrizExcel", db))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("EstructuraCarga", SqlDbType.Structured).Value = tabla;
+                cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+                    resultado = Convert.ToInt32(cmd.Parameters["Resultado"].Value);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+            return resultado;
+        }
+
+        public string generaTraspasos(string tipodocumento, string usuario, string motivo)
+        {
+            string resultado = "";
+            using (SqlCommand cmd = new SqlCommand("GA_WMS_PgenerarTraspasosMatriz", db))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tipodocumento", tipodocumento);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@motivo", motivo);
+                try
+                {
+                    db.Open();
+                    resultado = cmd.ExecuteScalar().ToString();
+                    return resultado;
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        public string guardarObsWms(string pedido, string observacion, string usuario)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "GA_WMS_PguardarObsWMS";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@pedido", pedido);
+                cmd.Parameters.AddWithValue("@observacion", observacion);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        /// <summary>
+        /// OBTIENE LOS CONTEOS ABIERTOS
+        /// </summary>
+        /// <returns></returns>
+        public DataSet GetConteosAbiertos(int op, string producto, int idmconteo)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PagregarProdConteos", db);
+                da.SelectCommand.Parameters.AddWithValue("@op", op);
+                da.SelectCommand.Parameters.AddWithValue("@producto", producto);
+                da.SelectCommand.Parameters.AddWithValue("@idmconteo", idmconteo);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PagregarProdConteos");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string AgregarProdConteos(int op, string producto, int idmconteo)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "GA_WMS_PagregarProdConteos";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@op", op);
+                cmd.Parameters.AddWithValue("@producto", producto);
+                cmd.Parameters.AddWithValue("@idmconteo", idmconteo);
+                cmd.Connection = db;
+                try
+                {
+                    db.Open();
+                    string idFromString = cmd.ExecuteScalar().ToString();
+                    return idFromString;
+                }
+                catch (Exception ex)
+                {
+                    return "ERROR";
+                }
+                finally
+                {
+                    db.Close();
+                }
+            }
+        }
+
+        public DataSet GetHoratencionCli(string ruc, string sucursal)
+        {
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("GA_WMS_PhoratencionCli", db);
+                da.SelectCommand.CommandTimeout = 120;
+                da.SelectCommand.Parameters.AddWithValue("@ruc", ruc);
+                da.SelectCommand.Parameters.AddWithValue("@sucursal", sucursal);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "GA_WMS_PhoratencionCli");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string UpContenedoresxDia(string fecha, int cont, int carga, int op)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "GA_WMS_PcontenedoresxDia";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@fecha", fecha);
+                cmd.Parameters.AddWithValue("@cont", cont);
+                cmd.Parameters.AddWithValue("@carga", carga);
                 cmd.Parameters.AddWithValue("@op", op);
                 cmd.Connection = db;
                 try

@@ -1,6 +1,6 @@
-﻿using AccesoEntidades.WMSiav;
+﻿using AccesoEntidades.WMScal;
 using AccesoNegocios.Alertas;
-using AccesoNegocios.WMSiav;
+using AccesoNegocios.Wmscal;
 using System;
 using System.Data;
 using System.Drawing;
@@ -16,7 +16,7 @@ namespace SIAV_v4.Proyectos.WMScal
         AE_GA_WMS_Trol ae_ga_wms_trol = new AE_GA_WMS_Trol();
         AE_GA_WMS_TUsuario ae_ga_wms_tusuario = new AE_GA_WMS_TUsuario();
         AE_GA_WMS_TPedusuario ae_ga_wms_tpedusuario = new AE_GA_WMS_TPedusuario();
-        AN_WMS an_wms = new AN_WMS();
+        AN_WMScal an_wms = new AN_WMScal();
         #endregion
 
         #region Eventos
@@ -318,8 +318,9 @@ namespace SIAV_v4.Proyectos.WMScal
                 LinkButton btn = (LinkButton)(sender);
                 string pedido = btn.CommandArgument;
                 //Llenar el grid
-                gvDetPed.DataSource = an_wms.GetDetallePedGrid(pedido);
-                gvDetPed.DataBind();
+                //gvDetPed.DataSource = an_wms.GetDetallePedGrid(pedido);
+                //gvDetPed.DataBind();
+                lbldetalleped.Text = an_wms.GetDetallePed(pedido);
                 //Abrir el modal
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@"<script type='text/javascript'>");

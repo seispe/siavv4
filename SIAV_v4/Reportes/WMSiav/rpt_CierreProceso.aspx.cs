@@ -2,6 +2,7 @@
 using AccesoNegocios.WMSiav;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Web;
@@ -23,7 +24,10 @@ namespace SIAV_v4.Reportes.WMSiav
             try
             {
                 //btnCerrar.Text = Txt_consolidado.Text.Trim();
-                gvDetallePicking.DataSource = an_wms.getCierrePicking(Txt_consolidado.Text.Trim(), Convert.ToInt32(rdbTipo.SelectedValue)).DataSource;
+                /*gvDetallePicking.DataSource = an_wms.getCierrePicking(Txt_consolidado.Text.Trim(), Convert.ToInt32(rdbTipo.SelectedValue)).DataSource;
+                gvDetallePicking.DataBind();*/
+                DataTable dt = an_wms.getCierrePickingHIST(Txt_consolidado.Text.Trim());
+                gvDetallePicking.DataSource = dt;
                 gvDetallePicking.DataBind();
             }
             catch (Exception ex)
@@ -47,11 +51,11 @@ namespace SIAV_v4.Reportes.WMSiav
             {
                 gvDetallePicking.Visible = true;
                 GridPicking();
-            }
+            } 
             else
             {
                 gvDetallePicking.Visible = false;
-                lblError.Text = an_alertas.Mensaje("ERROR ", "INGRESE UN NUMERO DE CONSOLIDADO/PEDIDO", "rojo");
+                lblError.Text = an_alertas.Mensaje("ERROR ", "INGRESE UN NUMERO DE PEDIDO", "rojo");
             }
         }
 

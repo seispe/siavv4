@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SIAV_v4.Proyectos.WMSiav
+namespace SIAV_v4.Reportes.WMScal
 {
 
 
-    public partial class frm_traspasoBodCua
+    public partial class rpt_EstadoPedidos
     {
 
         /// <summary>
@@ -51,6 +51,24 @@ namespace SIAV_v4.Proyectos.WMSiav
         protected global::System.Web.UI.WebControls.Label lblError;
 
         /// <summary>
+        /// Control rdbTipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdbTipo;
+
+        /// <summary>
+        /// Control txtDato.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDato;
+
+        /// <summary>
         /// Control txtfdesde.
         /// </summary>
         /// <remarks>
@@ -78,15 +96,6 @@ namespace SIAV_v4.Proyectos.WMSiav
         protected global::System.Web.UI.WebControls.Button btnBuscar;
 
         /// <summary>
-        /// Control UpdatePanel3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-
-        /// <summary>
         /// Control btnGenerar.
         /// </summary>
         /// <remarks>
@@ -96,75 +105,21 @@ namespace SIAV_v4.Proyectos.WMSiav
         protected global::System.Web.UI.WebControls.Button btnGenerar;
 
         /// <summary>
-        /// Control UpdatePanel5.
+        /// Control UpdatePanel10.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel5;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel10;
 
         /// <summary>
-        /// Control lblDesde.
+        /// Control gvEstadoPedidos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDesde;
-
-        /// <summary>
-        /// Control lblHasta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHasta;
-
-        /// <summary>
-        /// Control lblItems.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblItems;
-
-        /// <summary>
-        /// Control lblCantTotal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCantTotal;
-
-        /// <summary>
-        /// Control txtNdocumento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNdocumento;
-
-        /// <summary>
-        /// Control txtMotivo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMotivo;
-
-        /// <summary>
-        /// Control btnGenerarTraspaso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGenerarTraspaso;
+        protected global::System.Web.UI.WebControls.GridView gvEstadoPedidos;
     }
 }

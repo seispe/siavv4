@@ -66,6 +66,11 @@
                         <asp:Label ID="lblproducto" runat="server" Text='<%# Bind("producto") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                  <asp:TemplateField HeaderText="UsuarioCrea" SortExpression="usuario" >
+                    <ItemTemplate>
+                        <asp:Label ID="lblusuario" runat="server" Text='<%# Bind("usuario") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
              <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
              <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />

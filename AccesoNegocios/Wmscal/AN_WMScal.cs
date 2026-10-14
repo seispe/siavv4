@@ -1,4 +1,5 @@
 ﻿using AccesoDatos.WMScal;
+using AccesoEntidades.WMScal;
 using System;
 using System.Data;
 using System.Web.UI.WebControls;
@@ -223,6 +224,140 @@ namespace AccesoNegocios.Wmscal
                 gv.Rows[0].Cells[0].Text = "No se encuentra datos";
             }
             return gv;
+        }
+
+        public GridView GetEstadoPedido(string dato1, string dato2, int opcion)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wmscal.GetEstadoPedido(dato1, dato2, opcion);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public string getConsolidadoMax(string empresa, string dato, string opcion)
+        {
+            try
+            {
+                return ad_wmscal.getConsolidadoMax(empresa, dato, opcion);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public string AnulaPedido(string pedido, int opcion)
+        {
+            try
+            {
+                return ad_wmscal.AnulaPedido(pedido, opcion);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public string InsGA_WMS_Tconsolidado(int id, AE_GA_WMS_TPedusuario ae_ga_wms_tpedusuario, string empresa)
+        {
+            try
+            {
+                return ad_wmscal.InsGA_WMS_Tconsolidado(id, ae_ga_wms_tpedusuario, empresa);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet GetConsolidado(string empresa, string dato, string opcion)
+        {
+            return ad_wmscal.GetConsolidado(empresa, dato, opcion);
+        }
+
+        public string UpdatePedidoConsol(string numconsolidado, string pedido)
+        {
+            try
+            {
+                return ad_wmscal.UpdatePedidoConsol(numconsolidado, pedido);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public DataSet Gettiposciudades(string empresa, string opcion)
+        {
+            return ad_wmscal.Gettiposciudades(empresa, opcion);
+        }
+
+        public GridView GetPedidosNoAsignados(string pedido, string ciudad, string tipo, string cliente, string empresa, string opcion)
+        {
+
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_wmscal.GetPedidosNoAsignados(pedido, ciudad, tipo, cliente, empresa, opcion);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }
+
+        public string GetDetallePed(string pedido)
+        {
+            DataSet dsp = new DataSet();
+            string tabla = "";
+            dsp = ad_wmscal.GetDetallePed(pedido);
+            DataTable dt = dsp.Tables[0];
+            foreach (DataRow row in dt.Rows)
+            {
+                tabla += "<tr>";
+                tabla += "<td>" + Convert.ToString(row["pedido"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["producto"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["cantidad"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["descripcion"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["marca"]) + "</td>";
+                tabla += "<td>" + Convert.ToString(row["StockWMS"]) + "</td>";
+                tabla += "</tr>";
+            }
+            return tabla;
         }
         #endregion
     }

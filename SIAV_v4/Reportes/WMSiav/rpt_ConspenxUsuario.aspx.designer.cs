@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SIAV_v4.Reportes.WMSiav {
-    
-    
-    public partial class rpt_ConspenxUsuario {
-        
+namespace SIAV_v4.Reportes.WMSiav
+{
+
+
+    public partial class rpt_ConspenxUsuario
+    {
+
         /// <summary>
         /// Control form1.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// Control ScriptManager1.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
+
         /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// Control lblError.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
+
         /// <summary>
         /// Control btnBuscar.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnBuscar;
-        
+
         /// <summary>
         /// Control btnPendxEmpacar.
         /// </summary>
@@ -65,7 +67,16 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPendxEmpacar;
-        
+
+        /// <summary>
+        /// Control btnPend3raEtapa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPend3raEtapa;
+
         /// <summary>
         /// Control btnPendxFamilia.
         /// </summary>
@@ -74,7 +85,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPendxFamilia;
-        
+
         /// <summary>
         /// Control UpdatePanel10.
         /// </summary>
@@ -83,7 +94,7 @@ namespace SIAV_v4.Reportes.WMSiav {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel10;
-        
+
         /// <summary>
         /// Control gvConsPendxUsu.
         /// </summary>

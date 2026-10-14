@@ -50,11 +50,20 @@
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <asp:TextBox ID="txtTipo" runat="server" CssClass="form-control" Width="300px"  ReadOnly="true"></asp:TextBox>
                     </div>
+                       <div class="col-md-3 col-sm-3 col-xs-12">
                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                         <ContentTemplate>
                             <asp:Button ID="btnCerrar" runat="server" Text="Anular Pedido" CssClass="btn btn-success" Width="200px" OnClick="btnCerrarA_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
+                             </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                        <ContentTemplate>
+                            <asp:Button ID="btnObservacion" runat="server" Text="Observacion WMS" CssClass="btn btn-warning" Width="200px" OnClick="btnObservacion_Click" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                             </div>
                 </div>
                 <br />
                <%-- <div style="margin-left: 928px">
@@ -73,8 +82,9 @@
             <ContentTemplate>
                 <asp:GridView ID="gvDetallePicking" runat="server" AutoGenerateColumns="False" CellPadding="4"
                     CssClass="grid" ForeColor="#333333" GridLines="None" AllowPaging="True"
-                    AllowSorting="True" HeaderStyle-BackColor="green"
-                    PageSize="500" OnSelectedIndexChanged="gvDetallePicking_SelectedIndexChanged" OnRowDataBound="gvDetallePicking_RowDataBound" OnRowCommand="gvDetallePicking_RowCommand">
+                    AllowSorting="True" OnSorting="gvDetallePicking_Sorting" HeaderStyle-BackColor="green"
+                    PageSize="500" OnSelectedIndexChanged="gvDetallePicking_SelectedIndexChanged" OnRowDataBound="gvDetallePicking_RowDataBound" OnRowCommand="gvDetallePicking_RowCommand"
+                    OnRowCreated="gvDetallePicking_RowCreated" >
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
                         <asp:CommandField ButtonType="Image" SelectImageUrl="~/Recursos/images/grafico.png" SelectText="Seleccionar" ShowSelectButton="true" />
@@ -83,52 +93,52 @@
                   <asp:ImageButton CommandName="AnularPedido" CommandArgument="<%# Container.DataItemIndex %>" ImageUrl="~/Recursos/images/grafico.png" runat="server" OnClientClick="Warn()" />
               </ItemTemplate>
             </asp:TemplateField>--%>
-                        <asp:TemplateField HeaderText="Cons" SortExpression="Consol">
+                        <asp:TemplateField HeaderText="Cons" >
                             <ItemTemplate>
                                 <asp:Label ID="lblnumconsolidado" runat="server" Text='<%# Bind("numconsolidado") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Pedido" SortExpression="Pedido">
+                        <asp:TemplateField HeaderText="Pedido" >
                             <ItemTemplate>
                                 <asp:Label ID="lblpedido" runat="server" Text='<%# Bind("pedido") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Fecha" SortExpression="Fecha">
+                        <asp:TemplateField HeaderText="Fecha" >
                             <ItemTemplate>
                                 <asp:Label ID="lblfechapedido" runat="server" Text='<%# Bind("fechapedido") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Cliente" SortExpression="Cliente">
+                        <asp:TemplateField HeaderText="Cliente" >
                             <ItemTemplate>
                                 <asp:Label ID="lblrazonsocial" runat="server" Text='<%# Bind("razonsocial") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Ciudad" SortExpression="Ciudad">
+                        <asp:TemplateField HeaderText="Ciudad">
                             <ItemTemplate>
                                 <asp:Label ID="lblciudad" runat="server" Text='<%# Bind("ciudad") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Producto" SortExpression="Producto">
+                        <asp:TemplateField HeaderText="Producto" >
                             <ItemTemplate>
                                 <asp:Label ID="lblproducto" runat="server" Text='<%# Bind("producto") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Coordenada" SortExpression="Coordenada">
+                        <asp:TemplateField HeaderText="Coordenada" >
                             <ItemTemplate>
                                 <asp:Label ID="lblcoordenada" runat="server" Text='<%# Bind("coordenada") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Descripcion" SortExpression="Descripcion">
+                        <asp:TemplateField HeaderText="Descripcion" >
                             <ItemTemplate>
                                 <asp:Label ID="lbldescripcion" runat="server" Text='<%# Bind("descripcion") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="No Stock" SortExpression="No Stock">
+                        <asp:TemplateField HeaderText="No Stock" >
                             <ItemTemplate>
                                 <asp:ImageButton ID="imgCoor" CommandName="DarCoordenadas" CommandArgument="<%# Container.DataItemIndex %>" ImageUrl="~/Recursos/images/add.png" runat="server" Height="20px" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Etapa" SortExpression="Etapa">
+                        <asp:TemplateField HeaderText="Etapa" >
                             <ItemTemplate>
                                 <asp:Label ID="lbletapa" runat="server" Text='<%# Bind("etapa") %>'></asp:Label>
                             </ItemTemplate>
@@ -141,18 +151,18 @@
                         <asp:BoundField DataField="cerrado" HeaderText="Estado" Visible="true" />
                         <asp:BoundField DataField="can_solicitada" HeaderText="Solicitada" Visible="true" />
                         <asp:BoundField DataField="can_procesada" HeaderText="Procesada" Visible="true" />
-                        <asp:TemplateField HeaderText="Pendiente" SortExpression="Pendiente">
+                        <asp:TemplateField HeaderText="Pendiente" SortExpression="can_pendiente">
                             <ItemTemplate>
                                 <asp:Label ID="lblcan_pendiente" runat="server" Text='<%# Bind("can_pendiente") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="can_armada" HeaderText="Armada" Visible="true" />
-                        <asp:TemplateField HeaderText="Bultos" SortExpression="Bultos">
+                        <asp:TemplateField HeaderText="Bultos" >
                             <ItemTemplate>
                                 <asp:Label ID="lblbultos" runat="server" Text='<%# Bind("bultos") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Usuario" SortExpression="Usuario">
+                        <asp:TemplateField HeaderText="Usuario" >
                             <ItemTemplate>
                                 <asp:Label ID="lblusuarioarmo" runat="server" Text='<%# Bind("usuarioarmo") %>'></asp:Label>
                             </ItemTemplate>
@@ -163,6 +173,9 @@
                     <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
                 </asp:GridView>
             </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="gvDetallePicking" EventName="Sorting" />
+            </Triggers>
         </asp:UpdatePanel>
         <%-- MODAL INGRESAR OBSERVACIONES DE ANULACIONES --%>
         <div class="modal fade" id="obsAnula" data-backdrop="static" data-keyboard="false">
@@ -232,6 +245,38 @@
                     </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="btnCerrarItem" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+         <%-- MODAL INGRESAR OBSERVACIONES DE PEDIDOS WMS--%>
+        <div class="modal fade" id="obsWMS" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <asp:UpdatePanel ID="UpdatePanel7" runat="server" ChildrenAsTriggers="true">
+                    <ContentTemplate>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 id="obsWMSC">Ingrese una Observación para el Pedido</h3>
+                                <asp:HiddenField ID="HiddenField2" runat="server" />
+                                <br />
+                            </div>
+                            <div class="container"></div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <asp:DropDownList id="ddlObservacionWMS" runat="server" CssClass="form-control" Width="550px"></asp:DropDownList>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <asp:Button ID="btnGuardarObs" runat="server" Text="Guardar" CssClass=" btn btn-success" OnClick="btnGuardarObs_Click" />
+                                <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:PostBackTrigger ControlID="btnAnular" />
                     </Triggers>
                 </asp:UpdatePanel>
             </div>

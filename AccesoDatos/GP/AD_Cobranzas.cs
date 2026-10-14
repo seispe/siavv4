@@ -154,7 +154,7 @@ namespace AccesoDatos.GP
                     da.Fill(ds, "GA_DEV_Tdevoluciones");
                     return ds;
                 }
-                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX" || empresa == "GPCOP")
+                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPCTP" || empresa == "GPCCC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX" || empresa == "GPCOP")
                 {
                     SqlDataAdapter da = new SqlDataAdapter("GA_DEV_Prpt_cuentasxcobrar", dbdynamicscao);
                     da.SelectCommand.Parameters.AddWithValue("@empresa", empresa);
@@ -196,7 +196,7 @@ namespace AccesoDatos.GP
                     da.Fill(ds, "GA_DEV_Tdevoluciones");
                     return ds;
                 }
-                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX" || empresa == "GPCOP")
+                else if (empresa == "GPCAO" || empresa == "GPCSA" || empresa == "GPCTO" || empresa == "GPCSG" || empresa == "GPCPI" || empresa == "GPCTA" || empresa == "GPCUC" || empresa == "GPCTP" || empresa == "GPCCC" || empresa == "GPGRP" || empresa == "GPTET" || empresa == "GPGRO" || empresa == "GPTEX" || empresa == "GPCOP")
                 {
                     SqlDataAdapter da = new SqlDataAdapter("GA_DEV_Prpt_cuentasxpagar", dbdynamicscao);
                     da.SelectCommand.Parameters.AddWithValue("@empresa", empresa);

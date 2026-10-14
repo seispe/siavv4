@@ -1,4 +1,5 @@
-﻿using AccesoDatos.GP;
+﻿using AccesoDatos.Devoluciones;
+using AccesoDatos.GP;
 using System.Data;
 using System.Web.UI.WebControls;
 
@@ -43,6 +44,37 @@ namespace AccesoNegocios.GP
                 gv.Rows[0].Cells[0].Text = "No se encuentra datos";
             }
             return gv;
+        }
+
+        /*public GridView GetKardexGP(string dato1, string dato2)
+        {
+            DataSet dsp = new DataSet();
+            GridView gv = new GridView();
+
+            dsp = ad_inventario.GetKardexGP(dato1, dato2);
+
+            if (dsp.Tables[0].Rows.Count > 0)
+            {
+                gv.DataSource = dsp;
+                gv.DataBind();
+            }
+            else
+            {
+                dsp.Tables[0].Rows.Add(dsp.Tables[0].NewRow());
+                gv.DataSource = dsp;
+                gv.DataBind();
+                int columncount = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = columncount;
+                gv.Rows[0].Cells[0].Text = "No se encuentra datos";
+            }
+            return gv;
+        }*/
+        public DataTable GetKardexGP(string dato1, string dato2)
+        {
+            DataSet dsp = ad_inventario.GetKardexGP(dato1, dato2);
+            return dsp.Tables[0];
         }
         #endregion
     }

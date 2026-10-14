@@ -55,6 +55,22 @@ namespace SIAV_v4.Proyectos.WMSiav
             try
             {
                 lblError.Text = "";
+                if (e.CommandName == "CerrarCC")
+                {
+                    string salida = "";
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    int maestro = Convert.ToInt32((gvMaestros.Rows[index].FindControl("lblid") as Label).Text);
+                    salida = an_wms.CerrarCC(maestro);
+                    if (salida.Contains("ERROR"))
+                    {
+                        lblError.Text = an_alertas.Mensaje("", salida, "rojo");
+                    }
+                    else
+                    {
+                        lblError.Text = an_alertas.Mensaje("CORRECTO ", salida, "verde");
+                    }
+                    GridMaestros();
+                }
                 if (e.CommandName == "ExportarGP")
                 {
                     string salida = "";

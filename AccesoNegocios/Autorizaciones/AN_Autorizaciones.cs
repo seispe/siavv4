@@ -2,6 +2,8 @@
 using System;
 using System.Data;
 using System.Web.UI.WebControls;
+using AccesoEntidades.Autorizaciones;
+using System.Collections.Generic;
 
 namespace AccesoNegocios.Autorizaciones
 {
@@ -140,6 +142,16 @@ namespace AccesoNegocios.Autorizaciones
                 tabla += "</tr>";
             }
             return tabla;
+        }
+
+        public List<GP_AUTH_MOD> getAutorizacionesPewndientes()
+        {
+            return ad_aut.getAutorizacionesPendientes();
+        }
+
+        public int updateAutorizacionesPendientes(string usuario, int id, int time)
+        {
+            return ad_aut.updateAutorizacionesPendientes(usuario, id, time);
         }
         #endregion
     }

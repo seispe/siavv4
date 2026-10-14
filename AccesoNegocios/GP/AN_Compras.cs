@@ -1,7 +1,8 @@
-﻿using AccesoDatos.GP;
+﻿using AccesoDatos.Devoluciones;
+using AccesoDatos.GP;
+using System;
 using System.Data;
 using System.Web.UI.WebControls;
-using System;
 
 namespace AccesoNegocios.GP
 {
@@ -328,6 +329,16 @@ namespace AccesoNegocios.GP
 
                 throw ex;
             }
+        }
+
+        public string cargarReservaAllxlsx(DataTable tabla)
+        {
+            return ad_compras.cargarReservaAllxlsx(tabla);
+        }
+
+        public string reservaStockAllparts(string recibo, string usuario, int tipo)
+        {
+            return ad_compras.reservaStockAllparts(recibo, usuario, tipo);
         }
         #endregion
     }

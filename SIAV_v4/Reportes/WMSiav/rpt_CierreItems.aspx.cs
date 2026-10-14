@@ -30,7 +30,7 @@ namespace SIAV_v4.Reportes.WMSiav
                 lblError.Text = "";
                 if (txtfdesde.Text.Length > 0 && txtfhasta.Text.Length > 0)
                 {
-                    ExportToExcel();
+                    ExportToExcel(Convert.ToInt32(rdbBodega.SelectedValue));
                 }
                 else
                 {
@@ -45,7 +45,7 @@ namespace SIAV_v4.Reportes.WMSiav
         #endregion
 
         #region Funciones
-        public void ExportToExcel()
+        public void ExportToExcel(int op)
         {
 
             //Create a dummy GridView
@@ -53,7 +53,7 @@ namespace SIAV_v4.Reportes.WMSiav
             GridView1.AllowPaging = false;
             string fechadesde = Convert.ToDateTime(txtfdesde.Text.Trim()).ToString("yyyy-MM-dd");
             string fechahasta = Convert.ToDateTime(txtfhasta.Text.Trim()).ToString("yyyy-MM-dd");
-            GridView1.DataSource = an_wms.GetrptAnulaciones(fechadesde, fechahasta, 2).DataSource;
+            GridView1.DataSource = an_wms.GetrptAnulaciones(fechadesde, fechahasta, op).DataSource;
             GridView1.DataBind();
             Response.Clear();
             Response.Buffer = true;
